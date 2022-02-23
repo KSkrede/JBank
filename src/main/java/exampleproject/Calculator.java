@@ -33,3 +33,5 @@ public class Calculator {
         }
     }
 }
+
+//Dette er en test
