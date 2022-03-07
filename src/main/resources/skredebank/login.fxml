@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skredebank.LogInController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="273.0" fitWidth="606.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Skredebank.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="384.0" prefWidth="394.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="230.0" text="Fødselsdato">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="149.0" text="Mobilnummer ">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="71.0" layoutY="27.0" text="Logg inn">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="103.0" text="BankID på mobil">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="158.0" layoutY="152.0" text="(8 siffer)">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="132.0" layoutY="232.0" text="(ddmmåå)">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="phoneNumber" layoutX="14.0" layoutY="179.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 41234567" />
+            <TextField fx:id="birthDate" layoutX="16.0" layoutY="260.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 010100" />
+            <Button fx:id="nextButton" layoutX="197.0" layoutY="336.0" mnemonicParsing="false" onAction="#userLogIn" prefHeight="35.0" prefWidth="84.0" style="-fx-background-color: #2AAEBB;" text="Neste" textFill="WHITE" />
+            <Label fx:id="wrongLogin" layoutX="118.0" layoutY="302.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
