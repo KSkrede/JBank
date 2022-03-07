@@ -1,70 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="396.0" prefWidth="121.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="273.0" fitWidth="606.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="125.0" fitWidth="115.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Skredebank.png" />
+                  <Image url="@../../../../target/classes/skredebank/Skredebank.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
    </left>
    <center>
-      <AnchorPane prefHeight="384.0" prefWidth="394.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="464.0" prefWidth="471.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="14.0" layoutY="230.0" text="Fødselsdato">
+            <Label layoutX="16.0" layoutY="236.0" text="Mobilnummer ">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="17.0" layoutY="149.0" text="Mobilnummer ">
+            <Label layoutX="16.0" layoutY="24.0" prefHeight="54.0" prefWidth="222.0" text="Ny bruker">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Label>
+            <Label layoutX="157.0" layoutY="239.0" text="(8 siffer)">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="phoneNumber" layoutX="13.0" layoutY="266.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 41234567" />
+            <Button layoutX="348.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #2AAEBB;" text="Opprett bruker" textFill="WHITE" />
+            <Button layoutX="252.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="84.0" style="-fx-background-color: #2AAEBB;" text="Tilbake" textFill="WHITE" />
+            <Label layoutX="17.0" layoutY="84.0" text="Fornavn">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="71.0" layoutY="27.0" text="Logg inn">
+            <TextField fx:id="givenName" layoutX="14.0" layoutY="114.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks Ola" />
+            <Label layoutX="17.0" layoutY="159.0" prefHeight="30.0" prefWidth="104.0" text="Etternavn">
                <font>
-                  <Font size="45.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="104.0" text="BankID på mobil">
+            <TextField fx:id="surName" layoutX="14.0" layoutY="189.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks Nordmann" />
+            <DatePicker fx:id="birthDate" layoutX="16.0" layoutY="353.0" />
+            <Label layoutX="13.0" layoutY="315.0" prefHeight="30.0" prefWidth="136.0" text="Fødselsdato">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="158.0" layoutY="152.0" text="(8 siffer)">
+            <Label layoutX="13.0" layoutY="395.0" prefHeight="30.0" prefWidth="136.0" text="BankID pin">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="132.0" layoutY="232.0" text="(ddmmåå)">
+            <TextField fx:id="bankIDPin" layoutX="14.0" layoutY="433.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 12345678" />
+            <Label layoutX="13.0" layoutY="477.0" prefHeight="30.0" prefWidth="199.0" text="Bekreft BankID pin">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField layoutX="14.0" layoutY="179.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 41234567" />
-            <TextField layoutX="16.0" layoutY="260.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 010100" />
-            <Button layoutX="190.0" layoutY="324.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="84.0" style="-fx-background-color: #2AAEBB;" text="Neste" textFill="WHITE" />
-            <Text fill="RED" layoutX="16.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feil mobilnummer eller fødselsdato">
+            <TextField fx:id="confirmBankIDPin" layoutX="13.0" layoutY="516.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 12345678" />
+            <Label layoutX="238.0" layoutY="92.0" prefHeight="108.0" prefWidth="221.0" text="Velkommen til oss! - SkredeBank" wrapText="true">
                <font>
-                  <Font size="17.0" />
+                  <Font size="26.0" />
                </font>
-            </Text>
+            </Label>
          </children>
       </AnchorPane>
    </center>

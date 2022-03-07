@@ -17,7 +17,9 @@ public class LogInController {
     }
 
     @FXML
-    private Button button;
+    private Button nextButton;
+    @FXML
+    private Button newUserButton;
     @FXML
     private Label wrongLogIn;
     @FXML
@@ -25,16 +27,18 @@ public class LogInController {
     @FXML
     private TextField birthDate;
 
-
+    SkredebankApp m = new SkredebankApp();
 
     public void userLogIn(ActionEvent event) throws IOException {
         checkLogin();
+    }
 
+    public void newUser(ActionEvent event) throws IOException {
+        m.changeScene("newUser.fxml");
     }
 
     private void checkLogin() throws IOException {
         //Creates new main
-        SkredebankApp m = new SkredebankApp();
         if(phoneNumber.getText().toString().equals("40612594") && birthDate.getText().toString().equals("230100")) {
             wrongLogIn.setText("Suksessfull login!");
 
