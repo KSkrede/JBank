@@ -36,18 +36,18 @@ public class LogInController {
         //Creates new main
         SkredebankApp m = new SkredebankApp();
         if(phoneNumber.getText().toString().equals("40612594") && birthDate.getText().toString().equals("230100")) {
-            wrongLogIn.setText("Success!");
+            wrongLogIn.setText("Suksessfull login!");
 
             m.changeScene("afterLogin.fxml");
         }
 
         else if(phoneNumber.getText().isEmpty() && birthDate.getText().isEmpty()) {
-            wrongLogIn.setText("Please enter your data.");
+            wrongLogIn.setText("Venligst fyll inn mobil og fødselsnummer");
         }
 
 
         else {
-            wrongLogIn.setText("Wrong username or password!");
+            wrongLogIn.setText("Det finnes ingen bruker med dette mobil og fødselsnummeret ");
         }
     }
 
