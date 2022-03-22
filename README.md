@@ -1,6 +1,6 @@
 # Skredebank, Prosjekt i TDT4100
 
-Skredebank skal er en "Bank simulator" som skal la deg invistere penger.
+Skredebank skal er en "Bank simulator" som skal la deg investere penger.
 ## Reminder av nøkkelpunkter
 
 | Nøkkelpunkt                              | Beskrivelse                             |
