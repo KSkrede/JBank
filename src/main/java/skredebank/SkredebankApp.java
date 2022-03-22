@@ -18,13 +18,20 @@ public class SkredebankApp extends Application {
         primaryStage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         primaryStage.setTitle("SkredeBank");
-        primaryStage.setScene(new Scene(root, 600, 600));
+        //I stedet for 600 600 så hent prefheight widt
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
 
     public void changeScene(String fxml) throws IOException {
-        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-        stage.getScene().setRoot(pane);
+        Parent root = FXMLLoader.load(getClass().getResource(fxml));
+
+        //finne måte å hente ut height og width fra fxml.
+        int sceneWidth = (int)stage.getScene().getWidth();
+        int sceneHeight = (int)stage.getScene().getHeight();
+        System.out.println(sceneWidth);
+        System.out.println(sceneHeight);
+        stage.setScene(new Scene(root, sceneWidth, sceneHeight));
     }
 
 

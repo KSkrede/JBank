@@ -32,15 +32,27 @@ public class NewUserController {
     private TextField phoneNumber;
     @FXML
     private DatePicker birthDate;
+    @FXML
+    private TextField bankIDPin;
+    @FXML
+    private TextField confirmBankIDPin;
     
 
     SkredebankApp m = new SkredebankApp();
 
     public void createUser(ActionEvent event) throws IOException {
-        System.out.println(givenName.getText());
-        System.out.println(surName.getText());
-        System.out.println(phoneNumber.getText());
-        System.out.println(birthDate.getValue());
+        String BankID = phoneNumber+"x";
+        Person BankID2 = null;
+        try{
+            BankID2 = new Person(givenName.getText(), surName.getText(), phoneNumber.getText(), birthDate.getValue(), bankIDPin.getText());
+            System.out.println("Hey");
+        }
+        
+        catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+        System.out.println(BankID2);
+
     }
 
     public void newUser(ActionEvent event) throws IOException {

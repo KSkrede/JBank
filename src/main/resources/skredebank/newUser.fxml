@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skredebank.NewUserController">
    <left>
       <AnchorPane prefHeight="396.0" prefWidth="121.0" BorderPane.alignment="CENTER">
          <children>
@@ -41,7 +41,7 @@
                </font>
             </Label>
             <TextField fx:id="phoneNumber" layoutX="13.0" layoutY="266.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 41234567" />
-            <Button layoutX="348.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #2AAEBB;" text="Opprett bruker" textFill="WHITE" />
+            <Button fx:id="createUserButton" layoutX="348.0" layoutY="516.0" mnemonicParsing="false" onAction="#createUser" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #2AAEBB;" text="Opprett bruker" textFill="WHITE" />
             <Button layoutX="252.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="84.0" style="-fx-background-color: #2AAEBB;" text="Tilbake" textFill="WHITE" />
             <Label layoutX="17.0" layoutY="84.0" text="Fornavn">
                <font>

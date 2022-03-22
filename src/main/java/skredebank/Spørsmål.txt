@@ -1,0 +1,7 @@
+Er det en fornutig metode eg bruker på å koble alt sammen.
+
+Hvordan kan jeg plukek opp error messages og displaye de på nettsiden uten at det stopper opp?
+
+Try catch?
+
+Lage en unik ID, og bruke det til å generere en Person?

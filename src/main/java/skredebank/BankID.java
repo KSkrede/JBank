@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public class BankID {
-    private int phoneNumber;
+    private String phoneNumber;
     private int birthday;
 
     private static List<String> adjectives = Arrays.asList("UGREI", "VITTIG", "BLAUT", "VERDIG", "GYLDIG", "BRYSOM", "KALD", "RYDDIG", "BREIAL", "STRANDA", "SINNA", "STILIG", "SOLFYLT",
@@ -54,7 +54,7 @@ public class BankID {
     }
 
     public static void main(String[] args) {
-        BankID test = new BankID(new Person("Kristian Skrede", 40612594, LocalDate.of(2000, 1, 23)));
+        BankID test = new BankID(new Person("Kristian", "Skrede", "40612594", LocalDate.of(2000, 1, 23), "1234"));
         System.out.println(test.getBirthday());
         System.out.println(getBankIDText());
     }
