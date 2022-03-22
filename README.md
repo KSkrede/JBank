@@ -1,4 +1,5 @@
 # Skjelettprosjekt for TDT4100 prosjekt V2022
+#Skredebank
 
 Dette repoet er et skjelettprosjekt for TDT4100 prosjektet våren 2022.
 
