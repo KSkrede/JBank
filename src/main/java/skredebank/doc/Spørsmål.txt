@@ -1,1 +1,3 @@
 Er det fornuftig å holde tall som Bank ID pin og date som strings vs ints?
+
+Om det er riktig med objects i interfacet for å både håndtere accounts og fremtidig bank accounts.

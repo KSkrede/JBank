@@ -15,6 +15,17 @@ public class Help {
         return date.format(DateTimeFormatter.ofPattern("ddMMyy"));
     }
 
+    public static String todayToString() {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyy"));
+    }
+
+    public static LocalDate stringToDate(String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyy");
+        return LocalDate.parse(date, formatter);
+    }
+
+
+
     public static boolean isAllDigit(String str) {
         for (char c : str.toCharArray()) {
             if (!Character.isDigit(c)) {

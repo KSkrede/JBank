@@ -1,5 +1,6 @@
 package skredebank.data;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,9 +15,18 @@ public class Accounts {
         return accounts;
     }
 
-    public void addAccounts(String s, Person person) {
+    public void addAccounts(String s, Person person) throws FileNotFoundException {
         accounts.put(s, person);
     }
+
+    @Override
+    public String toString() {
+        return "Account: " + accounts;
+    }
+
+
+
+    
 
 
 

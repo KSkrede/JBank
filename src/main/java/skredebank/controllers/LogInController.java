@@ -9,8 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import skredebank.SkredebankApp;
 import skredebank.data.Accounts;
+import skredebank.logic.files.AccountSaver;
 import javafx.event.ActionEvent;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 public class LogInController {
 
@@ -18,8 +20,8 @@ public class LogInController {
 
     }
 
+    AccountSaver test2;
 
-    
 
     @FXML
     private Button nextButton;
@@ -33,10 +35,17 @@ public class LogInController {
     private TextField birthDate;
 
     SkredebankApp m = new SkredebankApp();
-    Accounts accounts = new Accounts();
+    Accounts a = new Accounts();
+
+    public void initialize() throws FileNotFoundException {
+        //test.readFile(a);
+        //nameLabel.setText(loggedInUser.getGivenName()); 
+    }
+
 
     public void userLogIn(ActionEvent event) throws IOException {
-        checkLogin();
+        //checkLogin();
+        test2.printFile(a);
     }
 
     public void newUser(ActionEvent event) throws IOException {
@@ -45,10 +54,9 @@ public class LogInController {
 
     private void checkLogin() throws IOException {
         //Creates new main
-        // if(phoneNumber.getText().toString().equals("40612594") && birthDate.getText().toString().equals("230100")) {
-        //     wrongLogIn.setText("Suksessfull login!");
+        if(phoneNumber.getText().toString().equals("40612594") && birthDate.getText().toString().equals("230100")) {
+            wrongLogIn.setText("Suksessfull login!");
 
-        if()
             m.changeScene("bankID.fxml");
         }
 

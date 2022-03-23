@@ -44,7 +44,7 @@ public class BankIDController {
     @FXML
     public void initialize() {
         setBankIDLabel();
-        nameLabel.setText(loggedInUser.getGivenName()); 
+        //nameLabel.setText(loggedInUser.getGivenName()); 
     }
 
     private void setBankIDLabel(){

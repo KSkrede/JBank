@@ -1,5 +1,6 @@
 package skredebank.data;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 //Implements help methods
@@ -13,14 +14,16 @@ public class Person {
     private String bankIDPin;
     private LocalDate birthDate;
     private String userId;
+    public Accounts a;
 
-    public Person(String givenName, String surName, String phoneNumber, LocalDate birthDate, String bankIDPin) {
+    public Person(String phoneNumber, LocalDate birthDate, String givenName, String surName, String bankIDPin) throws FileNotFoundException {
         setName(givenName, surName);
         setPhoneNumber(phoneNumber);
         setBirthday(birthDate);
         setBankIDPin(bankIDPin);
-        this.userId = phoneNumber + Help.dateToString(birthDate) ;
-        Accounts.addAccounts(this.userId, this);
+        this.userId = phoneNumber + Help.dateToString(birthDate);
+        Accounts a = new Accounts();
+        a.addAccounts(this.userId, this);
     }
 
     public void setName(String givenName, String surName) {
@@ -36,6 +39,10 @@ public class Person {
 
     public LocalDate getBirthday() {
         return birthDate;
+    }
+
+    public String getBirthdayToString() {
+        return  Help.dateToString(getBirthday());
     }
 
     public void setBirthday(LocalDate birthDate) {
@@ -84,15 +91,14 @@ public class Person {
     }
 
 
+    public String getUserId() {
+        return userId;
+    }
 
     @Override
     public String toString() {
-        return "UserID: "+ userId + " Name: " + givenName + " "+ surName;
+        return String.format("%s;%s;%s;%s;%s", phoneNumber, this.getBirthdayToString(), givenName, surName, bankIDPin);
     }
 
-    public static void main(String[] args) {
-        Person Kristian = new Person("Kristian", "Skrede", "40612594", LocalDate.of(2000, 1, 23), "1234");
-        System.out.println(Kristian);
-    }
 
 }
