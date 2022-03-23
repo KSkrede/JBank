@@ -39,19 +39,19 @@ public class NewUserController {
     
 
     SkredebankApp m = new SkredebankApp();
+    Accounts a = new Accounts();
 
     public void createUser(ActionEvent event) throws IOException {
-        String BankID = phoneNumber+"x";
-        Person BankID2 = null;
         try{
-            BankID2 = new Person(givenName.getText(), surName.getText(), phoneNumber.getText(), birthDate.getValue(), bankIDPin.getText());
-            System.out.println("Hey");
+            Person p1 = new Person(givenName.getText(), surName.getText(), phoneNumber.getText(), birthDate.getValue(), bankIDPin.getText());
+            //ID = new Person(givenName.getText(), surName.getText(), phoneNumber.getText(), birthDate.getValue(), bankIDPin.getText());
+            a.addAccounts(p1.getPhoneNumber(), p1);
         }
         
         catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
-        System.out.println(BankID2);
+        System.out.println(a.getAccounts());
 
     }
 
