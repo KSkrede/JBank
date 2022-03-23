@@ -2,6 +2,9 @@ package skredebank.data;
 
 import java.time.LocalDate;
 
+//Implements help methods
+import skredebank.logic.Help;
+
 public class Person {
 
     private String surName;
@@ -9,23 +12,19 @@ public class Person {
     private String phoneNumber;
     private String bankIDPin;
     private LocalDate birthDate;
-    private int userId;
-
-    private static int count = 0;
-
-    //bruke map eller liste til å inneholde alle persons som igjen brukes til å logge inn
+    private String userId;
 
     public Person(String givenName, String surName, String phoneNumber, LocalDate birthDate, String bankIDPin) {
         setName(givenName, surName);
         setPhoneNumber(phoneNumber);
         setBirthday(birthDate);
         setBankIDPin(bankIDPin);
-        this.userId = Person.count;
-        count++;
+        this.userId = phoneNumber + Help.dateToString(birthDate) ;
+        Accounts.addAccounts(this.userId, this);
     }
 
     public void setName(String givenName, String surName) {
-        if (this.isAllLetters(givenName) && this.isAllLetters(surName)) {
+        if (Help.isAllLetters(givenName) && Help.isAllLetters(surName)) {
             this.givenName = givenName;
             this.surName = surName;
         }
@@ -53,7 +52,7 @@ public class Person {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        if (phoneNumber.length() == 8 && this.isAllDigit(phoneNumber)) {
+        if (phoneNumber.length() == 8 && Help.isAllDigit(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
             throw new IllegalArgumentException("Illegal phonenumber " + phoneNumber);
@@ -61,32 +60,12 @@ public class Person {
     }
 
     public void setBankIDPin(String bankIDPin) {
-        if (this.isAllDigit(phoneNumber)) {
+        if (Help.isAllDigit(bankIDPin)) {
             this.bankIDPin = bankIDPin;
         } else {
-            throw new IllegalArgumentException("Illegal phonenumber " + phoneNumber);
+            throw new IllegalArgumentException("Illegal BankID Pin " + bankIDPin);
         }
     }
-
-    public boolean isAllDigit(String str) {
-        for (char c : str.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isAllLetters(String str) {
-        for (char c : str.toCharArray()) {
-            if(!Character.isLetter(c)) {
-                return false;
-            }
-        }
-    
-        return true;
-    }
-    
 
     public String getSurName() {
         return surName;
@@ -104,10 +83,11 @@ public class Person {
         this.givenName = givenName;
     }
 
+
+
     @Override
     public String toString() {
-        return "Person [bankIDPin=" + bankIDPin + ", birthDate=" + birthDate + ", givenName=" + givenName
-                + ", phoneNumber=" + phoneNumber + ", surName=" + surName + "]";
+        return "UserID: "+ userId + " Name: " + givenName + " "+ surName;
     }
 
     public static void main(String[] args) {

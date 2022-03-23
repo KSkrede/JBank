@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import skredebank.SkredebankApp;
+import skredebank.data.Accounts;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class LogInController {
     private TextField birthDate;
 
     SkredebankApp m = new SkredebankApp();
+    Accounts accounts = new Accounts();
 
     public void userLogIn(ActionEvent event) throws IOException {
         checkLogin();
@@ -43,9 +45,10 @@ public class LogInController {
 
     private void checkLogin() throws IOException {
         //Creates new main
-        if(phoneNumber.getText().toString().equals("40612594") && birthDate.getText().toString().equals("230100")) {
-            wrongLogIn.setText("Suksessfull login!");
+        // if(phoneNumber.getText().toString().equals("40612594") && birthDate.getText().toString().equals("230100")) {
+        //     wrongLogIn.setText("Suksessfull login!");
 
+        if()
             m.changeScene("bankID.fxml");
         }
 

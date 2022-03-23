@@ -6,8 +6,6 @@ import java.util.Map;
 public class Accounts {
     public Map<String, Person> accounts;
 
-    
-
     public Accounts() {
         accounts = new HashMap<>();
     }

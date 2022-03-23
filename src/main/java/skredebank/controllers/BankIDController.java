@@ -13,7 +13,6 @@ import skredebank.data.Person;
 import skredebank.logic.BankID;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 import javafx.event.ActionEvent;
 
@@ -35,18 +34,29 @@ public class BankIDController {
     @FXML
     private Button backButton;
     @FXML
+    private Button updateButton;
+    @FXML
     private Label BankIDLabel;
+    @FXML
+    private Label nameLabel;
+    
 
     @FXML
     public void initialize() {
-        setBankIDLabel(); 
+        setBankIDLabel();
+        nameLabel.setText(loggedInUser.getGivenName()); 
     }
 
     private void setBankIDLabel(){
-        BankID test = new BankID(new Person("Kristian", "Skrede", "40612594", LocalDate.of(2000, 1, 23), "1234"));
-        BankIDLabel.setText(test.getBankIDText());
+        BankIDLabel.setText(BankID.getBankIDText());
     }
 
+    @FXML
+    private void refreshBankIDLabel(ActionEvent event) throws IOException {
+        BankIDLabel.setText(BankID.getBankIDText());
+    }
+
+    @FXML
     public void back(ActionEvent event) throws IOException {
         m.changeScene("login.fxml");
     }
