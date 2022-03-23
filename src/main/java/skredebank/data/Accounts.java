@@ -1,4 +1,4 @@
-package skredebank;
+package skredebank.data;
 
 import java.util.HashMap;
 import java.util.Map;

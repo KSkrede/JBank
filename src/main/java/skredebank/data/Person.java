@@ -1,4 +1,4 @@
-package skredebank;
+package skredebank.data;
 
 import java.time.LocalDate;
 
@@ -86,8 +86,23 @@ public class Person {
     
         return true;
     }
-
     
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    public String getGivenName() {
+        return givenName;
+    }
+
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+    }
 
     @Override
     public String toString() {

@@ -1,10 +1,11 @@
-package skredebank;
+package skredebank.logic;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import skredebank.data.Person;
 
 public class BankID {
     private String phoneNumber;
@@ -25,7 +26,7 @@ public class BankID {
      "TROST", "TUR", "URT", "UTEDO", "VASK", "VEGETAR", "VEI", "VEKST");
 
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
     
@@ -39,7 +40,7 @@ public class BankID {
         return birthdayInt;
     }
 
-    public static String getBankIDText(){
+    public String getBankIDText(){
         Random rand = new Random();
         String ranAdj = adjectives.get(rand.nextInt(adjectives.size()));
         String ranSub = subjects.get(rand.nextInt(subjects.size()));

@@ -1,5 +1,4 @@
-package skredebank;
-
+package skredebank.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,15 +7,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import skredebank.SkredebankApp;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
-
 public class LogInController {
 
     public LogInController() {
 
     }
+
+
+    
 
     @FXML
     private Button nextButton;
@@ -40,20 +42,22 @@ public class LogInController {
     }
 
     private void checkLogin() throws IOException {
-        // Creates new main
-        if (phoneNumber.getText().toString().equals("40612594") && birthDate.getText().toString().equals("230100")) {
+        //Creates new main
+        if(phoneNumber.getText().toString().equals("40612594") && birthDate.getText().toString().equals("230100")) {
             wrongLogIn.setText("Suksessfull login!");
 
             m.changeScene("bankID.fxml");
         }
 
-        else if (phoneNumber.getText().isEmpty() && birthDate.getText().isEmpty()) {
+        else if(phoneNumber.getText().isEmpty() && birthDate.getText().isEmpty()) {
             wrongLogIn.setText("Venligst fyll inn mobil og fødselsnummer");
         }
+
 
         else {
             wrongLogIn.setText("Det finnes ingen bruker med dette mobil og fødselsnummeret ");
         }
     }
+
 
 }

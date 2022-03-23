@@ -1,8 +1,9 @@
-package skredebank;
+package skredebank.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import skredebank.SkredebankApp;
 
 import java.io.IOException;
 

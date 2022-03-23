@@ -1,0 +1,2 @@
+Legge til popup on wrong user creation and wrong pin on bankid
+Gå gjennom alle public og se om de kan bli private

@@ -1,4 +1,4 @@
-package skredebank;
+package skredebank.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import skredebank.data.Person;
+import skredebank.data.Accounts;
+import skredebank.SkredebankApp;
+
 
 import java.io.IOException;
 
@@ -52,11 +56,22 @@ public class NewUserController {
             System.out.println(e.getMessage());
         }
         System.out.println(a.getAccounts());
+        System.out.println("");
+
+        a.getAccounts().entrySet().forEach(entry -> {
+            System.out.println(entry.getKey() + " " + entry.getValue().getGivenName());
+        });
+
 
     }
 
     public void newUser(ActionEvent event) throws IOException {
         m.changeScene("newUser.fxml");
+    }
+
+    
+    public void back(ActionEvent event) throws IOException {
+        m.changeScene("login.fxml");
     }
 
 }
