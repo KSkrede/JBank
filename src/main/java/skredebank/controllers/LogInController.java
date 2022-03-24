@@ -20,9 +20,6 @@ public class LogInController {
 
     }
 
-    AccountSaver test2;
-
-
     @FXML
     private Button nextButton;
     @FXML
@@ -36,16 +33,18 @@ public class LogInController {
 
     SkredebankApp m = new SkredebankApp();
     Accounts a = new Accounts();
+    AccountSaver test = new AccountSaver(a);
 
     public void initialize() throws FileNotFoundException {
-        //test.readFile(a);
+        AccountSaver accountSaver = new AccountSaver(a);
+        test.readFile();
+
         //nameLabel.setText(loggedInUser.getGivenName()); 
     }
 
 
     public void userLogIn(ActionEvent event) throws IOException {
-        //checkLogin();
-        test2.printFile(a);
+        checkLogin();
     }
 
     public void newUser(ActionEvent event) throws IOException {

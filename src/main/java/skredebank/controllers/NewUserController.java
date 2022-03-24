@@ -47,7 +47,7 @@ public class NewUserController {
 
     SkredebankApp m = new SkredebankApp();
     Accounts a = new Accounts();
-    private AccountSaver saver = new AccountSaver();
+    private AccountSaver saver = new AccountSaver(a);
 
     public void createUser(ActionEvent event) throws IOException {
         try{

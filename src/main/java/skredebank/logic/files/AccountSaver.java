@@ -13,15 +13,21 @@ import skredebank.logic.Help;
 public class AccountSaver {
     File accountsTXT = new File("src\\main\\java\\skredebank\\accounts\\accounts.txt");
     Accounts test;
+    private Accounts accounts;
 
-    public Accounts readFile(Accounts accounts) throws FileNotFoundException {
+
+    public AccountSaver(Accounts accounts) {
+        this.accounts = accounts;
+    }
+
+    public Accounts readFile() throws FileNotFoundException {
         try (Scanner scanner = new Scanner(accountsTXT)) {
             //#TODO
              //Implementer sjekk på at det er valide objekter som scannes inn.
 
              while (scanner.hasNextLine()) {
                 String[] element = scanner.nextLine().split(";");
-                accounts.addAccounts(element[0], new Person(element[1], Help.stringToDate(element[2]), element[3], element[4], element[5]));
+                this.accounts.addAccounts(element[0], new Person(element[1], Help.stringToDate(element[2]), element[3], element[4], element[5]));
                 System.out.println(accounts);
             }
         }
