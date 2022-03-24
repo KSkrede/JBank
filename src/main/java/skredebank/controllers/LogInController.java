@@ -1,23 +1,15 @@
 package skredebank.controllers;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import skredebank.Skredebank;
-import skredebank.SkredebankApp;
-import skredebank.data.Accounts;
-import skredebank.data.Person;
-import skredebank.logic.files.AccountSaver;
-import javafx.event.ActionEvent;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import skredebank.Skredebank;
+import skredebank.data.Person;
 public class LogInController {
 
     public LogInController() {

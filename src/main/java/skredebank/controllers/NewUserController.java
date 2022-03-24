@@ -1,24 +1,16 @@
 package skredebank.controllers;
+import java.io.IOException;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import skredebank.data.Person;
-import skredebank.logic.Help;
-import skredebank.logic.files.AccountSaver;
-import skredebank.data.Accounts;
 import skredebank.SkredebankApp;
-
-
-import java.io.IOException;
-import java.time.LocalDate;
-
-import javafx.event.ActionEvent;
+import skredebank.data.Accounts;
+import skredebank.data.Person;
+import skredebank.logic.files.AccountSaver;
 
 public class NewUserController {
     public NewUserController() {
@@ -55,9 +47,6 @@ public class NewUserController {
             //ID = new Person(givenName.getText(), surName.getText(), phoneNumber.getText(), birthDate.getValue(), bankIDPin.getText());
             a.addAccounts(p1.getUserId(), p1);
             saver.writeFile(a);
-
-            //Save to today.txt
-            //saver.writeFile(Help.todayToString(), a);
         }
         
         catch(IllegalArgumentException e){
