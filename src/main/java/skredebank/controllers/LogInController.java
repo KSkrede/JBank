@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import skredebank.Skredebank;
 import skredebank.SkredebankApp;
 import skredebank.data.Accounts;
 import skredebank.data.Person;
@@ -20,8 +21,9 @@ import java.util.Map;
 public class LogInController {
 
     public LogInController() {
-
     }
+
+
 
     @FXML
     private Button nextButton;
@@ -34,14 +36,11 @@ public class LogInController {
     @FXML
     private TextField birthDate;
 
-    SkredebankApp m = new SkredebankApp();
-    Accounts a = new Accounts();
-    AccountSaver accountSaver = new AccountSaver(a);
-    Person loggedInUser;
-    Map accounts;
+    Skredebank skredebank;
 
     public void initialize() throws FileNotFoundException {
-        accountSaver.readFile();
+        skredebank = Skredebank.getInstance();
+        skredebank.getAccountSaver().readFile();
     }
 
 
@@ -50,25 +49,24 @@ public class LogInController {
     }
 
     public void newUser(ActionEvent event) throws IOException {
-        m.changeScene("newUser.fxml");
+        skredebank.getApp().changeScene("newUser.fxml");
     }
 
     private void checkLogin() throws IOException {
 
-        //     wrongLogIn.setText("Suksessfull login!");
-
         String userID = phoneNumber.getText().toString()+birthDate.getText().toString();
-        
+        Map<String, Person> accounts = skredebank.getAccountObject().getAccounts();
 
-        if(a.getAccounts().keySet().stream().anyMatch(key -> userID.equals(key))) {
+        if(accounts.keySet().stream().anyMatch(key -> userID.equals(key))) {
           //loggedInUser = a.getAccounts().keySet().stream().findFirst(key -> userID.equals(key));
 
-          for (String entry : a.getAccounts().keySet()) {
+          for (String entry : accounts.keySet()) {
               if (entry.equals(userID)){
-                  loggedInUser = a.getAccounts().get(entry);
+                skredebank.getAccountObject().setLoggedInPerson(accounts.get(entry));
               }
          }
-            m.changeScene("bankID.fxml");
+            wrongLogIn.setText("Suksessfull login!");
+            skredebank.getApp().changeScene("bankID.fxml");
         }
 
         if(phoneNumber.getText().isEmpty() && birthDate.getText().isEmpty()) {

@@ -11,6 +11,7 @@ import java.io.IOException;
 public class SkredebankApp extends Application {
 
     private static Stage stage;
+    private Skredebank skredebank;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -25,7 +26,6 @@ public class SkredebankApp extends Application {
 
     public void changeScene(String fxml) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(fxml));
-
         //finne måte å hente ut height og width fra fxml.
         int sceneWidth = (int)stage.getScene().getWidth();
         int sceneHeight = (int)stage.getScene().getHeight();
@@ -34,6 +34,13 @@ public class SkredebankApp extends Application {
         stage.setScene(new Scene(root, sceneWidth, sceneHeight));
     }
 
+    public Skredebank getSkredebank() {
+        return skredebank;
+    }
+
+    public void setSkredebank(Skredebank skredebank) {
+        this.skredebank = skredebank;
+    }
 
     public static void main(String[] args) {
         launch(args);

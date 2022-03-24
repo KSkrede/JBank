@@ -8,8 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import skredebank.Skredebank;
 import skredebank.SkredebankApp;
 import skredebank.data.Person;
+import skredebank.data.Accounts;
 import skredebank.logic.BankID;
 
 import java.io.IOException;
@@ -19,18 +21,6 @@ import javafx.event.ActionEvent;
 public class BankIDController {
     public BankIDController() {}
 
-    SkredebankApp m = new SkredebankApp();
-
-    Person loggedInUser;
-
-    public Person getLoggedInUser() {
-        return loggedInUser;
-    }
-
-    public void setLoggedInUser(Person loggedInUser) {
-        this.loggedInUser = loggedInUser;
-    }
-
     @FXML
     private Button backButton;
     @FXML
@@ -39,12 +29,15 @@ public class BankIDController {
     private Label BankIDLabel;
     @FXML
     private Label nameLabel;
+
+    Skredebank skredebank;
     
 
     @FXML
     public void initialize() {
+        skredebank = Skredebank.getInstance();
         setBankIDLabel();
-        //nameLabel.setText(loggedInUser.getGivenName()); 
+        nameLabel.setText(skredebank.getAccountObject().getLoggedInPerson().getGivenName()); 
     }
 
     private void setBankIDLabel(){
@@ -58,7 +51,7 @@ public class BankIDController {
 
     @FXML
     public void back(ActionEvent event) throws IOException {
-        m.changeScene("login.fxml");
+        skredebank.getApp().changeScene("login.fxml");
     }
 
 }
