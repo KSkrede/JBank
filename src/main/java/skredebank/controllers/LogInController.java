@@ -47,7 +47,7 @@ public class LogInController {
     private void checkLogin() throws IOException {
 
         String userID = phoneNumber.getText().toString()+birthDate.getText().toString();
-        Map<String, Person> accounts = skredebank.getAccountObject().getAccounts();
+        Map<String, Person> accounts = skredebank.getAccountMap();
 
         if(accounts.keySet().stream().anyMatch(key -> userID.equals(key))) {
           //loggedInUser = a.getAccounts().keySet().stream().findFirst(key -> userID.equals(key));

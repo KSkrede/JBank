@@ -34,14 +34,6 @@ public class SkredebankApp extends Application {
         stage.setScene(new Scene(root, sceneWidth, sceneHeight));
     }
 
-    public Skredebank getSkredebank() {
-        return skredebank;
-    }
-
-    public void setSkredebank(Skredebank skredebank) {
-        this.skredebank = skredebank;
-    }
-
     public static void main(String[] args) {
         launch(args);
     }

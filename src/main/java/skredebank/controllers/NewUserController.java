@@ -1,5 +1,7 @@
 package skredebank.controllers;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import skredebank.SkredebankApp;
+import skredebank.Skredebank;
 import skredebank.data.Accounts;
 import skredebank.data.Person;
 import skredebank.logic.files.AccountSaver;
@@ -35,40 +37,36 @@ public class NewUserController {
     private TextField bankIDPin;
     @FXML
     private TextField confirmBankIDPin;
-    
 
-    SkredebankApp m = new SkredebankApp();
-    Accounts a = new Accounts();
-    private AccountSaver saver = new AccountSaver(a);
+    Skredebank skredebank;
+
+    public void initialize() {
+        skredebank = Skredebank.getInstance();
+    }
 
     public void createUser(ActionEvent event) throws IOException {
         try{
             Person p1 = new Person(phoneNumber.getText(), birthDate.getValue(), givenName.getText(), surName.getText(), bankIDPin.getText());
             //ID = new Person(givenName.getText(), surName.getText(), phoneNumber.getText(), birthDate.getValue(), bankIDPin.getText());
-            a.addAccounts(p1.getUserId(), p1);
-            saver.writeFile(a);
+            skredebank.getAccountObject().addAccounts(p1.getUserId(), p1);
+            skredebank.getAccountSaver().writeFile(skredebank.getAccountObject());
         }
         
         catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
-        System.out.println(a.getAccounts());
-        System.out.println("");
 
-        a.getAccounts().entrySet().forEach(entry -> {
-            System.out.println(entry.getKey() + " " + entry.getValue().getGivenName());
-        });
 
 
     }
 
     public void newUser(ActionEvent event) throws IOException {
-        m.changeScene("newUser.fxml");
+        skredebank.getApp().changeScene("newUser.fxml");
     }
 
     
     public void back(ActionEvent event) throws IOException {
-        m.changeScene("login.fxml");
+        skredebank.getApp().changeScene("login.fxml");
     }
 
 }

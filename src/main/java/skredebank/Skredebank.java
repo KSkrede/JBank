@@ -1,6 +1,9 @@
 package skredebank;
 
+import java.util.Map;
+
 import skredebank.data.Accounts;
+import skredebank.data.Person;
 import skredebank.logic.files.AccountSaver;
 
 public class Skredebank {
@@ -10,6 +13,7 @@ public class Skredebank {
     public SkredebankApp app = new SkredebankApp();
     public Accounts accounts = new Accounts();
     public AccountSaver accountSaver = new AccountSaver(accounts);
+    public Map<String, Person> accountMap;
 
     private Skredebank() {
         this.app = new SkredebankApp();
@@ -37,5 +41,13 @@ public class Skredebank {
     public AccountSaver getAccountSaver() {
         return accountSaver;
     }
+
+    public Map<String, Person> getAccountMap() {
+        return this.getAccountObject().getAccounts();
+    }
+
+
+    
+    
 
 }
