@@ -95,6 +95,11 @@ public class Person {
         return userId;
     }
 
+
+    public String getBankIDPin() {
+        return bankIDPin;
+    }
+
     @Override
     public String toString() {
         return String.format("%s;%s;%s;%s;%s", phoneNumber, this.getBirthdayToString(), givenName, surName, bankIDPin);

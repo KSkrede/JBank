@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="skredebank.controllers.skredebank.SkredeBankController">
+  <tabs>
+    <Tab text="Hjem" />
+    <!-- <Tab text="Kontoer" />
+      <content>
+        <fx:include fx:id="tab1" source="bankAccounts.fxml" />
+      </content>
+    <Tab text="Overføre" />
+      <content>
+        <fx:include fx:id="tab1" source="transfer.fxml" />
+      </content>
+    <Tab text="Aksjer" />
+      <content>
+        <fx:include fx:id="tab1" source="stocks.fxml" />
+      </content>    
+    <Tab text="Krypto" />
+      <content>
+        <fx:include fx:id="tab1" source="crypto.fxml" />
+      </content>
+    <Tab text="Sparing" />
+      <content>
+        <fx:include fx:id="tab1" source="savings.fxml" />
+      </content>
+    <Tab text="Grafer" />
+      <content>
+        <fx:include fx:id="tab1" source="graphs.fxml" />
+      </content>
+    <Tab text="Instillinger" />
+      <content>
+        <fx:include fx:id="tab1" source="settings.fxml" />
+      </content> -->
+  </tabs>
+</TabPane>

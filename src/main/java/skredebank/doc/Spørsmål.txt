@@ -1,1 +1,4 @@
-Om det er riktig med objects i interfacet FileHandler for å både håndtere accounts og fremtidig bank accounts.
+interfacet FileHandler for å både håndtere accounts og fremtidig bank accounts.
+Loope gjennom Maps med Lamdasteams i loginController
+Importere okhttp
+NavbarDraer i scenebuilder
