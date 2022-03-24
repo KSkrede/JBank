@@ -1,7 +1,5 @@
 package skredebank.controllers;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Map;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,9 +8,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import skredebank.Skredebank;
-import skredebank.data.Accounts;
 import skredebank.data.Person;
-import skredebank.logic.files.AccountSaver;
 
 public class NewUserController {
     public NewUserController() {
