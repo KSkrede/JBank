@@ -1,1 +1,0 @@
-package skredebank.logic;
