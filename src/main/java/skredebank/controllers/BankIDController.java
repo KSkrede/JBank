@@ -27,7 +27,7 @@ public class BankIDController {
     public void initialize() {
         skredebank = Skredebank.getInstance();
         setBankIDLabel();
-        nameLabel.setText(skredebank.getAccountObject().getLoggedInPerson().getGivenName()); 
+        nameLabel.setText("Velkommen tilbake " + skredebank.getAccountObject().getLoggedInPerson().getGivenName() + ". Din BankID Referanse:"); 
     }
 
     private void setBankIDLabel(){

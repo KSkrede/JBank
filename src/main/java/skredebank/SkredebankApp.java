@@ -11,7 +11,6 @@ import java.io.IOException;
 public class SkredebankApp extends Application {
 
     private static Stage stage;
-    private Skredebank skredebank;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -20,7 +19,7 @@ public class SkredebankApp extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         primaryStage.setTitle("SkredeBank");
         //I stedet for 600 600 så hent prefheight widt
-        primaryStage.setScene(new Scene(root, 600, 600));
+        primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
 
