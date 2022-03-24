@@ -9,11 +9,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import skredebank.SkredebankApp;
 import skredebank.data.Accounts;
+import skredebank.data.Person;
 import skredebank.logic.files.AccountSaver;
 import javafx.event.ActionEvent;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 public class LogInController {
 
     public LogInController() {
@@ -33,13 +36,12 @@ public class LogInController {
 
     SkredebankApp m = new SkredebankApp();
     Accounts a = new Accounts();
-    AccountSaver test = new AccountSaver(a);
+    AccountSaver accountSaver = new AccountSaver(a);
+    Person loggedInUser;
+    Map accounts;
 
     public void initialize() throws FileNotFoundException {
-        AccountSaver accountSaver = new AccountSaver(a);
-        test.readFile();
-
-        //nameLabel.setText(loggedInUser.getGivenName()); 
+        accountSaver.readFile();
     }
 
 
@@ -52,17 +54,26 @@ public class LogInController {
     }
 
     private void checkLogin() throws IOException {
-        //Creates new main
-        if(phoneNumber.getText().toString().equals("40612594") && birthDate.getText().toString().equals("230100")) {
-            wrongLogIn.setText("Suksessfull login!");
 
+        //     wrongLogIn.setText("Suksessfull login!");
+
+        String userID = phoneNumber.getText().toString()+birthDate.getText().toString();
+        
+
+        if(a.getAccounts().keySet().stream().anyMatch(key -> userID.equals(key))) {
+          //loggedInUser = a.getAccounts().keySet().stream().findFirst(key -> userID.equals(key));
+
+          for (String entry : a.getAccounts().keySet()) {
+              if (entry.equals(userID)){
+                  loggedInUser = a.getAccounts().get(entry);
+              }
+         }
             m.changeScene("bankID.fxml");
         }
 
-        else if(phoneNumber.getText().isEmpty() && birthDate.getText().isEmpty()) {
+        if(phoneNumber.getText().isEmpty() && birthDate.getText().isEmpty()) {
             wrongLogIn.setText("Venligst fyll inn mobil og fødselsnummer");
         }
-
 
         else {
             wrongLogIn.setText("Det finnes ingen bruker med dette mobil og fødselsnummeret ");

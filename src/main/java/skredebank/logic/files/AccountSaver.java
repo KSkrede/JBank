@@ -2,7 +2,8 @@ package skredebank.logic.files;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -31,26 +32,22 @@ public class AccountSaver {
                 System.out.println(accounts);
             }
         }
+
+        catch (Exception ex) {
+            System.out.println("Det finnes ingen lagrede kontoer");
+            System.out.println(ex.getMessage());
+        }
         return accounts;
     }
 
-    public void printFile(Accounts accounts) throws FileNotFoundException {
-        try (Scanner scanner = new Scanner(accountsTXT)) {
-            System.out.println(scanner.hasNextLine());
-             while (scanner.hasNextLine()) {
-                System.out.println(scanner.nextLine().split(";"));
-                //accounts.addAccounts(element[0], new Person(element[1], Help.stringToDate(element[2]), element[3], element[4], element[5]));
-            }
-        }
-    }
 
+    public void writeFile(Accounts accounts) throws IOException {
 
-    public void writeFile(Accounts accounts) throws FileNotFoundException {
-
-        try (PrintWriter writer = new PrintWriter(accountsTXT)) {
+        try (FileWriter writer = new FileWriter(accountsTXT, true)) {
             for (Map.Entry<String, Person> entry : accounts.getAccounts().entrySet()) {
-                writer.print(entry.getKey()+";");
-                writer.print(entry.getValue());
+                writer.write(entry.getKey()+";");
+                writer.write(entry.getValue().toString());
+                writer.write("\n");
             }
             }
             }
