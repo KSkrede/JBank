@@ -3,6 +3,7 @@ package skredebank;
 import java.util.Map;
 
 import skredebank.data.Accounts;
+import skredebank.data.BankAccounts;
 import skredebank.data.Person;
 import skredebank.logic.files.AccountSaver;
 
@@ -14,11 +15,13 @@ public class Skredebank {
     public Accounts accounts = new Accounts();
     public AccountSaver accountSaver = new AccountSaver(accounts);
     public Map<String, Person> accountMap;
+    public BankAccounts bankAccounts;
 
     private Skredebank() {
         this.app = new SkredebankApp();
         this.accounts = new Accounts();
         this.accountSaver = new AccountSaver(accounts);
+        this.bankAccounts = new BankAccounts();
     }
 
     // Static method
@@ -44,6 +47,10 @@ public class Skredebank {
 
     public Map<String, Person> getAccountMap() {
         return this.getAccountObject().getAccounts();
+    }
+
+    public BankAccounts getBankAccounts() {
+        return this.bankAccounts;
     }
 
 

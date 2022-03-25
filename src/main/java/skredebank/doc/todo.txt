@@ -12,3 +12,5 @@ Neste dag knapp
 Tab fungerer på phonenumber user creation
 
 Hindre at man kan lage flere brukere med samme detaljer
+
+Slette brukere og kontoer
