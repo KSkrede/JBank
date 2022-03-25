@@ -21,12 +21,24 @@ public class BankAccounts {
         bankAccounts.put(userid, bankAccount);
     }
 
-    public Boolean hasFunds(BankAccount source, String accountName, double value){
+    public Boolean hasFunds(String accountName, double value){
+        //skredebank.accounts.getLoggedInPerson.
+
         return source.getBankAccount().get(accountName) >= value;
     }
 
+    public void addFunds(String accountName, double change){
+        bankAccounts.get(user).get(accountName).
+    }
+
+    public void updateFunds(String name, double change) {
+        this.bankAccounts.put(name, bankAccounts.getOrDefault(name, 0.0) + change);
+    }
+
     public void movefunds(String userid, BankAccount source, BankAccount recciver) {
-        //if hasFunds, move
+        //if hasFunds
+
+
     }
 
     @Override

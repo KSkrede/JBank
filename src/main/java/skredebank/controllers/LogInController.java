@@ -2,6 +2,7 @@ package skredebank.controllers;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,14 +50,10 @@ public class LogInController {
         String userID = phoneNumber.getText().toString()+birthDate.getText().toString();
         Map<String, Person> accounts = skredebank.getAccountMap();
 
-        if(accounts.keySet().stream().anyMatch(key -> userID.equals(key))) {
-          //loggedInUser = a.getAccounts().keySet().stream().findFirst(key -> userID.equals(key));
+       Optional<String> account =  accounts.keySet().stream().filter(key -> userID.equals(key)).findFirst();
 
-          for (String entry : accounts.keySet()) {
-              if (entry.equals(userID)){
-                skredebank.getAccountObject().setLoggedInPerson(accounts.get(entry));
-              }
-         }
+        if(account.isPresent()) {
+            skredebank.getAccountObject().setLoggedInPerson(accounts.get(account.get()));
             wrongLogIn.setText("Suksessfull login!");
             skredebank.getApp().changeScene("bankID.fxml");
         }

@@ -14,3 +14,6 @@ Tab fungerer på phonenumber user creation
 Hindre at man kan lage flere brukere med samme detaljer
 
 Slette brukere og kontoer
+
+
+Gjøre penger om til int i stedet for doubles
