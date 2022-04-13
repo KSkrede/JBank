@@ -2,6 +2,7 @@ package jbank.data;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import jbank.logic.Help;
 
@@ -11,7 +12,7 @@ public class Person {
     private String givenName;
     private String phoneNumber;
     private String bankIDPin;
-    private LocalDate birthDate;
+    private String birthDate;
     private String userId;
     public Accounts a;
 
@@ -36,20 +37,20 @@ public class Person {
         }
     }
 
-    public LocalDate getBirthday() {
+    public String getBirthday() {
         return birthDate;
-    }
-
-    public String getBirthdayToString() {
-        return  Help.dateToString(getBirthday());
     }
 
     public void setBirthday(LocalDate birthDate) {
         LocalDate today = LocalDate.now();
-        if (birthDate.isAfter(today)) {
-            throw new IllegalArgumentException("Ulovlig bursdag");
-        } else {
-            this.birthDate = birthDate;
+        if(birthDate == null){
+            throw new IllegalArgumentException("Du må velge fødselsdato");
+        }
+        else if (birthDate.isAfter(today)) {
+            throw new IllegalArgumentException("Du kan ikke ha fødselsdato i fremtiden");
+        } 
+        else {
+            this.birthDate = Help.dateToString(birthDate);
         }
     }
 
@@ -101,7 +102,11 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("%s;%s;%s;%s;%s", phoneNumber, this.getBirthdayToString(), givenName, surName, bankIDPin);
+        return String.format("%s;%s;%s;%s;%s", phoneNumber, birthDate, givenName, surName, bankIDPin);
+    }
+
+    public String prettyString(){
+        return givenName + " " + surName + " med mobilnummer: " + phoneNumber + " og bursdag: " + birthDate;
     }
 
 

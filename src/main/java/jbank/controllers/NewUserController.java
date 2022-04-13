@@ -43,10 +43,12 @@ public class NewUserController {
     }
 
     public void createUser(ActionEvent event) throws IOException {
+
         try {
             if (jbank.getAccountMap().containsKey(phoneNumber.getText() + birthDate.getValue())) {
+                System.out.println("Denne kontoen eksisterer allerede");
                 throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
-
+                
             }
             else {
 
@@ -54,6 +56,7 @@ public class NewUserController {
                         surName.getText(), bankIDPin.getText());
                 jbank.getAccountObject().addAccounts(person.getUserId(), person);
                 jbank.getAccountSaver().writeFile(jbank.getAccountObject());
+                Help.showInformation("Ny bruker lagd", person.prettyString());
             }
         }
 

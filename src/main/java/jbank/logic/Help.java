@@ -55,6 +55,14 @@ public class Help {
             alert.setContentText(errorMessage);
             alert.showAndWait();
         }
+
+        public static void showInformation(String header, String content) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(header);
+            alert.setContentText(content);
+            alert.showAndWait();
+        }
     }
 
 
