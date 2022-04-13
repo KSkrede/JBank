@@ -202,4 +202,4 @@ buildNumber.properties
 
 # Jbank
 
-.src.main.java.jbank.storage
+src/main/java/jbank/storage/accounts.txt
