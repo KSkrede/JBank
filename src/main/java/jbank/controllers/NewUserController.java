@@ -50,6 +50,11 @@ public class NewUserController {
                 throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
                 
             }
+
+            else if(!bankIDPin.getText().equals(confirmBankIDPin.getText()) ){
+                throw new IllegalArgumentException("BankID pin er ulik");
+
+            }
             else {
 
                 Person person = new Person(phoneNumber.getText(), birthDate.getValue(), givenName.getText(),
