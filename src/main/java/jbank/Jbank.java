@@ -11,9 +11,9 @@ public class Jbank {
     // Singleton
     private static Jbank single_instance = null;
 
-    public JbankApp app = new JbankApp();
-    public Accounts accounts = new Accounts();
-    public AccountSaver accountSaver = new AccountSaver(accounts);
+    public JbankApp app;
+    public Accounts accounts; 
+    public AccountSaver accountSaver;
     public Map<String, Person> accountMap;
     public BankAccounts bankAccounts;
 

@@ -35,7 +35,7 @@ public class BankIDController {
         jbank = Jbank.getInstance();
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
         setBankIDLabel();
-        //nameLabel.setText("Velkommen tilbake " + loggedInPerson.getGivenName() + ". Din BankID Referanse:"); 
+        nameLabel.setText("Velkommen tilbake " + loggedInPerson.getGivenName() + ". Din BankID Referanse:"); 
     }
 
     private void setBankIDLabel(){
@@ -56,7 +56,7 @@ public class BankIDController {
     private void Login(ActionEvent event) throws IOException {
 
         if(loggedInPerson.getBankIDPin().equals(pinField.getText().toString())) {
-            jbank.getApp().changeScene("skredebank/skredeBank.fxml");
+            jbank.getApp().changeScene("jbank/jbank.fxml");
         }
         else System.out.println("nay" + pinField.getText().toString());
     
