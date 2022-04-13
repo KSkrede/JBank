@@ -1,4 +1,5 @@
 package jbank.controllers;
+
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import jbank.Jbank;
 import jbank.data.Person;
+import jbank.logic.Help;
 
 public class NewUserController {
     public NewUserController() {
@@ -41,20 +43,24 @@ public class NewUserController {
     }
 
     public void createUser(ActionEvent event) throws IOException {
-        if(jbank.getAccountMap().containsKey(phoneNumber.getText()+birthDate.getValue())){
-            throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
+        try {
+            if (jbank.getAccountMap().containsKey(phoneNumber.getText() + birthDate.getValue())) {
+                throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
+
+            }
+            else {
+
+                Person person = new Person(phoneNumber.getText(), birthDate.getValue(), givenName.getText(),
+                        surName.getText(), bankIDPin.getText());
+                jbank.getAccountObject().addAccounts(person.getUserId(), person);
+                jbank.getAccountSaver().writeFile(jbank.getAccountObject());
+            }
         }
-        try{
-            Person person = new Person(phoneNumber.getText(), birthDate.getValue(), givenName.getText(), surName.getText(), bankIDPin.getText());
-            jbank.getAccountObject().addAccounts(person.getUserId(), person);
-            jbank.getAccountSaver().writeFile(jbank.getAccountObject());
-        }
-        
-        catch(IllegalArgumentException e){
+
+        catch (IllegalArgumentException e) {
+            Help.showErrorMessage(e.getMessage());
             System.out.println(e.getMessage());
         }
-
-
 
     }
 
@@ -62,7 +68,6 @@ public class NewUserController {
         jbank.getApp().changeScene("newUser.fxml");
     }
 
-    
     public void back(ActionEvent event) throws IOException {
         jbank.getApp().changeScene("login.fxml");
     }
