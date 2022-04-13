@@ -32,7 +32,7 @@ public class Person {
         }
 
         else {
-            throw new IllegalArgumentException("Illegal char in " + givenName + " or " + surName);
+            throw new IllegalArgumentException("Det er et ulovlig tegn i " + givenName + " eller " + surName);
         }
     }
 
@@ -47,7 +47,7 @@ public class Person {
     public void setBirthday(LocalDate birthDate) {
         LocalDate today = LocalDate.now();
         if (birthDate.isAfter(today)) {
-            throw new IllegalArgumentException("Birthday is in the future");
+            throw new IllegalArgumentException("Ulovlig bursdag");
         } else {
             this.birthDate = birthDate;
         }
@@ -61,7 +61,7 @@ public class Person {
         if (phoneNumber.length() == 8 && Help.isAllDigit(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
-            throw new IllegalArgumentException("Illegal phonenumber " + phoneNumber);
+            throw new IllegalArgumentException("Ulovelig telefonnummer " + phoneNumber);
         }
     }
 
@@ -69,7 +69,7 @@ public class Person {
         if (Help.isAllDigit(bankIDPin)) {
             this.bankIDPin = bankIDPin;
         } else {
-            throw new IllegalArgumentException("Illegal BankID Pin " + bankIDPin);
+            throw new IllegalArgumentException("Ulovelig BankIDpin " + bankIDPin);
         }
     }
 

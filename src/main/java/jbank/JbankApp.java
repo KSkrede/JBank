@@ -18,7 +18,6 @@ public class JbankApp extends Application {
         primaryStage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         primaryStage.setTitle("Jbank");
-        //I stedet for 600 600 så hent prefheight widt
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

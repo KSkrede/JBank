@@ -34,18 +34,20 @@ public class NewUserController {
     @FXML
     private TextField confirmBankIDPin;
 
-    Jbank skredebank;
+    Jbank jbank;
 
     public void initialize() {
-        skredebank = Jbank.getInstance();
+        jbank = Jbank.getInstance();
     }
 
     public void createUser(ActionEvent event) throws IOException {
+        if(jbank.getAccountMap().containsKey(phoneNumber.getText()+birthDate.getValue())){
+            throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
+        }
         try{
-            Person p1 = new Person(phoneNumber.getText(), birthDate.getValue(), givenName.getText(), surName.getText(), bankIDPin.getText());
-            //ID = new Person(givenName.getText(), surName.getText(), phoneNumber.getText(), birthDate.getValue(), bankIDPin.getText());
-            skredebank.getAccountObject().addAccounts(p1.getUserId(), p1);
-            skredebank.getAccountSaver().writeFile(skredebank.getAccountObject());
+            Person person = new Person(phoneNumber.getText(), birthDate.getValue(), givenName.getText(), surName.getText(), bankIDPin.getText());
+            jbank.getAccountObject().addAccounts(person.getUserId(), person);
+            jbank.getAccountSaver().writeFile(jbank.getAccountObject());
         }
         
         catch(IllegalArgumentException e){
@@ -57,12 +59,12 @@ public class NewUserController {
     }
 
     public void newUser(ActionEvent event) throws IOException {
-        skredebank.getApp().changeScene("newUser.fxml");
+        jbank.getApp().changeScene("newUser.fxml");
     }
 
     
     public void back(ActionEvent event) throws IOException {
-        skredebank.getApp().changeScene("login.fxml");
+        jbank.getApp().changeScene("login.fxml");
     }
 
 }
