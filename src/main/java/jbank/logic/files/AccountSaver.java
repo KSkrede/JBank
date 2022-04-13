@@ -12,7 +12,7 @@ import jbank.data.Person;
 import jbank.logic.Help;
 
 public class AccountSaver {
-    File accountsTXT = new File("src\\main\\java\\jbank\\accounts\\accounts.txt");
+    File accountsTXT = new File("src\\main\\java\\jbank\\storage\\accounts.txt");
     Accounts test;
     private Accounts accounts;
 
@@ -23,13 +23,9 @@ public class AccountSaver {
 
     public Accounts readFile() throws FileNotFoundException {
         try (Scanner scanner = new Scanner(accountsTXT)) {
-            //#TODO
-             //Implementer sjekk på at det er valide objekter som scannes inn.
-
              while (scanner.hasNextLine()) {
                 String[] element = scanner.nextLine().split(";");
                 this.accounts.addAccounts(element[0], new Person(element[1], Help.stringToDate(element[2]), element[3], element[4], element[5]));
-                System.out.println(accounts);
             }
         }
 
