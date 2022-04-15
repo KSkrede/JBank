@@ -1,0 +1,37 @@
+/* https://stackoverflow.com/questions/52440012/javafx-tab-appearance-differs-from-scenebuilder */
+.tab-pane > .tab-header-area {
+    -fx-padding: 0;
+  }
+  
+  .tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: white;
+    -fx-background-insets: 0, 0 0 1px 0;
+  }
+  
+  .tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: white;
+    -fx-background-insets: 0 0 1px 0;     
+    -fx-padding: 1.5em 1em;
+  }
+  
+  .tab-pane > .tab-header-area > .headers-region > .tab >.tab-container >.tab-label {
+    -fx-text-fill: #2AAEBB;
+  }
+  
+  .tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: #2AAEBB, white;
+    -fx-background-insets: 0, 0 0 2px 0;
+  }
+  
+  .tab-pane > .tab-header-area > .headers-region > .tab:selected >.tab-container >.tab-label {
+    -fx-text-fill: #2AAEBB;
+  }
+  
+  .tab-pane > .tab-header-area > .headers-region > .tab:selected >.tab-container >.focus-indicator {
+    -fx-opacity: 0;
+  }
+
+  .button {
+    -fx-background-color: #2AAEBB;
+    -fx-text-fill: White;
+  }

@@ -56,7 +56,7 @@ public class BankIDController {
     private void Login(ActionEvent event) throws IOException {
 
         if(loggedInPerson.getBankIDPin().equals(pinField.getText().toString())) {
-            jbank.getApp().changeScene("jbank/jbank.fxml");
+            jbank.getApp().changeScene("jbank/jBank.fxml");
         }
         else System.out.println("nay" + pinField.getText().toString());
     

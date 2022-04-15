@@ -1,4 +1,3 @@
-Legge til popup on wrong user creation and wrong pin on bankid - Fredag 18.03 27:59
 Gå gjennom alle public og se om de kan bli private
 
 Implement main Skredebank with following tabs
@@ -9,9 +8,6 @@ Legge til grafer
 
 Neste dag knapp
 
-Tab fungerer på phonenumber user creation
-
-Hindre at man kan lage flere brukere med samme detaljer
 
 Slette brukere og kontoer
 

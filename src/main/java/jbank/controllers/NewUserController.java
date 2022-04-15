@@ -43,19 +43,23 @@ public class NewUserController {
     }
 
     public void createUser(ActionEvent event) throws IOException {
-        String userID = phoneNumber.getText() + Help.dateToString(birthDate.getValue());
 
         try {
+            if (phoneNumber.getText() == null || birthDate.getValue() == null) {
+                throw new IllegalArgumentException("Du må fylle ut alle feltene");
+            }
+
+            String userID = phoneNumber.getText() + Help.dateToString(birthDate.getValue());
+            
             if (jbank.getAccountMap().containsKey(userID)) {
                 throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
-                
+
             }
 
-            else if(!bankIDPin.getText().equals(confirmBankIDPin.getText()) ){
+            else if (!bankIDPin.getText().equals(confirmBankIDPin.getText())) {
                 throw new IllegalArgumentException("BankID pin er ulik");
 
-            }
-            else {
+            } else {
 
                 Person person = new Person(phoneNumber.getText(), birthDate.getValue(), givenName.getText(),
                         surName.getText(), bankIDPin.getText());

@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import jbank.Jbank;
+import jbank.data.Accounts;
 import jbank.data.Person;
 public class LogInController {
 
@@ -34,6 +35,9 @@ public class LogInController {
     public void initialize() throws FileNotFoundException {
         skredebank = Jbank.getInstance();
         skredebank.getAccountSaver().readFile();
+        if (skredebank.getAccountMap().isEmpty()){
+            wrongLogIn.setText("Det er foreløpig ingen kontoer lagret");
+        }
     }
 
 
@@ -63,7 +67,7 @@ public class LogInController {
         }
 
         else {
-            wrongLogIn.setText("Det finnes ingen bruker med dette mobil og fødselsnummeret ");
+            wrongLogIn.setText("Det finnes ingen bruker med dette mobil og fødselsdato ");
         }
     }
 

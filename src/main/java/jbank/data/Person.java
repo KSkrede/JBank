@@ -109,5 +109,9 @@ public class Person {
         return givenName + " " + surName + " med mobilnummer: " + phoneNumber + " og bursdag: " + birthDate;
     }
 
+    public String getFullName(){
+        return givenName + " " + surName;
+    }
+
 
 }
