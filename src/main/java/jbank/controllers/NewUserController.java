@@ -75,9 +75,9 @@ public class NewUserController {
 
     }
 
-    public void newUser(ActionEvent event) throws IOException {
-        jbank.getApp().changeScene("newUser.fxml");
-    }
+    // public void newUser(ActionEvent event) throws IOException {
+    //     jbank.getApp().changeScene("newUser.fxml");
+    // }
 
     public void back(ActionEvent event) throws IOException {
         jbank.getApp().changeScene("login.fxml");

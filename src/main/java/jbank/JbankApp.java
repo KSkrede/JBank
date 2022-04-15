@@ -17,7 +17,7 @@ public class JbankApp extends Application {
         stage = primaryStage;
         primaryStage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-        primaryStage.setTitle("Jbank");
+        primaryStage.setTitle("JBank");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

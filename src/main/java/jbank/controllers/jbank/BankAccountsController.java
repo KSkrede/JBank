@@ -1,68 +1,59 @@
 package jbank.controllers.jbank;
+
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import jbank.Jbank;
+import jbank.data.BankAccount;
 import jbank.data.Person;
+import jbank.logic.Help;
 
 public class BankAccountsController {
-    public BankAccountsController() {
-
-    }
-
-    @FXML
-    private Button backButton;
-    @FXML
-    private Button createUserButton;
-    @FXML
-    private Label error;
-    @FXML
-    private TextField givenName;
-    @FXML
-    private TextField surName;
-    @FXML
-    private TextField phoneNumber;
-    @FXML
-    private DatePicker birthDate;
-    @FXML
-    private TextField bankIDPin;
-    @FXML
-    private TextField confirmBankIDPin;
 
     Jbank jbank;
+    Person loggedInPerson;
 
+    @FXML
+    private TextField bankName;
+    @FXML
+    private TextField bankAmount;
+    @FXML
+    private Button createBank;
+
+    @FXML
     public void initialize() {
         jbank = Jbank.getInstance();
+        loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
     }
 
-    public void createUser(ActionEvent event) throws IOException {
-        try{
-            Person p1 = new Person(phoneNumber.getText(), birthDate.getValue(), givenName.getText(), surName.getText(), bankIDPin.getText());
-            //ID = new Person(givenName.getText(), surName.getText(), phoneNumber.getText(), birthDate.getValue(), bankIDPin.getText());
-            jbank.getAccountObject().addAccounts(p1.getUserId(), p1);
-            jbank.getAccountSaver().writeFile(jbank.getAccountObject());
+    public void createBank(ActionEvent event) throws IOException {
+
+        try {
+            if (bankName.getText() == null || bankAmount.getText() == null) {
+                throw new IllegalArgumentException("Du må fylle ut alle feltene");
+            }
+
+            // if (jbank.accounts.getLoggedInPerson().contains bankaccount) {
+            // throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
+
+            // }
+
+            else {
+
+                BankAccount bankAccount = new BankAccount(bankName.getText(), Integer.parseInt(bankAmount.getText()));
+                jbank.getBankAccounts().addAccounts(loggedInPerson.getUserId(), bankAccount);
+                // jbank.getAccountSaver().writeFile(jbank.getAccountObject());
+                Help.showInformation("Ny bankkonto lagd", bankAccount.toString());
+            }
         }
-        
-        catch(IllegalArgumentException e){
-            System.out.println(e.getMessage());
+
+        catch (IllegalArgumentException e) {
+            Help.showErrorMessage(e.getMessage());
         }
 
-
-
-    }
-
-    public void newUser(ActionEvent event) throws IOException {
-        jbank.getApp().changeScene("newUser.fxml");
-    }
-
-    
-    public void back(ActionEvent event) throws IOException {
-        jbank.getApp().changeScene("login.fxml");
     }
 
 }

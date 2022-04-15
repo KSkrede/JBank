@@ -7,22 +7,25 @@ public class BankAccount {
 
     String name;
     double value;
-    private Map<String, Double> bankAccount = new HashMap<>();
+    private Map<String, Integer> bankAccount;
 
     
-    public BankAccount(String name, double value) {
+    public BankAccount(String name, int value) {
+        bankAccount = new HashMap<>();
         bankAccount.put(name, value);
+        this.name = name;
+        this.value = value;
     }
 
 
-    public Map<String, Double> getBankAccount() {
+    public Map<String, Integer> getBankAccount() {
         return bankAccount;
     }
 
 
     @Override
     public String toString() {
-        return "" + bankAccount;
+        return "Navn: " + name + ", Beløp: " + value ;
     }
 
     

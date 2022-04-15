@@ -57,8 +57,8 @@ public class Help {
         }
 
         public static void showInformation(String header, String content) {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Information");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Informasjon");
             alert.setHeaderText(header);
             alert.setContentText(content);
             alert.showAndWait();
