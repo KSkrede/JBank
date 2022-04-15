@@ -1,24 +1,27 @@
 package jbank.data;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BankAccounts {
-    private Map<String, BankAccount> bankAccounts;
+    private Map<String, ArrayList<BankAccount>> bankAccounts;
 
 
     public BankAccounts() {
         bankAccounts = new HashMap<>();
     }
 
-    public Map<String, BankAccount> getAllBankAccounts() {
+    public Map<String, ArrayList<BankAccount>> getAllBankAccounts() {
         return bankAccounts;
     }
 
+    public ArrayList<BankAccount> getBankAccounts(Person user){
+        return new ArrayList<>(bankAccounts.get(user.getUserId()));  
+    }
+
     public void addAccounts(String userid, BankAccount bankAccount) {
-        bankAccounts.put(userid, bankAccount);
+        bankAccounts.get(userid).add(bankAccount);
     }
 
     // public Boolean hasFunds(String accountName, double value){

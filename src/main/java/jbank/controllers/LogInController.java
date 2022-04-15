@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import jbank.Jbank;
-import jbank.data.Accounts;
 import jbank.data.Person;
 public class LogInController {
 
@@ -57,7 +56,7 @@ public class LogInController {
        Optional<String> account =  accounts.keySet().stream().filter(key -> userID.equals(key)).findFirst();
 
         if(account.isPresent()) {
-            skredebank.getAccountObject().setLoggedInPerson(accounts.get(account.get()));
+            login(accounts, account);
             wrongLogIn.setText("Suksessfull login!");
             skredebank.getApp().changeScene("bankID.fxml");
         }
@@ -69,6 +68,11 @@ public class LogInController {
         else {
             wrongLogIn.setText("Det finnes ingen bruker med dette mobil og fødselsdato ");
         }
+    }
+
+
+    private void login(Map<String, Person> accounts, Optional<String> account) {
+        skredebank.getAccountObject().setLoggedInPerson(accounts.get(account.get()));
     }
 
 
