@@ -44,7 +44,7 @@ public class BankAccount {
 
     @Override
     public String toString() {
-        return "Navn: " + name + ", Beløp: " + value ;
+        return name;
     }
 
     

@@ -22,6 +22,15 @@ public class BankAccounts {
             return new ArrayList<>(bankAccounts.get(user.getUserId()));
     }
 
+    public void deleteBankAccount(Person user, BankAccount bankAccount){
+        if (!bankAccounts.get(user.getUserId()).contains(bankAccount)){
+            throw new IllegalArgumentException("Du kan ikke slette en konto som ikke finnes");
+        }
+        else {
+            bankAccounts.get(user.getUserId()).remove(bankAccount);
+        }
+    }
+
     public void addAccounts(String userid, BankAccount bankAccount) {
 
         if (bankAccounts.get(userid) == null) {
@@ -52,8 +61,14 @@ public class BankAccounts {
         }
     }
 
-    public void movefunds(String userid, BankAccount source, BankAccount recciver) {
-        // if hasFunds
+    public void movefunds(BankAccount source, BankAccount destination, int amount) {
+        if(source.getValue() < amount){
+            throw new IllegalArgumentException(source + " har ikke dekning");
+        }
+        else{
+            source.removeValue(amount);
+            destination.addValue(amount);
+        }
 
     }
 

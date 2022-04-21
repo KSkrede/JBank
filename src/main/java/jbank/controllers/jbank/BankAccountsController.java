@@ -38,9 +38,10 @@ public class BankAccountsController {
     private ListView<String> bankInfo;
     @FXML
     private Button transferButton;
+    @FXML
+    private Button deleteButton;
     private ArrayList<BankAccount> loggedInPersonBankAccounts;
     private BankAccount selectedBankAccount;
-    private BankAccount chosenBankAccount;
 
     @FXML
     public void initialize() {
@@ -51,9 +52,9 @@ public class BankAccountsController {
     }
 
     public void test() {
-        System.out.println(selectedBankAccount);
-        bankInfo.getItems().add("test");
-        
+
+        System.out.println(jbank.getBankAccounts().getBankAccounts(loggedInPerson));
+
     }
 
     public void viewBankAccount() {
@@ -62,11 +63,12 @@ public class BankAccountsController {
             selectedBankAccount = bankList.getSelectionModel().getSelectedItem();
             viewBankAccount();
         });
-        if (selectedBankAccount == null) {
+        if (selectedBankAccount == null ) {
             bankInfo.getItems().add("");
         } else {
             bankInfo.getItems().clear();
             bankInfo.getItems().add(selectedBankAccount.toString());
+            bankInfo.getItems().add("Beløp: " + selectedBankAccount.getValue() + " kr");
             bankInfo.getItems().add("Her skal det komme kontoutskrift");
         }
     }
@@ -82,7 +84,6 @@ public class BankAccountsController {
             Help.showInformation(e.getMessage(), "Venligst lag en under fanen Bankkonto");
             loggedInPersonBankAccounts = new ArrayList<>();
         }
-        System.out.println(loggedInPersonBankAccounts);
         bankList.getItems().addAll(loggedInPersonBankAccounts);
     }
 
@@ -93,8 +94,9 @@ public class BankAccountsController {
                 throw new IllegalArgumentException("Du må fylle ut alle feltene");
             }
 
-            if (loggedInPersonBankAccounts.stream().anyMatch(BankAccount -> bankName.getText().equals(BankAccount.getName()))) {
-            throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
+            if (loggedInPersonBankAccounts.stream()
+                    .anyMatch(BankAccount -> bankName.getText().equals(BankAccount.getName()))) {
+                throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
 
             }
 
@@ -113,8 +115,45 @@ public class BankAccountsController {
 
     }
 
-    public void chooseBankAccount(){
-        chosenBankAccount = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts, "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
-        System.out.println(chosenBankAccount);
+    public void bankTransfer(){
+        try {
+
+        if(loggedInPersonBankAccounts.size() < 2){
+            throw new IllegalArgumentException("Du må ha minimum to kontoer for å overføre penger");
+        }
+
+        BankAccount source = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
+        "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
+        BankAccount destination = Help.choseBankAccount(loggedInPersonBankAccounts.get(1), loggedInPersonBankAccounts,
+        "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");
+        int amount = Help.amount();
+
+            jbank.bankAccounts.movefunds(source, destination, amount);
+        } catch (IllegalArgumentException e) {
+            Help.showErrorMessage(e.getMessage());
+        }
+        updateListView();
+    }
+
+    public void deleteBankAccount(){
+        BankAccount bank = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
+        "Sletting av konto", "Velg kontoen du ønsker å slette", "Bankkonto: ");
+        Boolean choice = Help.confirm("Er du sikker på at du vil slette denne kontoen?");
+
+        if(choice){
+            try {
+                if (selectedBankAccount == bank){
+                    selectedBankAccount = null;
+                    bankInfo.getItems().clear();
+                }
+                jbank.getBankAccounts().deleteBankAccount(loggedInPerson, bank);  
+            } catch (IllegalArgumentException e) {
+                Help.showErrorMessage(e.getMessage());
+            }
+            
+        }
+        updateListView();
+
+
     }
 }
