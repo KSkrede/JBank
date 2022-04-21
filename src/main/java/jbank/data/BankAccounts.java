@@ -30,18 +30,26 @@ public class BankAccounts {
         bankAccounts.get(userid).add(bankAccount);
     }
 
-    public Boolean hasFunds(String accountName, double value){
-    //jbank.accounts.getLoggedInPerson.
+    public Boolean hasFunds(BankAccount bank, int value){
+    return bank.getValue() >= value; }
 
-    return source.getBankAccount().get(accountName) >= value;
+
+    public void addFunds(BankAccount bank, int funds){
+        if(funds > 0){
+            throw new IllegalArgumentException("Kan ikke legge til et negativt beløp");
+        }
+        else {
+            bank.addValue(funds);
+        }
     }
 
-    public void addFunds(String accountName, double change){
-    bankAccounts.get(user).get(accountName).
-    }
-
-    public void updateFunds(String name, double change) {
-    this.bankAccounts.put(name, bankAccounts.getOrDefault(name, 0.0) + change);
+    public void removeFunds(BankAccount bank, int funds){
+        if(funds < 0){
+            throw new IllegalArgumentException("Kan ikke trekke fra et negativt beløp");
+        }
+        else {
+            bank.addValue(funds);
+        }
     }
 
     public void movefunds(String userid, BankAccount source, BankAccount recciver) {

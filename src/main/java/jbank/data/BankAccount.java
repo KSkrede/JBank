@@ -27,6 +27,20 @@ public class BankAccount {
         return name;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public void addValue(int funds){
+        value = value + funds;
+    }
+
+    public void removeValue(int funds){
+        value = value - funds;
+    }
+
+
+
 
     @Override
     public String toString() {

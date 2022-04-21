@@ -2,9 +2,12 @@ package jbank.logic;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Alert.AlertType;
+import jbank.data.BankAccount;
 
 public class Help {
 
@@ -63,6 +66,18 @@ public class Help {
             alert.setContentText(content);
             alert.showAndWait();
         }
+
+        public static BankAccount choseBankAccount(BankAccount selectedBankAccount, ArrayList<BankAccount> loggedInPersonBankAccounts, String title, String header, String content ){
+            ChoiceDialog<BankAccount> dialog = new ChoiceDialog<BankAccount>(selectedBankAccount, loggedInPersonBankAccounts);
+            dialog.setTitle(title);
+            dialog.setHeaderText(header);
+            dialog.setContentText(content);
+            BankAccount chosenBankAccount = dialog.showAndWait().get();
+            return chosenBankAccount;
+
+        }
+
+    
     }
 
 

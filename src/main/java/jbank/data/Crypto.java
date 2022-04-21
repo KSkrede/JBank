@@ -9,7 +9,7 @@ import java.util.Random;
 public class Crypto {
 
     private Person loggedInPerson;
-    private Map<String, Double> crypto = new HashMap<>();
+    private Map<String, int> crypto = new HashMap<>();
     Random random = new Random();
 
     public Crypto() {
@@ -18,11 +18,11 @@ public class Crypto {
         updateCrypto("Crypto3", 500.0);
     }
 
-    public double getValue(String name) {
+    public int getValue(String name) {
         return this.crypto.get(name);
     }
 
-    public void updateCrypto(String name, double value) {
+    public void updateCrypto(String name, int value) {
         this.crypto.put(name, crypto.getOrDefault(name, 0.0) + value);
     }
 
@@ -33,7 +33,7 @@ public class Crypto {
             try { 
                 String[] keys = crypto.keySet().toArray(new String[crypto.size()]);
                 String randomKey = keys[random.nextInt(keys.length)];
-                updateCrypto(randomKey, random.nextDouble(20)-10);
+                updateCrypto(randomKey, random.nextint(20)-10);
             } catch (Exception e) {
                 System.out.println(e);
             }

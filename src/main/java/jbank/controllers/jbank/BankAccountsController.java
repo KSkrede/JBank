@@ -2,6 +2,7 @@ package jbank.controllers.jbank;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -9,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import jbank.Jbank;
@@ -38,6 +40,7 @@ public class BankAccountsController {
     private Button transferButton;
     private ArrayList<BankAccount> loggedInPersonBankAccounts;
     private BankAccount selectedBankAccount;
+    private BankAccount chosenBankAccount;
 
     @FXML
     public void initialize() {
@@ -110,4 +113,8 @@ public class BankAccountsController {
 
     }
 
+    public void chooseBankAccount(){
+        chosenBankAccount = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts, "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
+        System.out.println(chosenBankAccount);
+    }
 }

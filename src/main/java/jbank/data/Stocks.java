@@ -9,7 +9,7 @@ import java.util.Random;
 public class Stocks {
 
     private Person loggedInPerson;
-    private Map<String, Double> stocks = new HashMap<>();
+    private Map<String, int> stocks = new HashMap<>();
     Random random = new Random();
 
     public Stocks() {
@@ -18,11 +18,11 @@ public class Stocks {
         updateStock("Aksje3", 12.50);
     }
 
-    public double getValue(String name) {
+    public int getValue(String name) {
         return this.stocks.get(name);
     }
 
-    public void updateStock(String name, double value) {
+    public void updateStock(String name, int value) {
         this.stocks.put(name, stocks.getOrDefault(name, 0.0) + value);
     }
 
@@ -33,7 +33,7 @@ public class Stocks {
             try { 
                 String[] keys = stocks.keySet().toArray(new String[stocks.size()]);
                 String randomKey = keys[random.nextInt(keys.length)];
-                updateStock(randomKey, random.nextDouble(20)-10);
+                updateStock(randomKey, random.nextint(20)-10);
             } catch (Exception e) {
                 System.out.println(e);
             }
