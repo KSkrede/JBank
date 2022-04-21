@@ -38,6 +38,6 @@ public class AccountSaverToDate implements IFileHandler {
         
 
      File getFile(String filename) {
-        return new File("src\\main\\java\\skredebank\\accounts\\" + filename + ".txt");
+        return new File("src\\main\\java\\jbank\\accounts\\" + filename + ".txt");
     }
 }

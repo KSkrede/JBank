@@ -29,12 +29,12 @@ public class LogInController {
     @FXML
     private TextField birthDate;
 
-    Jbank skredebank;
+    Jbank jbank;
 
     public void initialize() throws FileNotFoundException {
-        skredebank = Jbank.getInstance();
-        skredebank.getAccountSaver().readFile();
-        if (skredebank.getAccountMap().isEmpty()){
+        jbank = Jbank.getInstance();
+        jbank.getAccountSaver().readFile();
+        if (jbank.getAccountMap().isEmpty()){
             wrongLogIn.setText("Det er foreløpig ingen kontoer lagret");
         }
     }
@@ -45,20 +45,20 @@ public class LogInController {
     }
 
     public void newUser(ActionEvent event) throws IOException {
-        skredebank.getApp().changeScene("newUser.fxml");
+        jbank.getApp().changeScene("newUser.fxml");
     }
 
     private void checkLogin() throws IOException {
 
         String userID = phoneNumber.getText().toString()+birthDate.getText().toString();
-        Map<String, Person> accounts = skredebank.getAccountMap();
+        Map<String, Person> accounts = jbank.getAccountMap();
 
        Optional<String> account =  accounts.keySet().stream().filter(key -> userID.equals(key)).findFirst();
 
         if(account.isPresent()) {
             login(accounts, account);
             wrongLogIn.setText("Suksessfull login!");
-            skredebank.getApp().changeScene("bankID.fxml");
+            jbank.getApp().changeScene("bankID.fxml");
         }
 
         if(phoneNumber.getText().isEmpty() && birthDate.getText().isEmpty()) {
@@ -72,7 +72,7 @@ public class LogInController {
 
 
     private void login(Map<String, Person> accounts, Optional<String> account) {
-        skredebank.getAccountObject().setLoggedInPerson(accounts.get(account.get()));
+        jbank.getAccountObject().setLoggedInPerson(accounts.get(account.get()));
     }
 
 

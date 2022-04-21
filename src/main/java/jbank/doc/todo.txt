@@ -1,6 +1,6 @@
 Gå gjennom alle public og se om de kan bli private
 
-Implement main Skredebank with following tabs
+Implement main jbank with following tabs
 
 Aksjer, Krypto, Sparing, Kontoer, historikk.
 
