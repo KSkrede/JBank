@@ -63,7 +63,7 @@ public class BankAccountsController {
             selectedBankAccount = bankList.getSelectionModel().getSelectedItem();
             viewBankAccount();
         });
-        if (selectedBankAccount == null ) {
+        if (selectedBankAccount == null) {
             bankInfo.getItems().add("");
         } else {
             bankInfo.getItems().clear();
@@ -115,18 +115,19 @@ public class BankAccountsController {
 
     }
 
-    public void bankTransfer(){
+    public void bankTransfer() {
         try {
 
-        if(loggedInPersonBankAccounts.size() < 2){
-            throw new IllegalArgumentException("Du må ha minimum to kontoer for å overføre penger");
-        }
+            if (loggedInPersonBankAccounts.size() < 2) {
+                throw new IllegalArgumentException("Du må ha minimum to kontoer for å overføre penger");
+            }
 
-        BankAccount source = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
-        "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
-        BankAccount destination = Help.choseBankAccount(loggedInPersonBankAccounts.get(1), loggedInPersonBankAccounts,
-        "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");
-        int amount = Help.amount();
+            BankAccount source = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
+                    "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
+            BankAccount destination = Help.choseBankAccount(loggedInPersonBankAccounts.get(1),
+                    loggedInPersonBankAccounts,
+                    "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");
+            int amount = Help.amount();
 
             jbank.bankAccounts.movefunds(source, destination, amount);
         } catch (IllegalArgumentException e) {
@@ -135,25 +136,31 @@ public class BankAccountsController {
         updateListView();
     }
 
-    public void deleteBankAccount(){
-        BankAccount bank = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
-        "Sletting av konto", "Velg kontoen du ønsker å slette", "Bankkonto: ");
-        Boolean choice = Help.confirm("Er du sikker på at du vil slette denne kontoen?");
-
-        if(choice){
-            try {
-                if (selectedBankAccount == bank){
-                    selectedBankAccount = null;
-                    bankInfo.getItems().clear();
-                }
-                jbank.getBankAccounts().deleteBankAccount(loggedInPerson, bank);  
-            } catch (IllegalArgumentException e) {
-                Help.showErrorMessage(e.getMessage());
+    public void deleteBankAccount() {
+        try {
+            if (loggedInPersonBankAccounts.size() < 1) {
+                throw new IllegalArgumentException("Du kan ikke slette en konto før du har lagd en");
             }
-            
+
+            BankAccount bank = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
+                    "Sletting av konto", "Velg kontoen du ønsker å slette", "Bankkonto: ");
+            Boolean choice = Help.confirm("Er du sikker på at du vil slette denne kontoen?");
+
+            if (choice) {
+                try {
+                    if (selectedBankAccount == bank) {
+                        selectedBankAccount = null;
+                        bankInfo.getItems().clear();
+                    }
+                    jbank.getBankAccounts().deleteBankAccount(loggedInPerson, bank);
+                } catch (IllegalArgumentException e) {
+                    Help.showErrorMessage(e.getMessage());
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            Help.showErrorMessage(e.getMessage());
         }
         updateListView();
-
 
     }
 }

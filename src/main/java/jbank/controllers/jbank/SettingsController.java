@@ -29,6 +29,8 @@ public class SettingsController {
     private Label phoneNumber;
     @FXML
     private Label birthDate;
+    @FXML
+    private Button back;
 
 
 
@@ -39,6 +41,10 @@ public class SettingsController {
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
         //surName.setText(loggedInPerson.getSurName());
         givenName.setText(loggedInPerson.getGivenName());
+    }
+
+    public void back() throws IOException{
+        jbank.getApp().changeScene("jbank/jBank.fxml");
     }
 
 

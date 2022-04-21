@@ -44,6 +44,12 @@ public class JBankController {
     }
 
     @FXML
+    private void settings() throws IOException{
+        jbank.getApp().changeScene("jbank/settings.fxml");
+    }
+
+
+    @FXML
     private void logOut(ActionEvent event) throws IOException{
         jbank.getAccountObject().setLoggedInPerson(null);
         jbank.getApp().changeScene("login.fxml");

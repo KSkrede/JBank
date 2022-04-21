@@ -9,9 +9,8 @@ Legge til grafer
 Neste dag knapp
 
 
-Slette brukere og kontoer
+Slette brukere
 
-Gjøre penger om til int i stedet for ints
 
 Generics i filinterface?
 

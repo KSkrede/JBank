@@ -30,7 +30,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="loggedInUser" layoutX="914.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #2AAEBB;" text="Logged in user" textFill="WHITE" />
+      <Button fx:id="loggedInUser" layoutX="914.0" layoutY="13.0" mnemonicParsing="false" onAction="#settings" style="-fx-background-color: #2AAEBB;" text="Logged in user" textFill="WHITE" />
       <Button fx:id="nextDay" layoutX="1191.0" layoutY="10.0" mnemonicParsing="false" text="Neste dag" />
       <Label layoutX="718.0" layoutY="13.0" prefHeight="30.0" prefWidth="159.0" text="Innlogget bruker:">
          <font>
