@@ -19,7 +19,7 @@ public class Help {
     }
 
     public static String todayToString() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyy"));
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yy"));
     }
 
     public static LocalDate stringToDate(String date){
@@ -40,7 +40,7 @@ public class Help {
 
     public static boolean isAllLetters(String str) {
         for (char c : str.toCharArray()) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && !Character.isWhitespace(c)) {
                 return false;
             }
         }

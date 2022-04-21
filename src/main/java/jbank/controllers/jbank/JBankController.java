@@ -1,5 +1,8 @@
 package jbank.controllers.jbank;
+import java.io.IOException;
+import java.time.LocalDate;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +21,8 @@ public class JBankController {
     private Button nextDay;
     @FXML
     private Label currentDate;
+    @FXML
+    private Button logOuButton;
 
     @FXML
     public void initialize() {
@@ -37,5 +42,14 @@ public class JBankController {
     private void setDateLabel(){
         currentDate.setText(Help.todayToString());
     }
+
+    @FXML
+    private void logOut(ActionEvent event) throws IOException{
+        jbank.getAccountObject().setLoggedInPerson(null);
+        jbank.getApp().changeScene("login.fxml");
+
+    }
+
+
 
     }

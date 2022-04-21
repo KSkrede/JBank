@@ -15,3 +15,20 @@ Gjøre penger om til int i stedet for doubles
 
 Generics i filinterface?
 
+decrease prettyprint size
+
+
+Instillinger:
+
+Slette konto
+
+Endre fornavn
+
+Endre etternavn
+
+Endre pin
+
+
+
+
+

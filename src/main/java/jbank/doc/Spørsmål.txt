@@ -1,4 +1,6 @@
 interfacet FileHandler for å både håndtere accounts og fremtidig bankaccounts.
 Loope gjennom Maps med Lamdasteams i loginController
 Importere okhttp
-NavbarDrawer i scenebuilder
+
+
+Er Actionevent event nødvendig i controllere?

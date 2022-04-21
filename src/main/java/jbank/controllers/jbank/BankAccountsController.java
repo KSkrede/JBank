@@ -28,24 +28,41 @@ public class BankAccountsController {
     @FXML
     private Button createBank;
     @FXML
+    private Button test;
+    @FXML
     private ListView<BankAccount> bankList;
-
-    ArrayList loggedInPersonBankAccounts;
-
-
+    @FXML
+    private Button transferButton;
+    private ArrayList<BankAccount> loggedInPersonBankAccounts;
 
     @FXML
     public void initialize() {
         jbank = Jbank.getInstance();
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
         loggedInPersonBankAccounts = new ArrayList<>();
-        //loggedInPersonBankAccounts = jbank.getBankAccounts().getBankAccounts(loggedInPerson);
-        loggedInPersonBankAccounts.add(new BankAccount("test", 100));
+        updateListView();
     }
 
-    public void updateListView(){
-        ObservableList<BankAccount> observableBanks = FXCollections.observableArrayList(loggedInPersonBankAccounts);
-        bankList.setItems(observableBanks);
+    public void test(){
+        loggedInPersonBankAccounts.add(new BankAccount("test", 100));
+        updateListView();
+    }
+
+    public void updateListView() {
+        System.out.println("hei");
+        bankList.getItems().clear();
+        try {
+            loggedInPersonBankAccounts = jbank.getBankAccounts().getBankAccounts(loggedInPerson);
+            System.out.println(loggedInPersonBankAccounts);
+        }
+
+        catch (IllegalStateException e){
+            Help.showInformation(e.getMessage(),"Venligst lag en under fanen Bankkonto" );
+            loggedInPersonBankAccounts = new ArrayList<>();
+        }
+
+        bankList.getItems().addAll(loggedInPersonBankAccounts);
+        System.out.println(loggedInPersonBankAccounts);
     }
 
     public void createBank(ActionEvent event) throws IOException {

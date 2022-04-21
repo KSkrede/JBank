@@ -17,10 +17,18 @@ public class BankAccounts {
     }
 
     public ArrayList<BankAccount> getBankAccounts(Person user){
-        return new ArrayList<>(bankAccounts.get(user.getUserId()));  
+        if(bankAccounts.get(user.getUserId()) == null){
+            throw new IllegalStateException("Ingen bankkontoer eksisterer foreløpig.");
+        }
+        else return new ArrayList<>(bankAccounts.get(user.getUserId()));  
     }
 
     public void addAccounts(String userid, BankAccount bankAccount) {
+
+        if(bankAccounts.get(userid) == null){
+            bankAccounts.put(userid, new ArrayList<BankAccount>());
+        }
+        System.out.println(bankAccount);
         bankAccounts.get(userid).add(bankAccount);
     }
 

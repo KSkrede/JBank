@@ -65,7 +65,7 @@ public class NewUserController {
                         surName.getText(), bankIDPin.getText());
                 jbank.getAccountObject().addAccounts(person.getUserId(), person);
                 jbank.getAccountSaver().writeFile(jbank.getAccountObject());
-                Help.showInformation("Ny bruker lagd", person.prettyString());
+                Help.showInformation("Ny bruker laget", person.prettyString());
             }
         }
 

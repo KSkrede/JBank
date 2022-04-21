@@ -27,13 +27,20 @@ public class Person {
     }
 
     public void setName(String givenName, String surName) {
-        if (Help.isAllLetters(givenName) && Help.isAllLetters(surName)) {
+        if (Help.isAllLetters(givenName)) {
             this.givenName = givenName;
+        }
+        
+        else {
+            throw new IllegalArgumentException("Det er et ulovlig tegn i " + givenName);
+        }
+
+        if(Help.isAllLetters(surName)){
             this.surName = surName;
         }
 
         else {
-            throw new IllegalArgumentException("Det er et ulovlig tegn i " + givenName + " eller " + surName);
+            throw new IllegalArgumentException("Det er et ulovlig tegn i " + surName);
         }
     }
 
