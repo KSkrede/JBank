@@ -6,7 +6,7 @@ import java.util.Map;
 public class BankAccount {
 
     String name;
-    double value;
+    Integer value;
     private Map<String, Integer> bankAccount;
 
     
@@ -20,6 +20,11 @@ public class BankAccount {
 
     public Map<String, Integer> getBankAccount() {
         return bankAccount;
+    }
+
+
+    public String getName() {
+        return name;
     }
 
 

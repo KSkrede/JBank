@@ -7,7 +7,6 @@ import java.util.Map;
 public class BankAccounts {
     private Map<String, ArrayList<BankAccount>> bankAccounts;
 
-
     public BankAccounts() {
         bankAccounts = new HashMap<>();
     }
@@ -16,39 +15,37 @@ public class BankAccounts {
         return bankAccounts;
     }
 
-    public ArrayList<BankAccount> getBankAccounts(Person user){
-        if(bankAccounts.get(user.getUserId()) == null){
-            throw new IllegalStateException("Ingen bankkontoer eksisterer foreløpig.");
-        }
-        else return new ArrayList<>(bankAccounts.get(user.getUserId()));  
+    public ArrayList<BankAccount> getBankAccounts(Person user) {
+        if (bankAccounts.get(user.getUserId()) == null) {
+            throw new IllegalStateException("Ingen bankkontoer eksisterer foreløpig");
+        } else
+            return new ArrayList<>(bankAccounts.get(user.getUserId()));
     }
 
     public void addAccounts(String userid, BankAccount bankAccount) {
 
-        if(bankAccounts.get(userid) == null){
+        if (bankAccounts.get(userid) == null) {
             bankAccounts.put(userid, new ArrayList<BankAccount>());
         }
-        System.out.println(bankAccount);
         bankAccounts.get(userid).add(bankAccount);
     }
 
     // public Boolean hasFunds(String accountName, double value){
-    //     //skredebank.accounts.getLoggedInPerson.
+    // //skredebank.accounts.getLoggedInPerson.
 
-    //     return source.getBankAccount().get(accountName) >= value;
+    // return source.getBankAccount().get(accountName) >= value;
     // }
 
     // public void addFunds(String accountName, double change){
-    //     bankAccounts.get(user).get(accountName).
+    // bankAccounts.get(user).get(accountName).
     // }
 
     // public void updateFunds(String name, double change) {
-    //     this.bankAccounts.put(name, bankAccounts.getOrDefault(name, 0.0) + change);
+    // this.bankAccounts.put(name, bankAccounts.getOrDefault(name, 0.0) + change);
     // }
 
     public void movefunds(String userid, BankAccount source, BankAccount recciver) {
-        //if hasFunds
-
+        // if hasFunds
 
     }
 
@@ -56,19 +53,5 @@ public class BankAccounts {
     public String toString() {
         return "" + bankAccounts;
     }
-
-    public static void main(String[] args) {
-        BankAccounts test = new BankAccounts();
-        BankAccount konto = new BankAccount("Kontonavn", 20);
-        test.addAccounts("Kristian", konto );
-        System.out.println(test);
-
-    }
-
-
-
-    
-
-
 
 }

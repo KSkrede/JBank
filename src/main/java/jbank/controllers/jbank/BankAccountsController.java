@@ -3,6 +3,7 @@ package jbank.controllers.jbank;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,37 +33,54 @@ public class BankAccountsController {
     @FXML
     private ListView<BankAccount> bankList;
     @FXML
+    private ListView<String> bankInfo;
+    @FXML
     private Button transferButton;
     private ArrayList<BankAccount> loggedInPersonBankAccounts;
+    private BankAccount selectedBankAccount;
 
     @FXML
     public void initialize() {
         jbank = Jbank.getInstance();
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
-        loggedInPersonBankAccounts = new ArrayList<>();
         updateListView();
+
     }
 
-    public void test(){
-        loggedInPersonBankAccounts.add(new BankAccount("test", 100));
-        updateListView();
+    public void test() {
+        System.out.println(selectedBankAccount);
+        bankInfo.getItems().add("test");
+        
+    }
+
+    public void viewBankAccount() {
+        // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
+        bankList.setOnMouseClicked(me -> {
+            selectedBankAccount = bankList.getSelectionModel().getSelectedItem();
+            viewBankAccount();
+        });
+        if (selectedBankAccount == null) {
+            bankInfo.getItems().add("");
+        } else {
+            bankInfo.getItems().clear();
+            bankInfo.getItems().add(selectedBankAccount.toString());
+            bankInfo.getItems().add("Her skal det komme kontoutskrift");
+        }
     }
 
     public void updateListView() {
-        System.out.println("hei");
         bankList.getItems().clear();
+        viewBankAccount();
         try {
             loggedInPersonBankAccounts = jbank.getBankAccounts().getBankAccounts(loggedInPerson);
-            System.out.println(loggedInPersonBankAccounts);
         }
 
-        catch (IllegalStateException e){
-            Help.showInformation(e.getMessage(),"Venligst lag en under fanen Bankkonto" );
+        catch (IllegalStateException e) {
+            Help.showInformation(e.getMessage(), "Venligst lag en under fanen Bankkonto");
             loggedInPersonBankAccounts = new ArrayList<>();
         }
-
-        bankList.getItems().addAll(loggedInPersonBankAccounts);
         System.out.println(loggedInPersonBankAccounts);
+        bankList.getItems().addAll(loggedInPersonBankAccounts);
     }
 
     public void createBank(ActionEvent event) throws IOException {
@@ -72,10 +90,10 @@ public class BankAccountsController {
                 throw new IllegalArgumentException("Du må fylle ut alle feltene");
             }
 
-            // if (jbank.accounts.getLoggedInPerson().contains bankaccount) {
-            // throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
+            if (loggedInPersonBankAccounts.stream().anyMatch(BankAccount -> bankName.getText().equals(BankAccount.getName()))) {
+            throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
 
-            // }
+            }
 
             else {
 
@@ -86,11 +104,7 @@ public class BankAccountsController {
             }
 
             updateListView();
-        }
-
-        
-
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             Help.showErrorMessage(e.getMessage());
         }
 

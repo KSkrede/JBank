@@ -28,10 +28,6 @@ public class BankID {
         return ranAdj + " " + ranSub;
 
     }
-
-    public static void main(String[] args) {
-        System.out.println(getBankIDText());
-    }
     
     
 

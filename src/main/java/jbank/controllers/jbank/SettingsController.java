@@ -37,12 +37,8 @@ public class SettingsController {
     public void initialize() {
         jbank = Jbank.getInstance();
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
-        System.out.println(loggedInPerson.getSurName());
+        //surName.setText(loggedInPerson.getSurName());
         givenName.setText(loggedInPerson.getGivenName());
-        // //surName.setText(loggedInPerson.getSurName());
-        // phoneNumber.setText("40612594");
-        // birthDate.setText(loggedInPerson.getBirthday());
-        // System.out.println("hei");
     }
 
 

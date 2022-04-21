@@ -36,8 +36,7 @@ public class AccountSaver {
         }
 
         catch (Exception ex) {
-            System.out.println("Det finnes ingen gydlige lagrede kontoer");
-            System.out.println(ex.getMessage());
+            Help.showErrorMessage(ex.getMessage());
         }
         return accounts;
     }
