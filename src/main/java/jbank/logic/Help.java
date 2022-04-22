@@ -89,6 +89,22 @@ public class Help {
         return amount;
     }
 
+    public static String name() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Navn");
+        dialog.setHeaderText("Velg et navn: ");
+        return dialog.showAndWait().get();
+    }
+
+    public static String pin(String content) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Bytte av pin");
+        dialog.setHeaderText("Skriv inn pin under: ");
+        dialog.setContentText(content);
+        return dialog.showAndWait().get();
+    }
+
+
     public static boolean confirm(String content) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Bekreft");

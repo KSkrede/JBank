@@ -34,6 +34,10 @@ Interface på stocks og crypto
 
 Bedre håndtering om det ikke er noen accounts fil i starten
 
+amount to only allow input int 
+
+change bankidpin to just pin
+
 
 
 

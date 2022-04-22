@@ -35,6 +35,24 @@ public class Accounts {
         this.loggedInPerson = null;
     }
 
+    public void changeGivenName(String newName){
+        //TODO Validate that account exist
+        accounts.get(loggedInPerson.getUserId()).setGivenName(newName);
+        this.loggedInPerson = null;
+    }
+
+    public void changeSurName(String newName){
+        //TODO Validate that account exist
+        accounts.get(loggedInPerson.getUserId()).setSurName(newName);
+        this.loggedInPerson = null;
+    }
+
+    public void changePin(String newPin){
+        //TODO Validate that account exist
+        accounts.get(loggedInPerson.getUserId()).setBankIDPin(newPin);
+        this.loggedInPerson = null;
+    }
+
     @Override
     public String toString() {
         return accounts + "";

@@ -19,22 +19,22 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <Label fx:id="givenName" layoutX="51.0" layoutY="37.0" prefHeight="34.0" prefWidth="94.0" text="Fornavn">
+      <Label fx:id="givenName" layoutX="51.0" layoutY="37.0" prefHeight="34.0" prefWidth="234.0" text="Fornavn">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="surnName" layoutX="289.0" layoutY="36.0" prefHeight="34.0" prefWidth="199.0" text="Etternavn">
+      <Label fx:id="surName" layoutX="289.0" layoutY="36.0" prefHeight="34.0" prefWidth="374.0" text="Etternavn">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="mobileNumber" layoutX="290.0" layoutY="93.0" prefHeight="34.0" prefWidth="199.0" text="Mobilnummer">
+      <Label fx:id="phoneNumber" layoutX="290.0" layoutY="93.0" prefHeight="34.0" prefWidth="234.0" text="Mobilnummer">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="birthDate" layoutX="51.0" layoutY="93.0" prefHeight="34.0" prefWidth="136.0" text="Fødselsdato">
+      <Label fx:id="birthDate" layoutX="51.0" layoutY="93.0" prefHeight="34.0" prefWidth="234.0" text="Fødselsdato">
          <font>
             <Font size="18.0" />
          </font>
@@ -55,12 +55,12 @@
          </image>
       </ImageView>
       <Button fx:id="removePersonButton" layoutX="254.0" layoutY="551.0" mnemonicParsing="false" onAction="#removePerson" prefHeight="33.0" prefWidth="76.0" text="Slett konto" />
-      <Button layoutX="58.0" layoutY="320.0" mnemonicParsing="false" text="Endre fornavn">
+      <Button fx:id="changeGivenName" layoutX="58.0" layoutY="320.0" mnemonicParsing="false" onAction="#changeGivenName" text="Endre fornavn">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="59.0" layoutY="371.0" mnemonicParsing="false" text="Endre etternavn">
+      <Button fx:id="changeSurName" layoutX="59.0" layoutY="371.0" mnemonicParsing="false" onAction="#changeSurName" text="Endre etternavn">
          <font>
             <Font size="14.0" />
          </font>
@@ -70,7 +70,7 @@
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <Button layoutX="61.0" layoutY="481.0" mnemonicParsing="false" text="Endre PIN-kode">
+      <Button fx:id="changePin" layoutX="61.0" layoutY="481.0" mnemonicParsing="false" onAction="#changePin" text="Endre PIN-kode">
          <font>
             <Font size="14.0" />
          </font>
