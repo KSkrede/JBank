@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import jbank.Jbank;
+import jbank.data.Accounts;
 import jbank.data.BankAccount;
 import jbank.data.Person;
 import jbank.logic.Help;
@@ -31,23 +32,27 @@ public class SettingsController {
     private Label birthDate;
     @FXML
     private Button back;
-
-
-
+    @FXML
+    private Button removePersonButton;
 
     @FXML
     public void initialize() {
         jbank = Jbank.getInstance();
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
-        //surName.setText(loggedInPerson.getSurName());
+        // surName.setText(loggedInPerson.getSurName());
         givenName.setText(loggedInPerson.getGivenName());
     }
 
-    public void back() throws IOException{
-        jbank.getApp().changeScene("jbank/jBank.fxml");
+    public void removePerson() throws IOException {
+        if (Help.confirm("Er du sikker på at du vil slette kontoen din?")) {
+            jbank.getAccountObject().removePerson();
+            jbank.getAccountSaver().writeFile(jbank.getAccountObject());
+            jbank.getApp().changeScene("login.fxml");
+        }
     }
 
-
-
+    public void back() throws IOException {
+        jbank.getApp().changeScene("jbank/jBank.fxml");
+    }
 
 }

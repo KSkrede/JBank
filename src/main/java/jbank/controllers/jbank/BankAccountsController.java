@@ -103,7 +103,7 @@ public class BankAccountsController {
             else {
 
                 BankAccount bankAccount = new BankAccount(bankName.getText(), Integer.parseInt(bankAmount.getText()));
-                jbank.getBankAccounts().addAccounts(loggedInPerson.getUserId(), bankAccount);
+                jbank.getBankAccounts().addPerson(loggedInPerson.getUserId(), bankAccount);
                 // jbank.getAccountSaver().writeFile(jbank.getAccountObject());
                 Help.showInformation("Ny bankkonto lagd", bankAccount.toString());
             }

@@ -30,7 +30,7 @@ public class AccountSaver {
         try (Scanner scanner = new Scanner(accountsTXT)) {
             while (scanner.hasNextLine()) {
                 String[] element = scanner.nextLine().split(";");
-                this.accounts.addAccounts(element[0],
+                this.accounts.addPerson(element[0],
                         new Person(element[1], Help.stringToDate(element[2]), element[3], element[4], element[5]));
             }
         }
@@ -50,6 +50,8 @@ public class AccountSaver {
                 writer.write("\n");
             }
         }
+        // accounts.getAccounts().clear();
+        // readFile();
     }
 
 }

@@ -4,3 +4,4 @@ Importere okhttp
 
 
 Er Actionevent event nødvendig i controllere?
+throws IOException vs try /catch

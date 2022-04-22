@@ -54,7 +54,7 @@
             <Image url="@../Jbank_wide.png" />
          </image>
       </ImageView>
-      <Button layoutX="254.0" layoutY="551.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="76.0" text="Slett konto" />
+      <Button fx:id="removePersonButton" layoutX="254.0" layoutY="551.0" mnemonicParsing="false" onAction="#removePerson" prefHeight="33.0" prefWidth="76.0" text="Slett konto" />
       <Button layoutX="58.0" layoutY="320.0" mnemonicParsing="false" text="Endre fornavn">
          <font>
             <Font size="14.0" />

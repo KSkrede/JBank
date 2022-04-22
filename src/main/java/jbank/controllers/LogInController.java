@@ -62,11 +62,11 @@ public class LogInController {
         }
 
         if(phoneNumber.getText().isEmpty() && birthDate.getText().isEmpty()) {
-            wrongLogIn.setText("Venligst fyll inn mobil og fødselsnummer");
+            wrongLogIn.setText("Venligst fyll inn mobil og fødselsdato");
         }
 
         else {
-            wrongLogIn.setText("Det finnes ingen bruker med dette mobil og fødselsdato ");
+            wrongLogIn.setText("Det finnes ingen bruker med dette mobilnummeret og fødselsdato ");
         }
     }
 

@@ -28,6 +28,13 @@ Endre etternavn
 Endre pin
 
 
+Note startdate, også øke counter +1 hver gang neste dag, også printe ut dagene med startdate + counter sånn at de viser pen dato.
+
+Interface på stocks og crypto
+
+Bedre håndtering om det ikke er noen accounts fil i starten
+
+
 
 
 

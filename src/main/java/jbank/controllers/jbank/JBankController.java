@@ -34,23 +34,23 @@ public class JBankController {
     }
 
     @FXML
-    private void setLoggedInUser(){
+    public void setLoggedInUser(){
         loggedInUser.setText(loggedInPerson.getFullName());
     }
 
     @FXML
-    private void setDateLabel(){
+    public void setDateLabel(){
         currentDate.setText(Help.todayToString());
     }
 
     @FXML
-    private void settings() throws IOException{
+    public void settings() throws IOException{
         jbank.getApp().changeScene("jbank/settings.fxml");
     }
 
 
     @FXML
-    private void logOut(ActionEvent event) throws IOException{
+    public void logOut() throws IOException{
         jbank.getAccountObject().setLoggedInPerson(null);
         jbank.getApp().changeScene("login.fxml");
 

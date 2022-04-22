@@ -23,7 +23,7 @@ public class Person {
         setBankIDPin(bankIDPin);
         this.userId = phoneNumber + Help.dateToString(birthDate);
         Accounts a = new Accounts();
-        a.addAccounts(this.userId, this);
+        a.addPerson(this.userId, this);
     }
 
     public void setName(String givenName, String surName) {

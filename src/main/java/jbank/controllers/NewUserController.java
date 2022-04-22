@@ -63,7 +63,7 @@ public class NewUserController {
 
                 Person person = new Person(phoneNumber.getText(), birthDate.getValue(), givenName.getText(),
                         surName.getText(), bankIDPin.getText());
-                jbank.getAccountObject().addAccounts(person.getUserId(), person);
+                jbank.getAccountObject().addPerson(person.getUserId(), person);
                 jbank.getAccountSaver().writeFile(jbank.getAccountObject());
                 Help.showInformation("Ny bruker laget", person.prettyString());
             }

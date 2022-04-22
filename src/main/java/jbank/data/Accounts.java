@@ -16,7 +16,7 @@ public class Accounts {
         return accounts;
     }
 
-    public void addAccounts(String s, Person person) throws FileNotFoundException {
+    public void addPerson(String s, Person person) throws FileNotFoundException {
         accounts.put(s, person);
     }
 
@@ -29,9 +29,15 @@ public class Accounts {
         this.loggedInPerson = loggedInPerson;
     }
 
+    public void removePerson(){
+        //TODO Validate that account exist
+        accounts.remove(loggedInPerson.getUserId());
+        this.loggedInPerson = null;
+    }
+
     @Override
     public String toString() {
-        return "Account: " + accounts;
+        return accounts + "";
     }
 
 
