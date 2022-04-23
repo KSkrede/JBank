@@ -38,6 +38,10 @@ amount to only allow input int
 
 change bankidpin to just pin
 
+legge inn hint til hva brukeren burde gjøre videre
+
+konsekent bruker av store bokstaver , feks i userid
+
 
 
 

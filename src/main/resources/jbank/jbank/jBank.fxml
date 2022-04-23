@@ -23,6 +23,11 @@
               <fx:include fx:id="bankAccounts" source="bankAccounts.fxml" />
             </content>
           </Tab>
+          <Tab text="Aksjer">
+            <content>
+              <fx:include fx:id="stock" source="stock.fxml" />
+            </content>
+          </Tab>
             <Tab text="Instillinger">
               <content>
                 <fx:include fx:id="settings" source="settings.fxml" />

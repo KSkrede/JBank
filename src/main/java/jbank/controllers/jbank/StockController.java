@@ -19,21 +19,21 @@ import jbank.data.BankAccounts;
 import jbank.data.Person;
 import jbank.logic.Help;
 
-public class BankAccountsController {
+public class StockController {
 
     Jbank jbank;
     Person loggedInPerson;
 
     @FXML
-    private TextField bankName;
+    private TextField ticker;
     @FXML
-    private TextField bankAmount;
+    private TextField value;
     @FXML
-    private Button createBank;
+    private Button importStock;
     @FXML
     private Button test;
     @FXML
-    private ListView<BankAccount> bankList;
+    private ListView<BankAccount> stockList;
     @FXML
     private ListView<String> bankInfo;
     @FXML
@@ -59,9 +59,8 @@ public class BankAccountsController {
 
     public void viewBankAccount() {
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
-        bankList.setOnMouseClicked(me -> {
-            selectedBankAccount = bankList.getSelectionModel().getSelectedItem();
-            //viewBankAccount();
+        stockList.setOnMouseClicked(me -> {
+            selectedBankAccount = stockList.getSelectionModel().getSelectedItem();
         });
         if (selectedBankAccount == null) {
             bankInfo.getItems().add("");
@@ -74,7 +73,7 @@ public class BankAccountsController {
     }
 
     public void updateListView() {
-        bankList.getItems().clear();
+        stockList.getItems().clear();
         viewBankAccount();
         try {
             loggedInPersonBankAccounts = jbank.getBankAccounts().getBankAccounts(loggedInPerson);
@@ -84,25 +83,25 @@ public class BankAccountsController {
             Help.showInformation(e.getMessage(), "Venligst lag en under fanen Bankkonto");
             loggedInPersonBankAccounts = new ArrayList<>();
         }
-        bankList.getItems().addAll(loggedInPersonBankAccounts);
+        stockList.getItems().addAll(loggedInPersonBankAccounts);
     }
 
-    public void createBank(ActionEvent event) throws IOException {
+    public void importStock(ActionEvent event) throws IOException {
 
         try {
-            if (bankName.getText() == null || bankAmount.getText() == null) {
+            if (ticker.getText() == null || value.getText() == null) {
                 throw new IllegalArgumentException("Du må fylle ut alle feltene");
             }
 
             if (loggedInPersonBankAccounts.stream()
-                    .anyMatch(BankAccount -> bankName.getText().equals(BankAccount.getName()))) {
+                    .anyMatch(BankAccount -> ticker.getText().equals(BankAccount.getName()))) {
                 throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
 
             }
 
             else {
 
-                BankAccount bankAccount = new BankAccount(bankName.getText(), Integer.parseInt(bankAmount.getText()));
+                BankAccount bankAccount = new BankAccount(ticker.getText(), Integer.parseInt(value.getText()));
                 jbank.getBankAccounts().addPerson(loggedInPerson.getUserId(), bankAccount);
                 // jbank.getAccountSaver().writeFile(jbank.getAccountObject());
                 Help.showInformation("Ny bankkonto lagd", bankAccount.toString());

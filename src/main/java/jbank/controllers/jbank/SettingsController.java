@@ -47,8 +47,8 @@ public class SettingsController {
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
         givenName.setText("Fornavn: " + loggedInPerson.getGivenName());
         surName.setText("Etternavn: " + loggedInPerson.getSurName());
-        birthDate.setText("Fødselsdato : " + loggedInPerson.getBirthday());
-        phoneNumber.setText("Mobilnummer : " + loggedInPerson.getPhoneNumber());
+        birthDate.setText("Fødselsdato: " + loggedInPerson.getBirthday());
+        phoneNumber.setText("Mobilnummer: " + loggedInPerson.getPhoneNumber());
     }
 
     public void removePerson() throws IOException {
