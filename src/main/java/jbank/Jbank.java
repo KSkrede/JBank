@@ -5,6 +5,7 @@ import java.util.Map;
 import jbank.data.Accounts;
 import jbank.data.BankAccounts;
 import jbank.data.Person;
+import jbank.data.StockMarket;
 import jbank.logic.files.AccountSaver;
 
 public class Jbank {
@@ -16,12 +17,14 @@ public class Jbank {
     public AccountSaver accountSaver;
     public Map<String, Person> accountMap;
     public BankAccounts bankAccounts;
+    public StockMarket stockMarket;
 
     private Jbank() {
         this.app = new JbankApp();
         this.accounts = new Accounts();
         this.accountSaver = new AccountSaver(accounts);
         this.bankAccounts = new BankAccounts();
+        this.stockMarket = new StockMarket();
     }
 
     // Static method
@@ -52,6 +55,13 @@ public class Jbank {
     public BankAccounts getBankAccounts() {
         return this.bankAccounts;
     }
+
+    public StockMarket getStockMarket() {
+        return stockMarket;
+    }
+
+
+    
 
 
     

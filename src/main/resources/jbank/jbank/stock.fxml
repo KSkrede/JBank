@@ -35,16 +35,16 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <ListView fx:id="bankList" layoutX="455.0" layoutY="243.0" prefHeight="246.0" prefWidth="185.0" />
-      <Button fx:id="deleteButton" layoutX="669.0" layoutY="520.0" mnemonicParsing="false" onAction="#deleteBankAccount" text="Kjøp Aksje" />
-      <Button fx:id="transferButton" layoutX="763.0" layoutY="520.0" mnemonicParsing="false" onAction="#bankTransfer" text="Selg Aksje" />
+      <ListView layoutX="455.0" layoutY="243.0" prefHeight="246.0" prefWidth="185.0" />
+      <Button layoutX="669.0" layoutY="520.0" mnemonicParsing="false" text="Kjøp Aksje" />
+      <Button layoutX="763.0" layoutY="520.0" mnemonicParsing="false" text="Selg Aksje" />
       <Label layoutX="681.0" layoutY="169.0" prefHeight="54.0" prefWidth="305.0" text="Aksjeinfo">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <Button fx:id="testButton" layoutX="668.0" layoutY="136.0" mnemonicParsing="false" onAction="#test" text="Test" />
-      <ListView fx:id="bankInfo" layoutX="668.0" layoutY="243.0" prefHeight="246.0" prefWidth="202.0" />
+      <ListView fx:id="stockInfo" layoutX="668.0" layoutY="243.0" prefHeight="246.0" prefWidth="202.0" />
       <Label layoutX="231.0" layoutY="169.0" prefHeight="54.0" prefWidth="317.0" text="Tilgjengelige Aksjer">
          <font>
             <Font size="20.0" />

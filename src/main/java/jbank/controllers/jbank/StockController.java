@@ -17,6 +17,7 @@ import jbank.Jbank;
 import jbank.data.BankAccount;
 import jbank.data.BankAccounts;
 import jbank.data.Person;
+import jbank.data.StockMarket;
 import jbank.logic.Help;
 
 public class StockController {
@@ -33,133 +34,85 @@ public class StockController {
     @FXML
     private Button test;
     @FXML
-    private ListView<BankAccount> stockList;
+    private ListView<String> stockList;
     @FXML
-    private ListView<String> bankInfo;
+    private ListView<String> stockInfo;
     @FXML
     private Button transferButton;
     @FXML
     private Button deleteButton;
-    private ArrayList<BankAccount> loggedInPersonBankAccounts;
-    private BankAccount selectedBankAccount;
+    private ArrayList<String> loggedInPersonStocks;
+    private String selecteStock;
+    private ArrayList<String> allStocks;
+    private StockMarket stockmarket;
 
     @FXML
     public void initialize() {
         jbank = Jbank.getInstance();
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
+        stockmarket = jbank.stockMarket;
+        allStocks = stockmarket.getTickers();
         updateListView();
 
     }
 
     public void test() {
 
-        System.out.println(jbank.getBankAccounts().getBankAccounts(loggedInPerson));
+        System.out.println(allStocks);
 
     }
 
-    public void viewBankAccount() {
+    public void viewStockInfo() {
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
         stockList.setOnMouseClicked(me -> {
-            selectedBankAccount = stockList.getSelectionModel().getSelectedItem();
+            selecteStock = stockList.getSelectionModel().getSelectedItem();
         });
-        if (selectedBankAccount == null) {
-            bankInfo.getItems().add("");
+        if (selecteStock == null) {
+            stockInfo.getItems().add("");
         } else {
-            bankInfo.getItems().clear();
-            bankInfo.getItems().add(selectedBankAccount.toString());
-            bankInfo.getItems().add("Beløp: " + selectedBankAccount.getValue() + " kr");
-            bankInfo.getItems().add("Her skal det komme kontoutskrift");
+            stockInfo.getItems().clear();
+            stockInfo.getItems().add(selecteStock);
+            stockInfo.getItems().add("Beløp: "  + " kr");
+            stockInfo.getItems().add("Her skal det komme kontoutskrift");
         }
     }
 
     public void updateListView() {
         stockList.getItems().clear();
-        viewBankAccount();
+        viewStockInfo();
         try {
-            loggedInPersonBankAccounts = jbank.getBankAccounts().getBankAccounts(loggedInPerson);
+            allStocks = jbank.getStockMarket().getTickers();
         }
 
         catch (IllegalStateException e) {
-            Help.showInformation(e.getMessage(), "Venligst lag en under fanen Bankkonto");
-            loggedInPersonBankAccounts = new ArrayList<>();
+            Help.showInformation(e.getMessage(), "Venligst lag en under fanen Aksjer");
+            loggedInPersonStocks = new ArrayList<>();
         }
-        stockList.getItems().addAll(loggedInPersonBankAccounts);
+        stockList.getItems().addAll(allStocks);
     }
 
-    public void importStock(ActionEvent event) throws IOException {
+    public void importStock() throws IOException {
 
         try {
             if (ticker.getText() == null || value.getText() == null) {
                 throw new IllegalArgumentException("Du må fylle ut alle feltene");
             }
 
-            if (loggedInPersonBankAccounts.stream()
-                    .anyMatch(BankAccount -> ticker.getText().equals(BankAccount.getName()))) {
-                throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
+            if (allStocks.stream()
+                    .anyMatch(Stock -> ticker.getText().equals(Stock))) {
+                throw new IllegalArgumentException("Denne akjsen eksisterer allerede");
 
             }
 
             else {
-
-                BankAccount bankAccount = new BankAccount(ticker.getText(), Integer.parseInt(value.getText()));
-                jbank.getBankAccounts().addPerson(loggedInPerson.getUserId(), bankAccount);
-                // jbank.getAccountSaver().writeFile(jbank.getAccountObject());
-                Help.showInformation("Ny bankkonto lagd", bankAccount.toString());
+                stockmarket.update(ticker.getText(), Integer.parseInt(value.getText()));
+                Help.showInformation("Ny aksje impotert", ticker.getText());
             }
 
             updateListView();
         } catch (IllegalArgumentException e) {
             Help.showErrorMessage(e.getMessage());
         }
-
-    }
-
-    public void bankTransfer() {
-        try {
-
-            if (loggedInPersonBankAccounts.size() < 2) {
-                throw new IllegalArgumentException("Du må ha minimum to kontoer for å overføre penger");
-            }
-
-            BankAccount source = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
-                    "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
-            BankAccount destination = Help.choseBankAccount(loggedInPersonBankAccounts.get(1),
-                    loggedInPersonBankAccounts,
-                    "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");
-            int amount = Help.amount();
-
-            jbank.bankAccounts.movefunds(source, destination, amount);
-        } catch (IllegalArgumentException e) {
-            Help.showErrorMessage(e.getMessage());
-        }
-        updateListView();
-    }
-
-    public void deleteBankAccount() {
-        try {
-            if (loggedInPersonBankAccounts.size() < 1) {
-                throw new IllegalArgumentException("Du kan ikke slette en konto før du har lagd en");
-            }
-
-            BankAccount bank = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
-                    "Sletting av konto", "Velg kontoen du ønsker å slette", "Bankkonto: ");
-            Boolean choice = Help.confirm("Er du sikker på at du vil slette denne kontoen?");
-
-            if (choice) {
-                try {
-                    if (selectedBankAccount == bank) {
-                        selectedBankAccount = null;
-                        bankInfo.getItems().clear();
-                    }
-                    jbank.getBankAccounts().deleteBankAccount(loggedInPerson, bank);
-                } catch (IllegalArgumentException e) {
-                    Help.showErrorMessage(e.getMessage());
-                }
-            }
-        } catch (IllegalArgumentException e) {
-            Help.showErrorMessage(e.getMessage());
-        }
-        updateListView();
 
     }
 }

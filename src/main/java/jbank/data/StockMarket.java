@@ -13,6 +13,7 @@ public class StockMarket implements IValuable {
 
     private Map<String, Double> stocks = new HashMap<>();
     private Map<String, Map<String, Integer>> ownedStocks;
+    private ArrayList<String> ownedStocksList;
     Random random = new Random();
 
     public StockMarket() {
@@ -69,4 +70,11 @@ public class StockMarket implements IValuable {
             ownedStocks.get(userID).merge(ticker, amount, (a, b) -> a - b);
         }
     }
+
+    public ArrayList<String> listOwnedStocks(String userID){
+        // ownedStocksList = new ArrayList<String>(ownedStocks.get(userID).keySet());
+        // return ownedStocksList;
+        return new ArrayList<String>();
+    }
+
 }
