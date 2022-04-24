@@ -61,7 +61,7 @@ public class BankAccountsController {
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
         bankList.setOnMouseClicked(me -> {
             selectedBankAccount = bankList.getSelectionModel().getSelectedItem();
-            //viewBankAccount();
+            viewBankAccount();
         });
         if (selectedBankAccount == null) {
             bankInfo.getItems().add("");

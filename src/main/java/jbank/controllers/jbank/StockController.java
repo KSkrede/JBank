@@ -52,7 +52,7 @@ public class StockController {
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
         stockmarket = jbank.stockMarket;
         allStocks = stockmarket.getTickers();
-        updateListView();
+        updateViews();
 
     }
 
@@ -62,24 +62,30 @@ public class StockController {
 
     }
 
-    public void viewStockInfo() {
+    public void updateViews() {
+        updateStockView();
+        updateStockInfo();
+
+    }
+
+    public void updateStockInfo() {
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
         stockList.setOnMouseClicked(me -> {
             selecteStock = stockList.getSelectionModel().getSelectedItem();
+            updateStockInfo();
         });
         if (selecteStock == null) {
             stockInfo.getItems().add("");
         } else {
             stockInfo.getItems().clear();
             stockInfo.getItems().add(selecteStock);
-            stockInfo.getItems().add("Beløp: "  + " kr");
+            stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selecteStock).toString() + "kr");
             stockInfo.getItems().add("Her skal det komme kontoutskrift");
         }
     }
 
-    public void updateListView() {
+    public void updateStockView() {
         stockList.getItems().clear();
-        viewStockInfo();
         try {
             allStocks = jbank.getStockMarket().getTickers();
         }
@@ -101,18 +107,17 @@ public class StockController {
             if (allStocks.stream()
                     .anyMatch(Stock -> ticker.getText().equals(Stock))) {
                 throw new IllegalArgumentException("Denne akjsen eksisterer allerede");
-
-            }
-
-            else {
+            } else {
                 stockmarket.update(ticker.getText(), Integer.parseInt(value.getText()));
                 Help.showInformation("Ny aksje impotert", ticker.getText());
             }
 
-            updateListView();
+            updateStockView();
         } catch (IllegalArgumentException e) {
             Help.showErrorMessage(e.getMessage());
         }
-
+        updateViews();
     }
+
+    
 }

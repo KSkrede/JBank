@@ -42,6 +42,11 @@ legge inn hint til hva brukeren burde gjøre videre
 
 konsekent bruker av store bokstaver , feks i userid
 
+sorting av bankkontoer og aksjer, med dropdown til å velge sortering
+
+
+
+
 
 
 
