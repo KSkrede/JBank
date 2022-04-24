@@ -8,3 +8,8 @@ throws IOException vs try /catch
 Var det slik at man ikke trengte å teste kontrollerene?
 Hvordan føre kode fra forelesning som kilde?
 Bruksanvisning?
+Om eg burde dele opp noen av data klassene mine og få reine data / computation klasser?
+Flytte logikk ut av kontrolleren, se StockController
+ @FXML tag
+ Filhåndtering Mac
+ Oppdatere view fra andre kontrollere

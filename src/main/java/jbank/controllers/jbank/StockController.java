@@ -79,13 +79,32 @@ public class StockController {
             selectedStock = stockList.getSelectionModel().getSelectedItem();
             updateStockInfo();
         });
+
+        stockOwned.setOnMouseClicked(me -> {
+            selectedStock = stockOwned.getSelectionModel().getSelectedItem();
+            updateStockInfo();
+        });
+
         if (selectedStock == null) {
             stockInfo.getItems().add("");
         } else {
-            stockInfo.getItems().clear();
-            stockInfo.getItems().add(selectedStock);
-            stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selectedStock).toString() + "kr");
-            stockInfo.getItems().add("Her skal det komme kontoutskrift");
+            if (selectedStock == stockList.getSelectionModel().getSelectedItem() ){
+                stockInfo.getItems().clear();
+                stockInfo.getItems().add(selectedStock);
+                stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selectedStock).toString() + "kr");
+                stockInfo.getItems().add("Public stocks");
+            }
+
+            else if(selectedStock == stockOwned.getSelectionModel().getSelectedItem()) {
+                int value = stockmarket.getValue(selectedStock);
+                int number = stockmarket.numberOwnedStocks(loggedInPerson.getUserId(), selectedStock);
+
+                stockInfo.getItems().clear();
+                stockInfo.getItems().add(selectedStock);
+                stockInfo.getItems().add("Verdi: "+ value + "kr");
+                stockInfo.getItems().add("Antall du eier: " + number);
+                stockInfo.getItems().add("Total verdi: " + number*value + "kr");
+            }
         }
     }
 

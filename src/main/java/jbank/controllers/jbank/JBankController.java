@@ -48,6 +48,12 @@ public class JBankController {
         jbank.getApp().changeScene("jbank/settings.fxml");
     }
 
+    @FXML
+    public void nextDay(){
+        jbank.stockMarket.nextDay();
+        StockController.updateViews();
+    }
+
 
     @FXML
     public void logOut() throws IOException{

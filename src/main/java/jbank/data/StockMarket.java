@@ -39,7 +39,6 @@ public class StockMarket implements IValuable {
 
     public void nextDay() {
         for (int i = 0; i < 100; i++) {
-
             try {
                 String[] keys = stocks.keySet().toArray(new String[stocks.size()]);
                 String randomKey = keys[random.nextInt(keys.length)];
@@ -78,6 +77,10 @@ public class StockMarket implements IValuable {
         }
         ownedStocksList = new ArrayList<String>(ownedStocks.get(userID).keySet());
         return ownedStocksList;
+    }
+
+    public int numberOwnedStocks(String userID, String stock){
+        return ownedStocks.get(userID).get(stock);
     }
 
 }
