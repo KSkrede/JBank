@@ -11,7 +11,7 @@ public class StockMarket implements IValuable {
     // Inspiret fra Stock eksempelete fra forelesning
     // https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/students/-/tree/main/foreksempel/src/main/java/uke12/listener/stocks
 
-    private Map<String, Double> stocks = new HashMap<>();
+    private Map<String, Integer> stocks = new HashMap<>();
     private Map<String, Map<String, Integer>> ownedStocks;
     private ArrayList<String> ownedStocksList;
     Random random = new Random();
@@ -20,9 +20,10 @@ public class StockMarket implements IValuable {
         update("Aksje1", 500);
         update("Aksje2", 250);
         update("Aksje3", 12);
+        ownedStocks = new HashMap<>();
     }
 
-    public Double getValue(String name) {
+    public Integer getValue(String name) {
         return this.stocks.get(name);
     }
 
@@ -33,7 +34,7 @@ public class StockMarket implements IValuable {
     }
 
     public void update(String name, int value) {
-        this.stocks.put(name, stocks.getOrDefault(name, 0.0) + value);
+        this.stocks.put(name, stocks.getOrDefault(name, 0) + value);
     }
 
     public void nextDay() {
@@ -72,9 +73,11 @@ public class StockMarket implements IValuable {
     }
 
     public ArrayList<String> listOwnedStocks(String userID){
-        // ownedStocksList = new ArrayList<String>(ownedStocks.get(userID).keySet());
-        // return ownedStocksList;
-        return new ArrayList<String>();
+        if(ownedStocks.get(userID) == null){
+            ownedStocks.put(userID, new HashMap<>());
+        }
+        ownedStocksList = new ArrayList<String>(ownedStocks.get(userID).keySet());
+        return ownedStocksList;
     }
 
 }

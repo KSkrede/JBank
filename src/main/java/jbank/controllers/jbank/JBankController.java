@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import jbank.Jbank;
 import jbank.data.Person;
-import jbank.logic.Help;
+import jbank.logic.JBankHelp;
 
 public class JBankController {
 
@@ -40,7 +40,7 @@ public class JBankController {
 
     @FXML
     public void setDateLabel(){
-        currentDate.setText(Help.todayToString());
+        currentDate.setText(JBankHelp.todayToString());
     }
 
     @FXML

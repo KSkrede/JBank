@@ -3,7 +3,6 @@ package jbank.logic;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javafx.scene.control.Alert;
@@ -13,7 +12,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import jbank.data.BankAccount;
 
-public class Help {
+public class JBankHelp {
 
     public static int dateToInt(LocalDate date) {
         String formattedDate = date.format(DateTimeFormatter.ofPattern("ddMMyy"));
@@ -80,6 +79,15 @@ public class Help {
         return chosenBankAccount;
     }
 
+    public static String choseStock(String selectedStock,
+            ArrayList<String> allStocks) {
+        ChoiceDialog<String> dialog = new ChoiceDialog<String>(selectedStock, allStocks);
+        dialog.setTitle("Velg aksje");
+        dialog.setHeaderText("Velg aksje under:");
+        String chosenStock = dialog.showAndWait().get();
+        return chosenStock;
+    }
+
     public static int amount() {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Beløp");
@@ -87,6 +95,14 @@ public class Help {
         dialog.setContentText("Antall kr: ");
         int amount = Integer.parseInt(dialog.showAndWait().get());
         return amount;
+    }
+
+    public static int number() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Antall");
+        dialog.setHeaderText("Velg antall aksjer under: ");
+        int number = Integer.parseInt(dialog.showAndWait().get());
+        return number;
     }
 
     public static String name() {
@@ -103,7 +119,6 @@ public class Help {
         dialog.setContentText(content);
         return dialog.showAndWait().get();
     }
-
 
     public static boolean confirm(String content) {
         Alert alert = new Alert(AlertType.CONFIRMATION);

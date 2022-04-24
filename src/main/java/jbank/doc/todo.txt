@@ -44,6 +44,8 @@ konsekent bruker av store bokstaver , feks i userid
 
 sorting av bankkontoer og aksjer, med dropdown til å velge sortering
 
+catche cancel ved valg
+
 
 
 

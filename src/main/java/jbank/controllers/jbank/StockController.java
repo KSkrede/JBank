@@ -18,7 +18,7 @@ import jbank.data.BankAccount;
 import jbank.data.BankAccounts;
 import jbank.data.Person;
 import jbank.data.StockMarket;
-import jbank.logic.Help;
+import jbank.logic.JBankHelp;
 
 public class StockController {
 
@@ -38,12 +38,17 @@ public class StockController {
     @FXML
     private ListView<String> stockInfo;
     @FXML
+    private ListView<String> stockOwned;
+    @FXML
     private Button transferButton;
+    @FXML
+    private Button buyStock;
     @FXML
     private Button deleteButton;
     private ArrayList<String> loggedInPersonStocks;
-    private String selecteStock;
+    private String selectedStock;
     private ArrayList<String> allStocks;
+    private ArrayList<String> ownedStocks;
     private StockMarket stockmarket;
 
     @FXML
@@ -57,29 +62,29 @@ public class StockController {
     }
 
     public void test() {
-
-        System.out.println(allStocks);
+        System.out.println(stockmarket.listOwnedStocks(loggedInPerson.getUserId()));
 
     }
 
     public void updateViews() {
         updateStockView();
         updateStockInfo();
+        updateStockOwnedView();
 
     }
 
     public void updateStockInfo() {
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
         stockList.setOnMouseClicked(me -> {
-            selecteStock = stockList.getSelectionModel().getSelectedItem();
+            selectedStock = stockList.getSelectionModel().getSelectedItem();
             updateStockInfo();
         });
-        if (selecteStock == null) {
+        if (selectedStock == null) {
             stockInfo.getItems().add("");
         } else {
             stockInfo.getItems().clear();
-            stockInfo.getItems().add(selecteStock);
-            stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selecteStock).toString() + "kr");
+            stockInfo.getItems().add(selectedStock);
+            stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selectedStock).toString() + "kr");
             stockInfo.getItems().add("Her skal det komme kontoutskrift");
         }
     }
@@ -91,14 +96,24 @@ public class StockController {
         }
 
         catch (IllegalStateException e) {
-            Help.showInformation(e.getMessage(), "Venligst lag en under fanen Aksjer");
+            JBankHelp.showInformation(e.getMessage(), "Venligst lag en under fanen Aksjer");
             loggedInPersonStocks = new ArrayList<>();
         }
         stockList.getItems().addAll(allStocks);
     }
 
-    public void importStock() throws IOException {
+    public void updateStockOwnedView() {
+        stockOwned.getItems().clear();
+        try {
+            ownedStocks = jbank.getStockMarket().listOwnedStocks(loggedInPerson.getUserId());
+        }
+        catch (IllegalStateException e) {
+            ownedStocks = new ArrayList<>();
+        }
+        stockOwned.getItems().addAll(ownedStocks);
+    }
 
+    public void importStock() throws IOException {
         try {
             if (ticker.getText() == null || value.getText() == null) {
                 throw new IllegalArgumentException("Du må fylle ut alle feltene");
@@ -109,15 +124,32 @@ public class StockController {
                 throw new IllegalArgumentException("Denne akjsen eksisterer allerede");
             } else {
                 stockmarket.update(ticker.getText(), Integer.parseInt(value.getText()));
-                Help.showInformation("Ny aksje impotert", ticker.getText());
+                JBankHelp.showInformation("Ny aksje impotert", ticker.getText());
             }
 
             updateStockView();
         } catch (IllegalArgumentException e) {
-            Help.showErrorMessage(e.getMessage());
+            JBankHelp.showErrorMessage(e.getMessage());
         }
         updateViews();
     }
 
-    
+    public void buyStock() {
+        System.out.println("nå kjøpes det aksjer");
+        String stockToBuy = JBankHelp.choseStock(selectedStock, allStocks);
+        int number = JBankHelp.number();
+        ArrayList<BankAccount> loggedInPersonBankAccounts = jbank.bankAccounts.getBankAccounts(loggedInPerson);
+        BankAccount source = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(0), loggedInPersonBankAccounts,
+                "Overføring mellom kontoer", "Velg kontoen du ønsker å kjøpe " + stockToBuy + " fra", "Bankkonto: ");
+        if (!jbank.bankAccounts.hasFunds(source, number * stockmarket.getValue(stockToBuy))) {
+            JBankHelp.showErrorMessage("Du har ikke råd til å kjøpe disse aksjene");
+        }
+
+        else {
+            jbank.stockMarket.buy(loggedInPerson.getUserId(), stockToBuy, number);
+            System.out.println("Aksjer er kjøpt");
+        }
+        updateViews();
+    }
+
 }

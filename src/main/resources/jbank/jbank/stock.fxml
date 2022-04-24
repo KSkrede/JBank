@@ -35,8 +35,8 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <ListView layoutX="455.0" layoutY="243.0" prefHeight="246.0" prefWidth="185.0" />
-      <Button layoutX="669.0" layoutY="520.0" mnemonicParsing="false" text="Kjøp Aksje" />
+      <ListView fx:id="stockOwned" layoutX="455.0" layoutY="243.0" prefHeight="246.0" prefWidth="185.0" />
+      <Button fx:id="buyStock" layoutX="669.0" layoutY="520.0" mnemonicParsing="false" onAction="#buyStock" text="Kjøp Aksje" />
       <Button layoutX="763.0" layoutY="520.0" mnemonicParsing="false" text="Selg Aksje" />
       <Label layoutX="681.0" layoutY="169.0" prefHeight="54.0" prefWidth="305.0" text="Aksjeinfo">
          <font>

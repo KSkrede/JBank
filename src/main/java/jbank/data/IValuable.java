@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface IValuable {
 
-    Double getValue(String ticker);
+    Integer getValue(String ticker);
     ArrayList <String> getTickers();
     void update(String name, int value);
     void nextDay();

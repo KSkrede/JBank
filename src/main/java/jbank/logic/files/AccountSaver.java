@@ -10,7 +10,7 @@ import java.util.Scanner;
 import jbank.Jbank;
 import jbank.data.Accounts;
 import jbank.data.Person;
-import jbank.logic.Help;
+import jbank.logic.JBankHelp;
 
 public class AccountSaver {
     File accountsTXT = new File("src\\main\\java\\jbank\\storage\\accounts.txt");
@@ -31,12 +31,12 @@ public class AccountSaver {
             while (scanner.hasNextLine()) {
                 String[] element = scanner.nextLine().split(";");
                 this.accounts.addPerson(element[0],
-                        new Person(element[1], Help.stringToDate(element[2]), element[3], element[4], element[5]));
+                        new Person(element[1], JBankHelp.stringToDate(element[2]), element[3], element[4], element[5]));
             }
         }
 
         catch (Exception ex) {
-            Help.showErrorMessage(ex.getMessage());
+            JBankHelp.showErrorMessage(ex.getMessage());
         }
         return accounts;
     }

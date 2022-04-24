@@ -9,7 +9,7 @@ import javafx.scene.control.PasswordField;
 import jbank.Jbank;
 import jbank.data.Person;
 import jbank.logic.BankID;
-import jbank.logic.Help;
+import jbank.logic.JBankHelp;
 
 public class BankIDController {
     public BankIDController() {}
@@ -59,7 +59,7 @@ public class BankIDController {
         if(loggedInPerson.getBankIDPin().equals(pinField.getText().toString())) {
             jbank.getApp().changeScene("jbank/jBank.fxml");
         }
-        else Help.showErrorMessage(pinField.getText().toString() + " er feil pin");
+        else JBankHelp.showErrorMessage(pinField.getText().toString() + " er feil pin");
 
 }
 

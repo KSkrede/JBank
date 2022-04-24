@@ -17,7 +17,7 @@ import jbank.Jbank;
 import jbank.data.BankAccount;
 import jbank.data.BankAccounts;
 import jbank.data.Person;
-import jbank.logic.Help;
+import jbank.logic.JBankHelp;
 
 public class BankAccountsController {
 
@@ -81,7 +81,7 @@ public class BankAccountsController {
         }
 
         catch (IllegalStateException e) {
-            Help.showInformation(e.getMessage(), "Venligst lag en under fanen Bankkonto");
+            JBankHelp.showInformation(e.getMessage(), "Venligst lag en under fanen Bankkonto");
             loggedInPersonBankAccounts = new ArrayList<>();
         }
         bankList.getItems().addAll(loggedInPersonBankAccounts);
@@ -105,12 +105,12 @@ public class BankAccountsController {
                 BankAccount bankAccount = new BankAccount(bankName.getText(), Integer.parseInt(bankAmount.getText()));
                 jbank.getBankAccounts().addPerson(loggedInPerson.getUserId(), bankAccount);
                 // jbank.getAccountSaver().writeFile(jbank.getAccountObject());
-                Help.showInformation("Ny bankkonto lagd", bankAccount.toString());
+                JBankHelp.showInformation("Ny bankkonto lagd", bankAccount.toString());
             }
 
             updateListView();
         } catch (IllegalArgumentException e) {
-            Help.showErrorMessage(e.getMessage());
+            JBankHelp.showErrorMessage(e.getMessage());
         }
 
     }
@@ -122,16 +122,16 @@ public class BankAccountsController {
                 throw new IllegalArgumentException("Du må ha minimum to kontoer for å overføre penger");
             }
 
-            BankAccount source = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
+            BankAccount source = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
                     "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
-            BankAccount destination = Help.choseBankAccount(loggedInPersonBankAccounts.get(1),
+            BankAccount destination = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(1),
                     loggedInPersonBankAccounts,
                     "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");
-            int amount = Help.amount();
+            int amount = JBankHelp.amount();
 
             jbank.bankAccounts.movefunds(source, destination, amount);
         } catch (IllegalArgumentException e) {
-            Help.showErrorMessage(e.getMessage());
+            JBankHelp.showErrorMessage(e.getMessage());
         }
         updateListView();
     }
@@ -142,9 +142,9 @@ public class BankAccountsController {
                 throw new IllegalArgumentException("Du kan ikke slette en konto før du har lagd en");
             }
 
-            BankAccount bank = Help.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
+            BankAccount bank = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
                     "Sletting av konto", "Velg kontoen du ønsker å slette", "Bankkonto: ");
-            Boolean choice = Help.confirm("Er du sikker på at du vil slette denne kontoen?");
+            Boolean choice = JBankHelp.confirm("Er du sikker på at du vil slette denne kontoen?");
 
             if (choice) {
                 try {
@@ -154,11 +154,11 @@ public class BankAccountsController {
                     }
                     jbank.getBankAccounts().deleteBankAccount(loggedInPerson, bank);
                 } catch (IllegalArgumentException e) {
-                    Help.showErrorMessage(e.getMessage());
+                    JBankHelp.showErrorMessage(e.getMessage());
                 }
             }
         } catch (IllegalArgumentException e) {
-            Help.showErrorMessage(e.getMessage());
+            JBankHelp.showErrorMessage(e.getMessage());
         }
         updateListView();
 

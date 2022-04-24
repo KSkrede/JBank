@@ -5,3 +5,6 @@ Importere okhttp
 
 Er Actionevent event nødvendig i controllere?
 throws IOException vs try /catch
+Var det slik at man ikke trengte å teste kontrollerene?
+Hvordan føre kode fra forelesning som kilde?
+Bruksanvisning?

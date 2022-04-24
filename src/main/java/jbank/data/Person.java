@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import jbank.logic.Help;
+import jbank.logic.JBankHelp;
 
 public class Person {
 
@@ -21,13 +21,13 @@ public class Person {
         setPhoneNumber(phoneNumber);
         setBirthday(birthDate);
         setBankIDPin(bankIDPin);
-        this.userId = phoneNumber + Help.dateToString(birthDate);
+        this.userId = phoneNumber + JBankHelp.dateToString(birthDate);
         Accounts a = new Accounts();
         a.addPerson(this.userId, this);
     }
 
     public void setName(String givenName, String surName) {
-        if (Help.isAllLetters(givenName)) {
+        if (JBankHelp.isAllLetters(givenName)) {
             this.givenName = givenName;
         }
         
@@ -35,7 +35,7 @@ public class Person {
             throw new IllegalArgumentException("Det er et ulovlig tegn i " + givenName);
         }
 
-        if(Help.isAllLetters(surName)){
+        if(JBankHelp.isAllLetters(surName)){
             this.surName = surName;
         }
 
@@ -57,7 +57,7 @@ public class Person {
             throw new IllegalArgumentException("Du kan ikke ha fødselsdato i fremtiden");
         } 
         else {
-            this.birthDate = Help.dateToString(birthDate);
+            this.birthDate = JBankHelp.dateToString(birthDate);
         }
     }
 
@@ -66,7 +66,7 @@ public class Person {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        if (phoneNumber.length() == 8 && Help.isAllDigit(phoneNumber)) {
+        if (phoneNumber.length() == 8 && JBankHelp.isAllDigit(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
             throw new IllegalArgumentException("Ulovelig telefonnummer " + phoneNumber);
@@ -74,7 +74,7 @@ public class Person {
     }
 
     public void setBankIDPin(String bankIDPin) {
-        if (Help.isAllDigit(bankIDPin)) {
+        if (JBankHelp.isAllDigit(bankIDPin)) {
             this.bankIDPin = bankIDPin;
         } else {
             throw new IllegalArgumentException("Ulovelig BankIDpin " + bankIDPin);

@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import jbank.Jbank;
 import jbank.data.Person;
-import jbank.logic.Help;
+import jbank.logic.JBankHelp;
 
 public class NewUserController {
     public NewUserController() {
@@ -49,7 +49,7 @@ public class NewUserController {
                 throw new IllegalArgumentException("Du må fylle ut alle feltene");
             }
 
-            String userID = phoneNumber.getText() + Help.dateToString(birthDate.getValue());
+            String userID = phoneNumber.getText() + JBankHelp.dateToString(birthDate.getValue());
             
             if (jbank.getAccountMap().containsKey(userID)) {
                 throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
@@ -65,12 +65,12 @@ public class NewUserController {
                         surName.getText(), bankIDPin.getText());
                 jbank.getAccountObject().addPerson(person.getUserId(), person);
                 jbank.getAccountSaver().writeFile(jbank.getAccountObject());
-                Help.showInformation("Ny bruker laget", person.prettyString());
+                JBankHelp.showInformation("Ny bruker laget", person.prettyString());
             }
         }
 
         catch (IllegalArgumentException e) {
-            Help.showErrorMessage(e.getMessage());
+            JBankHelp.showErrorMessage(e.getMessage());
         }
 
     }
