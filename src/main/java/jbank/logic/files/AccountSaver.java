@@ -50,8 +50,6 @@ public class AccountSaver {
                 writer.write("\n");
             }
         }
-        // accounts.getAccounts().clear();
-        // readFile();
     }
 
 }

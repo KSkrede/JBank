@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import jbank.Jbank;
 import jbank.data.Person;
 import jbank.logic.JBankHelp;
@@ -33,7 +34,6 @@ public class JBankController {
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
         setLoggedInUser();
         setDateLabel();
-
     }
 
     @FXML
@@ -53,9 +53,10 @@ public class JBankController {
 
     @FXML
     public void nextDay(){
-        jbank.stockMarket.nextDay();
+        jbank.getStockTracker().log(jbank.getStockMarket().getStocks());
+        jbank.getStockMarket().nextDay();
         stockController.updateStockInfo();
-        System.out.println("her trykkes cet");
+        stockController.updateStockChart();
     }
 
 
@@ -65,7 +66,5 @@ public class JBankController {
         jbank.getApp().changeScene("login.fxml");
 
     }
-
-
 
     }

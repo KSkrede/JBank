@@ -3,28 +3,30 @@ package jbank;
 import java.util.Map;
 
 import jbank.data.Accounts;
-import jbank.data.BankAccounts;
+import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.data.StockMarket;
+import jbank.logic.StockTracker;
 import jbank.logic.files.AccountSaver;
 
 public class Jbank {
     // Singleton
     private static Jbank single_instance = null;
 
-    public JbankApp app;
-    public Accounts accounts; 
-    public AccountSaver accountSaver;
-    public Map<String, Person> accountMap;
-    public BankAccounts bankAccounts;
-    public StockMarket stockMarket;
+    private JbankApp app;
+    private Accounts accounts; 
+    private AccountSaver accountSaver;
+    private BankManager BankManager;
+    private StockMarket stockMarket;
+    private StockTracker stockTracker;
 
     private Jbank() {
         this.app = new JbankApp();
         this.accounts = new Accounts();
         this.accountSaver = new AccountSaver(accounts);
-        this.bankAccounts = new BankAccounts();
+        this.BankManager = new BankManager();
         this.stockMarket = new StockMarket();
+        this.stockTracker = new StockTracker();
     }
 
     // Static method
@@ -52,12 +54,16 @@ public class Jbank {
         return this.getAccountObject().getAccounts();
     }
 
-    public BankAccounts getBankAccounts() {
-        return this.bankAccounts;
+    public BankManager getBankManager() {
+        return this.BankManager;
     }
 
     public StockMarket getStockMarket() {
         return stockMarket;
+    }
+
+    public StockTracker getStockTracker() {
+        return stockTracker;
     }
 
 

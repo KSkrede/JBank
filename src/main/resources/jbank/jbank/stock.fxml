@@ -51,9 +51,9 @@
          </font>
       </Label>
       <ListView fx:id="stockList" layoutX="250.0" layoutY="243.0" prefHeight="246.0" prefWidth="185.0" />
-      <LineChart layoutX="903.0" layoutY="243.0" prefHeight="253.0" prefWidth="317.0">
+      <LineChart fx:id="indexChart" layoutX="903.0" layoutY="243.0" prefHeight="253.0" prefWidth="317.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <NumberAxis side="BOTTOM" />
         </xAxis>
         <yAxis>
           <NumberAxis side="LEFT" />

@@ -42,11 +42,17 @@ public class StockMarket implements IValuable {
             try {
                 String[] keys = stocks.keySet().toArray(new String[stocks.size()]);
                 String randomKey = keys[random.nextInt(keys.length)];
-                update(randomKey, random.nextInt(20) - 10);
+                update(randomKey, random.nextInt(20) - 5);
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
+    }
+
+    public Map<String, Integer> getStocks(){
+        Map<String, Integer> stocksCopy = new HashMap<>();
+        stocksCopy.putAll(this.stocks);
+        return stocksCopy;
     }
 
     public void buy(String userID, String ticker, int amount) {

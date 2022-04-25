@@ -69,9 +69,9 @@ public class JBankHelp {
     }
 
     public static BankAccount choseBankAccount(BankAccount selectedBankAccount,
-            ArrayList<BankAccount> loggedInPersonBankAccounts, String title, String header, String content) {
+            ArrayList<BankAccount> loggedInPersonBankManager, String title, String header, String content) {
         ChoiceDialog<BankAccount> dialog = new ChoiceDialog<BankAccount>(selectedBankAccount,
-                loggedInPersonBankAccounts);
+                loggedInPersonBankManager);
         dialog.setTitle(title);
         dialog.setHeaderText(header);
         dialog.setContentText(content);

@@ -7,8 +7,7 @@ Flytte logikk ut av kontrolleren, se StockController - går greit
  @FXML tag - funksjoner som bare er i .fxml fila
  Filhåndtering Mac - legge alle resources i resource mappen
  Lagrings av maps av maps - gjør manuelt eller ikke
- Oppdatere view fra andre kontrollere - fixed
- 
+
  Arv på kontrollerne?
  Er JBankHelp klassen delegering, når det bare er statiske metoder?
  Om eg har observatør-observert i en aksjeindeks, evt med mouseclick?

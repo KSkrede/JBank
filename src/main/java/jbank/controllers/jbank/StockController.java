@@ -2,23 +2,19 @@ package jbank.controllers.jbank;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import jbank.Jbank;
 import jbank.data.BankAccount;
-import jbank.data.BankAccounts;
 import jbank.data.Person;
 import jbank.data.StockMarket;
 import jbank.logic.JBankHelp;
+import jbank.logic.StockTracker;
 
 public class StockController {
 
@@ -45,18 +41,23 @@ public class StockController {
     private Button buyStock;
     @FXML
     private Button deleteButton;
+    @FXML
+    private LineChart<Integer, Integer> indexChart;
+
     private ArrayList<String> loggedInPersonStocks;
     private String selectedStock;
     private ArrayList<String> allStocks;
     private ArrayList<String> ownedStocks;
     private StockMarket stockmarket;
+    private StockTracker stockTracker;
 
     @FXML
     public void initialize() {
         jbank = Jbank.getInstance();
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
-        stockmarket = jbank.stockMarket;
+        stockmarket = jbank.getStockMarket();
         allStocks = stockmarket.getTickers();
+        stockTracker = jbank.getStockTracker();
         updateViews();
 
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
@@ -73,7 +74,7 @@ public class StockController {
     }
 
     public void test() {
-        System.out.println(stockmarket.listOwnedStocks(loggedInPerson.getUserId()));
+        System.out.println(stockTracker.getStocklogs());
 
     }
 
@@ -81,21 +82,19 @@ public class StockController {
         updateStockView();
         updateStockInfo();
         updateStockOwnedView();
+        updateStockChart();
 
     }
 
     public void updateStockInfo() {
-        System.out.println(selectedStock);
         if (selectedStock == null) {
             stockInfo.getItems().add("");
-            System.out.println("0");
         } else {
             if (selectedStock == stockList.getSelectionModel().getSelectedItem() ){
                 stockInfo.getItems().clear();
                 stockInfo.getItems().add(selectedStock);
                 stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selectedStock).toString() + "kr");
                 stockInfo.getItems().add("Public stocks");
-                System.out.println("1");
             }
 
             else if(selectedStock == stockOwned.getSelectionModel().getSelectedItem()) {
@@ -107,7 +106,6 @@ public class StockController {
                 stockInfo.getItems().add("Verdi: "+ value + "kr");
                 stockInfo.getItems().add("Antall du eier: " + number);
                 stockInfo.getItems().add("Total verdi: " + number*value + "kr");
-                System.out.println("2");
             }
         }
     }
@@ -136,6 +134,36 @@ public class StockController {
         stockOwned.getItems().addAll(ownedStocks);
     }
 
+
+    public void updateStockChart(){
+        indexChart.getData().clear();
+        int latestDay = stockTracker.getDay();
+
+        for (String stock : allStocks) {
+            XYChart.Series<Integer, Integer> stockData = new XYChart.Series<>();
+            stockData.setName(stock);
+            if (stockTracker.getStocklogs().get(0).containsKey(stock)){
+
+                stockTracker.getStocklogs().forEach((day, stocks)->stockData.getData().add(new XYChart.Data<>(day, stockmarket.getValue(stock))));
+
+            }
+            stockTracker.getStocklogs().forEach((day, stocks)->stockData.getData().add(new XYChart.Data<>(day, stocks.get(stock))));
+            indexChart.getData().add(stockData);
+        }
+
+        //stockTracker.getStocklogs().forEach((day, stocks)->stockdata.getData().add(new XYChart.Data<>(day, stocks.get("Aksje1"))));
+        // System.out.println(stockdata);
+
+        // for (int day = 0; day == totalDays; day++) {
+        //     stockdata.getData().add(new XYChart.Data<>(day, stockTracker.getStockprice(day, "Aksje1")));
+        //     System.out.println(day + stockTracker.getStockprice(day, "Aksje1") );
+        // }
+
+
+       
+
+    }
+
     public void importStock() throws IOException {
         try {
             if (ticker.getText() == null || value.getText() == null) {
@@ -147,10 +175,9 @@ public class StockController {
                 throw new IllegalArgumentException("Denne akjsen eksisterer allerede");
             } else {
                 stockmarket.update(ticker.getText(), Integer.parseInt(value.getText()));
+                stockTracker.log(stocks);
                 JBankHelp.showInformation("Ny aksje impotert", ticker.getText());
             }
-
-            updateStockView();
         } catch (IllegalArgumentException e) {
             JBankHelp.showErrorMessage(e.getMessage());
         }
@@ -161,15 +188,15 @@ public class StockController {
         System.out.println("nå kjøpes det aksjer");
         String stockToBuy = JBankHelp.choseStock(selectedStock, allStocks);
         int number = JBankHelp.number();
-        ArrayList<BankAccount> loggedInPersonBankAccounts = jbank.bankAccounts.getBankAccounts(loggedInPerson);
-        BankAccount source = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(0), loggedInPersonBankAccounts,
+        ArrayList<BankAccount> loggedInPersonBankManager = jbank.getBankManager().getBankAccount(loggedInPerson);
+        BankAccount source = JBankHelp.choseBankAccount(loggedInPersonBankManager.get(0), loggedInPersonBankManager,
                 "Overføring mellom kontoer", "Velg kontoen du ønsker å kjøpe " + stockToBuy + " fra", "Bankkonto: ");
-        if (!jbank.bankAccounts.hasFunds(source, number * stockmarket.getValue(stockToBuy))) {
+        if (!jbank.getBankManager().hasFunds(source, number * stockmarket.getValue(stockToBuy))) {
             JBankHelp.showErrorMessage("Du har ikke råd til å kjøpe disse aksjene");
         }
 
         else {
-            jbank.stockMarket.buy(loggedInPerson.getUserId(), stockToBuy, number);
+            jbank.getStockMarket().buy(loggedInPerson.getUserId(), stockToBuy, number);
             System.out.println("Aksjer er kjøpt");
         }
         updateViews();

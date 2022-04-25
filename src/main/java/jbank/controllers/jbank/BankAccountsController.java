@@ -15,7 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import jbank.Jbank;
 import jbank.data.BankAccount;
-import jbank.data.BankAccounts;
+import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.logic.JBankHelp;
 
@@ -40,7 +40,7 @@ public class BankAccountsController {
     private Button transferButton;
     @FXML
     private Button deleteButton;
-    private ArrayList<BankAccount> loggedInPersonBankAccounts;
+    private ArrayList<BankAccount> loggedInPersonBankManager;
     private BankAccount selectedBankAccount;
 
     @FXML
@@ -53,7 +53,7 @@ public class BankAccountsController {
 
     public void test() {
 
-        System.out.println(jbank.getBankAccounts().getBankAccounts(loggedInPerson));
+        System.out.println(jbank.getBankManager().getBankAccount(loggedInPerson));
 
     }
 
@@ -77,14 +77,14 @@ public class BankAccountsController {
         bankList.getItems().clear();
         viewBankAccount();
         try {
-            loggedInPersonBankAccounts = jbank.getBankAccounts().getBankAccounts(loggedInPerson);
+            loggedInPersonBankManager = jbank.getBankManager().getBankAccount(loggedInPerson);
         }
 
         catch (IllegalStateException e) {
             JBankHelp.showInformation(e.getMessage(), "Venligst lag en under fanen Bankkonto");
-            loggedInPersonBankAccounts = new ArrayList<>();
+            loggedInPersonBankManager = new ArrayList<>();
         }
-        bankList.getItems().addAll(loggedInPersonBankAccounts);
+        bankList.getItems().addAll(loggedInPersonBankManager);
     }
 
     public void createBank(ActionEvent event) throws IOException {
@@ -94,7 +94,7 @@ public class BankAccountsController {
                 throw new IllegalArgumentException("Du må fylle ut alle feltene");
             }
 
-            if (loggedInPersonBankAccounts.stream()
+            if (loggedInPersonBankManager.stream()
                     .anyMatch(BankAccount -> bankName.getText().equals(BankAccount.getName()))) {
                 throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
 
@@ -103,7 +103,7 @@ public class BankAccountsController {
             else {
 
                 BankAccount bankAccount = new BankAccount(bankName.getText(), Integer.parseInt(bankAmount.getText()));
-                jbank.getBankAccounts().addPerson(loggedInPerson.getUserId(), bankAccount);
+                jbank.getBankManager().addPerson(loggedInPerson.getUserId(), bankAccount);
                 // jbank.getAccountSaver().writeFile(jbank.getAccountObject());
                 JBankHelp.showInformation("Ny bankkonto lagd", bankAccount.toString());
             }
@@ -118,18 +118,18 @@ public class BankAccountsController {
     public void bankTransfer() {
         try {
 
-            if (loggedInPersonBankAccounts.size() < 2) {
+            if (loggedInPersonBankManager.size() < 2) {
                 throw new IllegalArgumentException("Du må ha minimum to kontoer for å overføre penger");
             }
 
-            BankAccount source = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
+            BankAccount source = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankManager,
                     "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
-            BankAccount destination = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(1),
-                    loggedInPersonBankAccounts,
+            BankAccount destination = JBankHelp.choseBankAccount(loggedInPersonBankManager.get(1),
+                    loggedInPersonBankManager,
                     "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");
             int amount = JBankHelp.amount();
 
-            jbank.bankAccounts.movefunds(source, destination, amount);
+            jbank.getBankManager().movefunds(source, destination, amount);
         } catch (IllegalArgumentException e) {
             JBankHelp.showErrorMessage(e.getMessage());
         }
@@ -138,11 +138,11 @@ public class BankAccountsController {
 
     public void deleteBankAccount() {
         try {
-            if (loggedInPersonBankAccounts.size() < 1) {
+            if (loggedInPersonBankManager.size() < 1) {
                 throw new IllegalArgumentException("Du kan ikke slette en konto før du har lagd en");
             }
 
-            BankAccount bank = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
+            BankAccount bank = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankManager,
                     "Sletting av konto", "Velg kontoen du ønsker å slette", "Bankkonto: ");
             Boolean choice = JBankHelp.confirm("Er du sikker på at du vil slette denne kontoen?");
 
@@ -152,7 +152,7 @@ public class BankAccountsController {
                         selectedBankAccount = null;
                         bankInfo.getItems().clear();
                     }
-                    jbank.getBankAccounts().deleteBankAccount(loggedInPerson, bank);
+                    jbank.getBankManager().deleteBankAccount(loggedInPerson, bank);
                 } catch (IllegalArgumentException e) {
                     JBankHelp.showErrorMessage(e.getMessage());
                 }

@@ -17,16 +17,7 @@ Generics i filinterface?
 decrease prettyprint size
 
 
-Instillinger:
-
-Slette konto
-
-Endre fornavn
-
-Endre etternavn
-
-Endre pin
-
+Flytte alle filer til resources mappen
 
 Note startdate, også øke counter +1 hver gang neste dag, også printe ut dagene med startdate + counter sånn at de viser pen dato.
 

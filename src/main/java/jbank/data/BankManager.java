@@ -4,39 +4,39 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BankAccounts {
-    private Map<String, ArrayList<BankAccount>> bankAccounts;
+public class BankManager {
+    private Map<String, ArrayList<BankAccount>> BankManager;
 
-    public BankAccounts() {
-        bankAccounts = new HashMap<>();
+    public BankManager() {
+        BankManager = new HashMap<>();
     }
 
     public Map<String, ArrayList<BankAccount>> getAllBankAccounts() {
-        return bankAccounts;
+        return BankManager;
     }
 
-    public ArrayList<BankAccount> getBankAccounts(Person user) {
-        if (bankAccounts.get(user.getUserId()) == null) {
+    public ArrayList<BankAccount> getBankAccount(Person user) {
+        if (BankManager.get(user.getUserId()) == null) {
             throw new IllegalStateException("Ingen bankkontoer eksisterer foreløpig");
         } else
-            return new ArrayList<>(bankAccounts.get(user.getUserId()));
+            return new ArrayList<>(BankManager.get(user.getUserId()));
     }
 
     public void deleteBankAccount(Person user, BankAccount bankAccount){
-        if (!bankAccounts.get(user.getUserId()).contains(bankAccount)){
+        if (!BankManager.get(user.getUserId()).contains(bankAccount)){
             throw new IllegalArgumentException("Du kan ikke slette en konto som ikke finnes");
         }
         else {
-            bankAccounts.get(user.getUserId()).remove(bankAccount);
+            BankManager.get(user.getUserId()).remove(bankAccount);
         }
     }
 
     public void addPerson(String userid, BankAccount bankAccount) {
 
-        if (bankAccounts.get(userid) == null) {
-            bankAccounts.put(userid, new ArrayList<BankAccount>());
+        if (BankManager.get(userid) == null) {
+            BankManager.put(userid, new ArrayList<BankAccount>());
         }
-        bankAccounts.get(userid).add(bankAccount);
+        BankManager.get(userid).add(bankAccount);
     }
 
     public Boolean hasFunds(BankAccount bank, int value){
@@ -74,7 +74,7 @@ public class BankAccounts {
 
     @Override
     public String toString() {
-        return "" + bankAccounts;
+        return "" + BankManager;
     }
 
 }
