@@ -28,6 +28,11 @@
               <fx:include fx:id="stock" source="stock.fxml" />
             </content>
           </Tab>
+          <Tab text="Grafer">
+            <content>
+              <fx:include fx:id="charts" source="charts.fxml" />
+            </content>
+          </Tab>
             <Tab text="Instillinger">
               <content>
                 <fx:include fx:id="settings" source="settings.fxml" />

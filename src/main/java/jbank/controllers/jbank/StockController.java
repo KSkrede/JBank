@@ -59,6 +59,17 @@ public class StockController {
         allStocks = stockmarket.getTickers();
         updateViews();
 
+        // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
+        stockList.setOnMouseClicked(me -> {
+            selectedStock = stockList.getSelectionModel().getSelectedItem();
+            updateStockInfo();
+        });
+
+        stockOwned.setOnMouseClicked(me -> {
+            selectedStock = stockOwned.getSelectionModel().getSelectedItem();
+            updateStockInfo();
+        });
+
     }
 
     public void test() {
@@ -74,25 +85,17 @@ public class StockController {
     }
 
     public void updateStockInfo() {
-        // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
-        stockList.setOnMouseClicked(me -> {
-            selectedStock = stockList.getSelectionModel().getSelectedItem();
-            updateStockInfo();
-        });
-
-        stockOwned.setOnMouseClicked(me -> {
-            selectedStock = stockOwned.getSelectionModel().getSelectedItem();
-            updateStockInfo();
-        });
-
+        System.out.println(selectedStock);
         if (selectedStock == null) {
             stockInfo.getItems().add("");
+            System.out.println("0");
         } else {
             if (selectedStock == stockList.getSelectionModel().getSelectedItem() ){
                 stockInfo.getItems().clear();
                 stockInfo.getItems().add(selectedStock);
                 stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selectedStock).toString() + "kr");
                 stockInfo.getItems().add("Public stocks");
+                System.out.println("1");
             }
 
             else if(selectedStock == stockOwned.getSelectionModel().getSelectedItem()) {
@@ -104,6 +107,7 @@ public class StockController {
                 stockInfo.getItems().add("Verdi: "+ value + "kr");
                 stockInfo.getItems().add("Antall du eier: " + number);
                 stockInfo.getItems().add("Total verdi: " + number*value + "kr");
+                System.out.println("2");
             }
         }
     }

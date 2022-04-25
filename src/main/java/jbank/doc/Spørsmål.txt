@@ -1,15 +1,15 @@
-interfacet FileHandler for å både håndtere accounts og fremtidig bankaccounts.
-Loope gjennom Maps med Lamdasteams i loginController
-Importere okhttp
-
-
-Er Actionevent event nødvendig i controllere?
-throws IOException vs try /catch
-Var det slik at man ikke trengte å teste kontrollerene?
-Hvordan føre kode fra forelesning som kilde?
-Bruksanvisning?
-Om eg burde dele opp noen av data klassene mine og få reine data / computation klasser?
-Flytte logikk ut av kontrolleren, se StockController
- @FXML tag
- Filhåndtering Mac
- Oppdatere view fra andre kontrollere
+throws IOException vs try /catch -- Legget til i metodene som kan throwe
+Var det slik at man ikke trengte å teste kontrollerene? - ikke teste kontrolelre
+Hvordan føre kode fra forelesning som kilde? - greit sånn det er
+Bruksanvisning? - lage readme fil
+Om eg burde dele opp noen av data klassene mine og få reine data / computation klasser? - går greit
+Flytte logikk ut av kontrolleren, se StockController - går greit
+ @FXML tag - funksjoner som bare er i .fxml fila
+ Filhåndtering Mac - legge alle resources i resource mappen
+ Lagrings av maps av maps - gjør manuelt eller ikke
+ Oppdatere view fra andre kontrollere - fixed
+ 
+ Arv på kontrollerne?
+ Er JBankHelp klassen delegering, når det bare er statiske metoder?
+ Om eg har observatør-observert i en aksjeindeks, evt med mouseclick?
+ Burde eg ha et stort diagram, eller flere små som viser hver sin del av appen?

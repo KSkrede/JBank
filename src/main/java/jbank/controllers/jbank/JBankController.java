@@ -23,6 +23,9 @@ public class JBankController {
     private Label currentDate;
     @FXML
     private Button logOuButton;
+    @FXML
+    private StockController stockController;
+
 
     @FXML
     public void initialize() {
@@ -51,7 +54,8 @@ public class JBankController {
     @FXML
     public void nextDay(){
         jbank.stockMarket.nextDay();
-        StockController.updateViews();
+        stockController.updateStockInfo();
+        System.out.println("her trykkes cet");
     }
 
 
