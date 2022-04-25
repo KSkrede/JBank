@@ -142,11 +142,6 @@ public class StockController {
         for (String stock : allStocks) {
             XYChart.Series<Integer, Integer> stockData = new XYChart.Series<>();
             stockData.setName(stock);
-            if (stockTracker.getStocklogs().get(0).containsKey(stock)){
-
-                stockTracker.getStocklogs().forEach((day, stocks)->stockData.getData().add(new XYChart.Data<>(day, stockmarket.getValue(stock))));
-
-            }
             stockTracker.getStocklogs().forEach((day, stocks)->stockData.getData().add(new XYChart.Data<>(day, stocks.get(stock))));
             indexChart.getData().add(stockData);
         }
@@ -175,7 +170,7 @@ public class StockController {
                 throw new IllegalArgumentException("Denne akjsen eksisterer allerede");
             } else {
                 stockmarket.update(ticker.getText(), Integer.parseInt(value.getText()));
-                stockTracker.log(stocks);
+                stockTracker.logNew(ticker.getText());
                 JBankHelp.showInformation("Ny aksje impotert", ticker.getText());
             }
         } catch (IllegalArgumentException e) {

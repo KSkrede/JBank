@@ -38,6 +38,18 @@ public class StockTracker {
         days++;
     }
 
+
+    public void logNew(String stock) {
+        if (stocklogs.get(days) == null){ 
+            System.out.println("null");  
+            }
+                for (int i = 0; i <= days; i++) {
+                    Map<String, Integer> stockToAdd = new HashMap<>();
+                    stockToAdd.put(stock, 0);
+                    stocklogs.put(i, new HashMap<>());
+                }
+            }
+
     public int getStockprice(int day, String ticker) {
         if (this.stocklogs == null) {
             return -1;
