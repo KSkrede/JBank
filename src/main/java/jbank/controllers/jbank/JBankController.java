@@ -52,8 +52,7 @@ public class JBankController {
     public void nextDay(){
         jbank.getStockTracker().log(jbank.getStockMarket().getStocks());
         jbank.getStockMarket().nextDay();
-        stockController.updateStockInfo();
-        stockController.updateStockChart();
+        stockController.nextDay();
     }
 
 

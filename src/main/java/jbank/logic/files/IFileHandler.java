@@ -1,7 +1,6 @@
 package jbank.logic.files;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
 import jbank.data.Accounts;
 

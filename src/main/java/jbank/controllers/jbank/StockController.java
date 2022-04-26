@@ -9,6 +9,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import jbank.Jbank;
 import jbank.data.BankAccount;
 import jbank.data.Person;
@@ -43,6 +44,8 @@ public class StockController {
     private Button deleteButton;
     @FXML
     private LineChart<Integer, Integer> indexChart;
+    @FXML
+    private AnchorPane importStockPane;
 
     private ArrayList<String> loggedInPersonStocks;
     private String selectedStock;
@@ -90,22 +93,22 @@ public class StockController {
         if (selectedStock == null) {
             stockInfo.getItems().add("");
         } else {
-            if (selectedStock == stockList.getSelectionModel().getSelectedItem() ){
+            if (selectedStock == stockList.getSelectionModel().getSelectedItem()) {
                 stockInfo.getItems().clear();
                 stockInfo.getItems().add(selectedStock);
                 stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selectedStock).toString() + "kr");
                 stockInfo.getItems().add("Public stocks");
             }
 
-            else if(selectedStock == stockOwned.getSelectionModel().getSelectedItem()) {
+            else if (selectedStock == stockOwned.getSelectionModel().getSelectedItem()) {
                 int value = stockmarket.getValue(selectedStock);
                 int number = stockmarket.numberOwnedStocks(loggedInPerson.getUserId(), selectedStock);
 
                 stockInfo.getItems().clear();
                 stockInfo.getItems().add(selectedStock);
-                stockInfo.getItems().add("Verdi: "+ value + "kr");
+                stockInfo.getItems().add("Verdi: " + value + "kr");
                 stockInfo.getItems().add("Antall du eier: " + number);
-                stockInfo.getItems().add("Total verdi: " + number*value + "kr");
+                stockInfo.getItems().add("Total verdi: " + number * value + "kr");
             }
         }
     }
@@ -127,35 +130,34 @@ public class StockController {
         stockOwned.getItems().clear();
         try {
             ownedStocks = jbank.getStockMarket().listOwnedStocks(loggedInPerson.getUserId());
-        }
-        catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             ownedStocks = new ArrayList<>();
         }
         stockOwned.getItems().addAll(ownedStocks);
     }
 
-
-    public void updateStockChart(){
+    public void updateStockChart() {
         indexChart.getData().clear();
         int latestDay = stockTracker.getDay();
 
         for (String stock : allStocks) {
             XYChart.Series<Integer, Integer> stockData = new XYChart.Series<>();
             stockData.setName(stock);
-            stockTracker.getStocklogs().forEach((day, stocks)->stockData.getData().add(new XYChart.Data<>(day, stocks.get(stock))));
+            stockTracker.getStocklogs()
+                    .forEach((day, stocks) -> stockData.getData().add(new XYChart.Data<>(day, stocks.get(stock))));
             indexChart.getData().add(stockData);
         }
 
-        //stockTracker.getStocklogs().forEach((day, stocks)->stockdata.getData().add(new XYChart.Data<>(day, stocks.get("Aksje1"))));
+        // stockTracker.getStocklogs().forEach((day,
+        // stocks)->stockdata.getData().add(new XYChart.Data<>(day,
+        // stocks.get("Aksje1"))));
         // System.out.println(stockdata);
 
         // for (int day = 0; day == totalDays; day++) {
-        //     stockdata.getData().add(new XYChart.Data<>(day, stockTracker.getStockprice(day, "Aksje1")));
-        //     System.out.println(day + stockTracker.getStockprice(day, "Aksje1") );
+        // stockdata.getData().add(new XYChart.Data<>(day,
+        // stockTracker.getStockprice(day, "Aksje1")));
+        // System.out.println(day + stockTracker.getStockprice(day, "Aksje1") );
         // }
-
-
-       
 
     }
 
@@ -170,7 +172,6 @@ public class StockController {
                 throw new IllegalArgumentException("Denne akjsen eksisterer allerede");
             } else {
                 stockmarket.update(ticker.getText(), Integer.parseInt(value.getText()));
-                stockTracker.logNew(ticker.getText());
                 JBankHelp.showInformation("Ny aksje impotert", ticker.getText());
             }
         } catch (IllegalArgumentException e) {
@@ -180,21 +181,26 @@ public class StockController {
     }
 
     public void buyStock() {
-        System.out.println("nå kjøpes det aksjer");
         String stockToBuy = JBankHelp.choseStock(selectedStock, allStocks);
         int number = JBankHelp.number();
-        ArrayList<BankAccount> loggedInPersonBankManager = jbank.getBankManager().getBankAccount(loggedInPerson);
-        BankAccount source = JBankHelp.choseBankAccount(loggedInPersonBankManager.get(0), loggedInPersonBankManager,
-                "Overføring mellom kontoer", "Velg kontoen du ønsker å kjøpe " + stockToBuy + " fra", "Bankkonto: ");
-        if (!jbank.getBankManager().hasFunds(source, number * stockmarket.getValue(stockToBuy))) {
-            JBankHelp.showErrorMessage("Du har ikke råd til å kjøpe disse aksjene");
-        }
 
-        else {
-            jbank.getStockMarket().buy(loggedInPerson.getUserId(), stockToBuy, number);
-            System.out.println("Aksjer er kjøpt");
+        try {
+            ArrayList<BankAccount> loggedInPersonBankAccounts = jbank.getBankManager().getBankAccounts(loggedInPerson);
+            BankAccount source = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(0),
+                    loggedInPersonBankAccounts,
+                    "Overføring mellom kontoer", "Velg kontoen du ønsker å kjøpe " + stockToBuy + " fra",
+                    "Bankkonto: ");
+
+            jbank.buyStocks(stockToBuy, number, source, loggedInPerson.getUserId());
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            JBankHelp.showErrorMessage(e.getMessage());
         }
         updateViews();
     }
 
+    public void nextDay() {
+        importStockPane.setVisible(false);
+        updateStockInfo();
+        updateStockChart();
+    }
 }

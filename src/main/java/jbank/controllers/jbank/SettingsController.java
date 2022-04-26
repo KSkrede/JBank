@@ -1,19 +1,11 @@
 package jbank.controllers.jbank;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import jbank.Jbank;
-import jbank.data.Accounts;
-import jbank.data.BankAccount;
 import jbank.data.Person;
 import jbank.logic.JBankHelp;
 
@@ -54,7 +46,7 @@ public class SettingsController {
     public void removePerson() throws IOException {
         if (JBankHelp.confirm("Er du sikker på at du vil slette kontoen din?")) {
             jbank.getAccountObject().removePerson();
-            jbank.getAccountSaver().writeFile(jbank.getAccountObject());
+            jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
             jbank.getApp().changeScene("login.fxml");
         }
     }
@@ -63,7 +55,7 @@ public class SettingsController {
         if (JBankHelp.confirm("Er du sikker på at du vil endre fornavnet ditt?")) {
             String newName = JBankHelp.name();
             jbank.getAccountObject().changeGivenName(newName);
-            jbank.getAccountSaver().writeFile(jbank.getAccountObject());
+            jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
             JBankHelp.showInformation("Navnebytte", "Navnebyttet var vellyket, velkommen tilbake " + newName + "\n Venligst logg inn på nytt");
             jbank.getApp().changeScene("login.fxml");
         }
@@ -73,7 +65,7 @@ public class SettingsController {
         if (JBankHelp.confirm("Er du sikker på at du vil endre etternavnet ditt?")) {
             String newName = JBankHelp.name();
             jbank.getAccountObject().changeSurName(newName);
-            jbank.getAccountSaver().writeFile(jbank.getAccountObject());
+            jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
             JBankHelp.showInformation("Navnebytte", "Navnebyttet var vellyket, ditt nye etternavn er nå " + newName + "\n Venligst logg inn på nytt");
             jbank.getApp().changeScene("login.fxml");
         }
@@ -84,7 +76,7 @@ public class SettingsController {
         if (currentPin.equals(loggedInPerson.getBankIDPin())){
             String newPin = JBankHelp.pin("Skriv inn ny pin: ");
             jbank.getAccountObject().changePin(newPin);
-            jbank.getAccountSaver().writeFile(jbank.getAccountObject());
+            jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
             JBankHelp.showInformation("Pin bytte", "Pin bytte var vellyket, dinn nye pin er nå " + newPin + "\n Venligst logg inn på nytt");
             jbank.getApp().changeScene("login.fxml");
         }

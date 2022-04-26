@@ -2,10 +2,13 @@ package jbank;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import jbank.data.Accounts;
+import jbank.data.BankAccount;
 import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.data.StockMarket;
@@ -77,7 +80,7 @@ public class Jbank {
 
     public void jBankLogin() throws IllegalArgumentException, IOException {
         this.getAccountSaver().readAccounts("accounts", accounts);
-        if (this.getAccountMap().isEmpty()) {
+        if (getAccountMap().isEmpty()) {
             throw new IllegalArgumentException("Det er foreløpig ingen kontoer lagret");
         }
     }
@@ -85,15 +88,27 @@ public class Jbank {
     public Boolean userLogin(String userID) {
         Optional<String> account = this.getAccountMap().keySet().stream().filter(key -> userID.equals(key)).findFirst();
         if (account.isPresent()) {
-            this.getAccountObject().setLoggedInPerson(getAccountMap().get(userID));
+            getAccountObject().setLoggedInPerson(getAccountMap().get(userID));
             return true;
         } else {
             return false;
         }
     }
 
-    //BankID
+    // stocks
 
-    
+    public void buyStocks(String stockToBuy, int number, BankAccount source, String userID) {
+        int value = stockMarket.getValue(stockToBuy) * number;
+
+        if (!getBankManager().hasFunds(source, value)) {
+            throw new IllegalArgumentException(
+                    "Du har ikke nok penger til å kjøpe " + number + " " + stockToBuy + "-aksjer");
+        } else {
+            getStockMarket().buy(userID, stockToBuy, number);
+            getBankManager().removeFunds(source, value);
+
+        }
+
+    }
 
 }
