@@ -1,15 +1,3 @@
-Gå gjennom alle public og se om de kan bli private
-
-Implement main jbank with following tabs
-
-Aksjer, Krypto, Sparing, Kontoer, historikk.
-
-Legge til grafer
-
-Neste dag knapp
-
-
-Slette brukere
 
 
 Generics i filinterface?
@@ -42,6 +30,8 @@ Iterator for å summere indeks
 Arv på bankkontoer
 
 Teit filhåndtering for at det skal fungere på mac
+
+Readme som brukerdokumentasjon
 
 
 

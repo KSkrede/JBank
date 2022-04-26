@@ -47,7 +47,6 @@ public class StockController {
     @FXML
     private AnchorPane importStockPane;
 
-    private ArrayList<String> loggedInPersonStocks;
     private String selectedStock;
     private ArrayList<String> allStocks;
     private ArrayList<String> ownedStocks;
@@ -121,7 +120,7 @@ public class StockController {
 
         catch (IllegalStateException e) {
             JBankHelp.showInformation(e.getMessage(), "Venligst lag en under fanen Aksjer");
-            loggedInPersonStocks = new ArrayList<>();
+            allStocks = new ArrayList<>();
         }
         stockList.getItems().addAll(allStocks);
     }
@@ -138,7 +137,6 @@ public class StockController {
 
     public void updateStockChart() {
         indexChart.getData().clear();
-        int latestDay = stockTracker.getDay();
 
         for (String stock : allStocks) {
             XYChart.Series<Integer, Integer> stockData = new XYChart.Series<>();
@@ -194,6 +192,9 @@ public class StockController {
             jbank.buyStocks(stockToBuy, number, source, loggedInPerson.getUserId());
         } catch (IllegalArgumentException | IllegalStateException e) {
             JBankHelp.showErrorMessage(e.getMessage());
+        }
+        catch (IndexOutOfBoundsException e){
+            JBankHelp.showErrorMessage("Du kan ikke kjøpe aksjer uten en bankkonto");
         }
         updateViews();
     }

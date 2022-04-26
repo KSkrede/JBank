@@ -1,9 +1,6 @@
 package jbank;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -12,7 +9,6 @@ import jbank.data.BankAccount;
 import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.data.StockMarket;
-import jbank.logic.JBankHelp;
 import jbank.logic.StockTracker;
 import jbank.logic.files.AccountSaver;
 
