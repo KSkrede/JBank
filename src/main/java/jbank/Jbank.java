@@ -1,11 +1,14 @@
 package jbank;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 import jbank.data.Accounts;
 import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.data.StockMarket;
+import jbank.logic.JBankHelp;
 import jbank.logic.StockTracker;
 import jbank.logic.files.AccountSaver;
 
@@ -27,6 +30,8 @@ public class Jbank {
         this.BankManager = new BankManager();
         this.stockMarket = new StockMarket();
         this.stockTracker = new StockTracker();
+
+
     }
 
     // Static method
@@ -37,6 +42,8 @@ public class Jbank {
 
         return single_instance;
     }
+
+    //getters for all objects
 
     public JbankApp getApp() {
         return app;
@@ -65,6 +72,20 @@ public class Jbank {
     public StockTracker getStockTracker() {
         return stockTracker;
     }
+
+    //Login
+
+    public void jBankLogin() throws IllegalArgumentException, IOException {
+        this.getAccountSaver().readAccounts("accounts", accounts);
+        // if (this.getAccountMap().isEmpty()){
+        //     wrongLogIn.setText("Det er foreløpig ingen kontoer lagret");
+        // }
+
+
+
+    }
+
+    
 
 
     

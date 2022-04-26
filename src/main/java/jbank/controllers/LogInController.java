@@ -11,12 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import jbank.Jbank;
 import jbank.data.Person;
+import jbank.logic.JBankHelp;
 public class LogInController {
-
-    public LogInController() {
-    }
-
-
 
     @FXML
     private Button nextButton;
@@ -31,12 +27,18 @@ public class LogInController {
 
     Jbank jbank;
 
-    public void initialize() throws FileNotFoundException {
+    public void initialize() {
         jbank = Jbank.getInstance();
-        jbank.getAccountSaver().readFile();
-        if (jbank.getAccountMap().isEmpty()){
-            wrongLogIn.setText("Det er foreløpig ingen kontoer lagret");
+        try {
+            jbank.jBankLogin();
+        } catch (IllegalArgumentException | IOException e) {
+            JBankHelp.showErrorMessage(e.getMessage());
         }
+
+        // jbank.getAccountSaver().readFile();
+        // if (jbank.getAccountMap().isEmpty()){
+        //     wrongLogIn.setText("Det er foreløpig ingen kontoer lagret");
+        // }
     }
 
 

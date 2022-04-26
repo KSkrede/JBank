@@ -1,17 +1,16 @@
 package jbank.logic.files;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
 
 import jbank.data.Accounts;
 
 public interface IFileHandler {
 
-    // Object readFile(String filename, Object object) throws FileNotFoundException;
+    Accounts readAccounts(String file, Accounts accounts) throws IOException;
 
-    // void writeFile(String filename, Object  object) throws FileNotFoundException;
+    void writeAccounts(String file, Accounts  accounts) throws IOException;
 
-    Object readFile(String filename, Accounts accounts) throws FileNotFoundException;
-
-    void writeFile(String filename, Accounts  accounts) throws FileNotFoundException;
+    Path getFilePath(String filename);
 
 }

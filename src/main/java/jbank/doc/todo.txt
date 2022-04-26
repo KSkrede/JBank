@@ -37,7 +37,9 @@ sorting av bankkontoer og aksjer, med dropdown til å velge sortering
 
 catche cancel ved valg
 
+Iterator for å summere indeks
 
+Arv på bankkontoer
 
 
 
