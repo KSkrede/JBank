@@ -2,7 +2,6 @@ package jbank.data;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import jbank.logic.JBankHelp;
 

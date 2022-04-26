@@ -1,8 +1,11 @@
 package jbank;
 
+import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 import jbank.data.Accounts;
+import jbank.data.BankAccount;
 import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.data.StockMarket;
@@ -14,7 +17,7 @@ public class Jbank {
     private static Jbank single_instance = null;
 
     private JbankApp app;
-    private Accounts accounts; 
+    private Accounts accounts;
     private AccountSaver accountSaver;
     private BankManager BankManager;
     private StockMarket stockMarket;
@@ -23,10 +26,11 @@ public class Jbank {
     private Jbank() {
         this.app = new JbankApp();
         this.accounts = new Accounts();
-        this.accountSaver = new AccountSaver(accounts);
+        this.accountSaver = new AccountSaver();
         this.BankManager = new BankManager();
         this.stockMarket = new StockMarket();
         this.stockTracker = new StockTracker();
+
     }
 
     // Static method
@@ -37,6 +41,8 @@ public class Jbank {
 
         return single_instance;
     }
+
+    // getters for all objects
 
     public JbankApp getApp() {
         return app;
@@ -66,11 +72,39 @@ public class Jbank {
         return stockTracker;
     }
 
+    // Login
 
-    
+    public void jBankLogin() throws IllegalArgumentException, IOException {
+        this.getAccountSaver().readAccounts("accounts", accounts);
+        if (getAccountMap().isEmpty()) {
+            throw new IllegalArgumentException("Det er foreløpig ingen kontoer lagret");
+        }
+    }
 
+    public Boolean userLogin(String userID) {
+        Optional<String> account = this.getAccountMap().keySet().stream().filter(key -> userID.equals(key)).findFirst();
+        if (account.isPresent()) {
+            getAccountObject().setLoggedInPerson(getAccountMap().get(userID));
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    
-    
+    // stocks
+
+    public void buyStocks(String stockToBuy, int number, BankAccount source, String userID) {
+        int value = stockMarket.getValue(stockToBuy) * number;
+
+        if (!getBankManager().hasFunds(source, value)) {
+            throw new IllegalArgumentException(
+                    "Du har ikke nok penger til å kjøpe " + number + " " + stockToBuy + "-aksjer");
+        } else {
+            getStockMarket().buy(userID, stockToBuy, number);
+            getBankManager().removeFunds(source, value);
+
+        }
+
+    }
 
 }

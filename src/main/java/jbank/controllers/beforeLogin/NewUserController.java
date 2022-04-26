@@ -1,4 +1,4 @@
-package jbank.controllers;
+package jbank.controllers.beforeLogin;
 
 import java.io.IOException;
 
@@ -42,7 +42,7 @@ public class NewUserController {
         jbank = Jbank.getInstance();
     }
 
-    public void createUser(ActionEvent event) throws IOException {
+    public void createUser() throws IOException {
 
         try {
             if (phoneNumber.getText() == null || birthDate.getValue() == null) {
@@ -64,7 +64,7 @@ public class NewUserController {
                 Person person = new Person(phoneNumber.getText(), birthDate.getValue(), givenName.getText(),
                         surName.getText(), bankIDPin.getText());
                 jbank.getAccountObject().addPerson(person.getUserId(), person);
-                jbank.getAccountSaver().writeFile(jbank.getAccountObject());
+                jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
                 JBankHelp.showInformation("Ny bruker laget", person.prettyString());
             }
         }
@@ -75,9 +75,6 @@ public class NewUserController {
 
     }
 
-    // public void newUser(ActionEvent event) throws IOException {
-    //     jbank.getApp().changeScene("newUser.fxml");
-    // }
 
     public void back(ActionEvent event) throws IOException {
         jbank.getApp().changeScene("login.fxml");
