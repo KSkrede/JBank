@@ -1,37 +1,23 @@
 
 
-Generics i filinterface?
-
-decrease prettyprint size
-
-
-Flytte alle filer til resources mappen
-
-Note startdate, også øke counter +1 hver gang neste dag, også printe ut dagene med startdate + counter sånn at de viser pen dato.
-
-Interface på stocks og crypto
 
 Bedre håndtering om det ikke er noen accounts fil i starten
 
 amount to only allow input int 
 
-change bankidpin to just pin
-
-legge inn hint til hva brukeren burde gjøre videre
-
-konsekent bruker av store bokstaver , feks i userid
 
 sorting av bankkontoer og aksjer, med dropdown til å velge sortering
 
 catche cancel ved valg
 
-Iterator for å summere indeks
 
 Arv på bankkontoer
 
 Teit filhåndtering for at det skal fungere på mac
 
 Readme som brukerdokumentasjon
+
+Fikse på stocks
 
 
 

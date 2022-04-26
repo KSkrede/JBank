@@ -44,7 +44,7 @@ public class BankManager {
 
 
     public void addFunds(BankAccount bank, int funds){
-        if(funds > 0){
+        if(funds < 0){
             throw new IllegalArgumentException("Kan ikke legge til et negativt beløp");
         }
         else {
@@ -57,7 +57,7 @@ public class BankManager {
             throw new IllegalArgumentException("Kan ikke trekke fra et negativt beløp");
         }
         else {
-            bank.addValue(funds);
+            bank.removeValue(funds);
         }
     }
 

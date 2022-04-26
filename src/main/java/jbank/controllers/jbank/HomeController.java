@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import jbank.Jbank;
 import jbank.data.BankAccount;
@@ -26,7 +27,9 @@ public class HomeController {
     @FXML
     private ListView<String> stockOwned;
     @FXML
-    private LineChart<Integer, Integer> totalValueChart;
+    private Label sumStocks;
+    @FXML
+    private Label sumBank;
     @FXML
     private Button test;
 
@@ -76,7 +79,7 @@ public class HomeController {
         updateBankList();
         updateInfo();
         updateStockOwnedView();
-        updateStockChart();
+        updateSum();
 
     }
 
@@ -110,11 +113,9 @@ public class HomeController {
     public void updateBankList() {
         try {
             loggedInPersonBankAccounts = jbank.getBankManager().getBankAccounts(loggedInPerson);
-            System.out.println(loggedInPersonBankAccounts);
         }
 
         catch (IllegalStateException e) {
-            JBankHelp.showInformation(e.getMessage(), "Venligst lag en under fanen Bankkonto");
             loggedInPersonBankAccounts = new ArrayList<>();
         }
         bankList.getItems().clear();
@@ -131,16 +132,9 @@ public class HomeController {
         stockOwned.getItems().addAll(ownedStocks);
     }
 
-    public void updateStockChart() {
-        totalValueChart.getData().clear();
-
-        for (String stock : allStocks) {
-            XYChart.Series<Integer, Integer> stockData = new XYChart.Series<>();
-            stockData.setName(stock);
-            stockTracker.getStocklogs()
-                    .forEach((day, stocks) -> stockData.getData().add(new XYChart.Data<>(day, stocks.get(stock))));
-            totalValueChart.getData().add(stockData);
-        }
+    public void updateSum() {
+        sumBank.setText("Sum penger: " + jbank.sumBankAccounts());
+        sumStocks.setText("Sum aksjer: " + jbank.sumStocks());
 
     }
 }

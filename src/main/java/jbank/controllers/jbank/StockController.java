@@ -41,6 +41,8 @@ public class StockController {
     @FXML
     private Button buyStock;
     @FXML
+    private Button sellStock;
+    @FXML
     private Button deleteButton;
     @FXML
     private LineChart<Integer, Integer> indexChart;
@@ -145,17 +147,9 @@ public class StockController {
                     .forEach((day, stocks) -> stockData.getData().add(new XYChart.Data<>(day, stocks.get(stock))));
             indexChart.getData().add(stockData);
         }
-
-        // stockTracker.getStocklogs().forEach((day,
-        // stocks)->stockdata.getData().add(new XYChart.Data<>(day,
-        // stocks.get("Aksje1"))));
-        // System.out.println(stockdata);
-
-        // for (int day = 0; day == totalDays; day++) {
-        // stockdata.getData().add(new XYChart.Data<>(day,
-        // stockTracker.getStockprice(day, "Aksje1")));
-        // System.out.println(day + stockTracker.getStockprice(day, "Aksje1") );
-        // }
+        XYChart.Series<Integer, Integer> index = new XYChart.Series<>();
+        index.setName("Indeks");
+        // stockTracker.getStocklogs().forEach((day, stocks) -> index.getData().add(new XYChart.Data<>(day, stocks.get(stock))));
 
     }
 
@@ -190,6 +184,27 @@ public class StockController {
                     "Bankkonto: ");
 
             jbank.buyStocks(stockToBuy, number, source, loggedInPerson.getUserId());
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            JBankHelp.showErrorMessage(e.getMessage());
+        }
+        catch (IndexOutOfBoundsException e){
+            JBankHelp.showErrorMessage("Du kan ikke kjøpe aksjer uten en bankkonto");
+        }
+        updateViews();
+    }
+
+    public void sellStock() {
+        String stockToSell = JBankHelp.choseStock(selectedStock, ownedStocks );
+        int number = JBankHelp.number();
+
+        try {
+            ArrayList<BankAccount> loggedInPersonBankAccounts = jbank.getBankManager().getBankAccounts(loggedInPerson);
+            BankAccount destination = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(0),
+                    loggedInPersonBankAccounts,
+                    "Overføring mellom kontoer", "Velg kontoen du å plassere gevinst fra " + stockToSell + " fra",
+                    "Bankkonto: ");
+
+            jbank.sellStocks(stockToSell, number, destination, loggedInPerson.getUserId());
         } catch (IllegalArgumentException | IllegalStateException e) {
             JBankHelp.showErrorMessage(e.getMessage());
         }

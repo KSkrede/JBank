@@ -40,7 +40,7 @@ public class JBankController {
 
     @FXML
     public void setDateLabel(){
-        currentDate.setText(JBankHelp.todayToString());
+        currentDate.setText("Dato: " + JBankHelp.todayToString(0));
     }
 
     @FXML
@@ -50,9 +50,11 @@ public class JBankController {
 
     @FXML
     public void nextDay(){
-        jbank.getStockTracker().log(jbank.getStockMarket().getStocks());
+        jbank.getStockTracker().log(jbank.getStockMarket().getStocks(), jbank.getDays());
         jbank.getStockMarket().nextDay();
         stockController.nextDay();
+        jbank.daysIncrease();
+        currentDate.setText("Dato: " + JBankHelp.todayToString(jbank.getDays()));
     }
 
 

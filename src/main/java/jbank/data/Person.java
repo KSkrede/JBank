@@ -112,7 +112,7 @@ public class Person {
     }
 
     public String prettyString(){
-        return givenName + " " + surName + " med mobilnummer: " + phoneNumber + " og bursdag: " + birthDate;
+        return givenName + " " + surName;
     }
 
     public String getFullName(){

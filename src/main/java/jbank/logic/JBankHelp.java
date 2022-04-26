@@ -24,8 +24,8 @@ public class JBankHelp {
         return date.format(DateTimeFormatter.ofPattern("ddMMyy"));
     }
 
-    public static String todayToString() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yy"));
+    public static String todayToString(int days) {
+        return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yy"));
     }
 
     public static LocalDate stringToDate(String date) {
