@@ -41,6 +41,8 @@ Iterator for å summere indeks
 
 Arv på bankkontoer
 
+Teit filhåndtering for at det skal fungere på mac
+
 
 
 

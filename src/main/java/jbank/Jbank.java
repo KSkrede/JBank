@@ -26,7 +26,7 @@ public class Jbank {
     private Jbank() {
         this.app = new JbankApp();
         this.accounts = new Accounts();
-        this.accountSaver = new AccountSaver(accounts);
+        this.accountSaver = new AccountSaver();
         this.BankManager = new BankManager();
         this.stockMarket = new StockMarket();
         this.stockTracker = new StockTracker();

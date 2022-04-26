@@ -9,8 +9,6 @@ public interface IFileHandler {
 
     Accounts readAccounts(String file, Accounts accounts) throws IOException;
 
-    void writeAccounts(String file, Accounts  accounts) throws IOException;
-
-    Path getFilePath(String filename);
+    void writeAccounts(String file, Accounts accounts) throws IOException;
 
 }
