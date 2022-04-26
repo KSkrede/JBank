@@ -1,12 +1,9 @@
 package jbank.controllers.jbank;
 import java.io.IOException;
-import java.time.LocalDate;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SingleSelectionModel;
 import jbank.Jbank;
 import jbank.data.Person;
 import jbank.logic.JBankHelp;

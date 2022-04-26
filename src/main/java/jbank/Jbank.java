@@ -3,6 +3,7 @@ package jbank;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 import jbank.data.Accounts;
 import jbank.data.BankManager;
@@ -17,7 +18,7 @@ public class Jbank {
     private static Jbank single_instance = null;
 
     private JbankApp app;
-    private Accounts accounts; 
+    private Accounts accounts;
     private AccountSaver accountSaver;
     private BankManager BankManager;
     private StockMarket stockMarket;
@@ -31,7 +32,6 @@ public class Jbank {
         this.stockMarket = new StockMarket();
         this.stockTracker = new StockTracker();
 
-
     }
 
     // Static method
@@ -43,7 +43,7 @@ public class Jbank {
         return single_instance;
     }
 
-    //getters for all objects
+    // getters for all objects
 
     public JbankApp getApp() {
         return app;
@@ -73,25 +73,27 @@ public class Jbank {
         return stockTracker;
     }
 
-    //Login
+    // Login
 
     public void jBankLogin() throws IllegalArgumentException, IOException {
         this.getAccountSaver().readAccounts("accounts", accounts);
-        // if (this.getAccountMap().isEmpty()){
-        //     wrongLogIn.setText("Det er foreløpig ingen kontoer lagret");
-        // }
-
-
-
+        if (this.getAccountMap().isEmpty()) {
+            throw new IllegalArgumentException("Det er foreløpig ingen kontoer lagret");
+        }
     }
 
-    
+    public Boolean userLogin(String userID) {
+        Optional<String> account = this.getAccountMap().keySet().stream().filter(key -> userID.equals(key)).findFirst();
+        if (account.isPresent()) {
+            this.getAccountObject().setLoggedInPerson(getAccountMap().get(userID));
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    //BankID
 
-    
-
-
-    
     
 
 }

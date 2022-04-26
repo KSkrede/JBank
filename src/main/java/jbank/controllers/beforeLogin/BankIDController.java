@@ -1,7 +1,6 @@
-package jbank.controllers;
+package jbank.controllers.beforeLogin;
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,17 +43,17 @@ public class BankIDController {
     }
 
     @FXML
-    private void refreshBankIDLabel(ActionEvent event) throws IOException {
+    private void refreshBankIDLabel() throws IOException {
         BankIDLabel.setText(BankID.getBankIDText());
     }
 
     @FXML
-    public void Back(ActionEvent event) throws IOException {
+    public void Back() throws IOException {
         jbank.getApp().changeScene("login.fxml");
     }
 
     @FXML
-    private void Login(ActionEvent event) throws IOException {
+    private void Login() throws IOException {
 
         if(loggedInPerson.getBankIDPin().equals(pinField.getText().toString())) {
             jbank.getApp().changeScene("jbank/jBank.fxml");
