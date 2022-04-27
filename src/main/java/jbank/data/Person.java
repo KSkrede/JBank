@@ -54,7 +54,11 @@ public class Person {
         }
         else if (birthDate.isAfter(today)) {
             throw new IllegalArgumentException("Du kan ikke ha fødselsdato i fremtiden");
-        } 
+        }
+        else if (birthDate.isAfter(today.minusYears(18))) {
+            throw new IllegalArgumentException("Du må minst være 18 år for å lage konto her");
+        }
+
         else {
             this.birthDate = JBankHelp.dateToString(birthDate);
         }
