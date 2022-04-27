@@ -23,6 +23,8 @@ public class JBankController {
     private Button logOuButton;
     @FXML
     private StockController stockController;
+    @FXML
+    private HomeController homeController;
 
 
     @FXML
@@ -53,6 +55,7 @@ public class JBankController {
         jbank.getStockTracker().log(jbank.getStockMarket().getStocks(), jbank.getDays(), jbank.getStockIndex().getAvg());
         jbank.getStockMarket().nextDay();
         stockController.nextDay();
+        homeController.updateViews();
         jbank.daysIncrease();
         currentDate.setText("Dato: " + JBankHelp.todayToString(jbank.getDays()));
     }

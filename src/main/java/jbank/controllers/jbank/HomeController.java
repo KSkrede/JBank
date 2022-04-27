@@ -28,7 +28,9 @@ public class HomeController {
     @FXML
     private Label sumBank;
     @FXML
-    private Button test;
+    private Label totalSum;
+    @FXML
+    private Button update;
 
     private String selectedItem;
     private ArrayList<String> allStocks;
@@ -64,11 +66,6 @@ public class HomeController {
                 updateInfo();
             }
         });
-
-    }
-
-    public void test() {
-        updateViews();
 
     }
 
@@ -130,8 +127,9 @@ public class HomeController {
     }
 
     public void updateSum() {
-        sumBank.setText("Sum penger: " + jbank.sumBankAccounts());
-        sumStocks.setText("Sum aksjer: " + jbank.sumStocks());
+        sumBank.setText("Sum penger: " + jbank.sumBankAccounts() + "kr");
+        sumStocks.setText("Sum aksjer: " + jbank.sumStocks() + "kr" );
+        totalSum.setText("Sum totalt: " + jbank.sumBankAccounts() + jbank.sumStocks() + "kr");
 
     }
 }

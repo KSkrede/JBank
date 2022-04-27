@@ -36,13 +36,18 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button fx:id="test" layoutX="665.0" layoutY="95.0" mnemonicParsing="false" onAction="#test" text="Button" />
+      <Button fx:id="update" layoutX="806.0" layoutY="91.0" mnemonicParsing="false" onAction="#updateViews" text="Oppdater" />
       <Label fx:id="sumStocks" layoutX="965.0" layoutY="217.0" text="Sum aksjer: 000">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <Label fx:id="sumBank" layoutX="965.0" layoutY="279.0" text="Sum penger: 00">
+      <Label fx:id="sumBank" layoutX="964.0" layoutY="280.0" text="Sum penger: 00">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalSum" layoutX="964.0" layoutY="349.0" text="Sum totalt: 00">
          <font>
             <Font size="29.0" />
          </font>
