@@ -1,6 +1,7 @@
 package jbank.logic.files;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
@@ -12,7 +13,7 @@ import jbank.logic.JBankHelp;
 
 public class AccountSaver implements IFileHandler {
     @Override
-    public Accounts readAccounts(String fileName, Accounts accounts) throws IOException, IllegalArgumentException {
+    public Accounts readAccounts(String fileName, Accounts accounts) throws IOException, IllegalArgumentException, FileNotFoundException {
         File file = new File(fileName + ".txt");
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {

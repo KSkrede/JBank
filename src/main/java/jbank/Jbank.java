@@ -1,5 +1,6 @@
 package jbank;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
@@ -82,7 +83,13 @@ public class Jbank {
     // Login
 
     public void jBankLogin() throws IllegalArgumentException, IOException {
+        try{
+
         this.getAccountSaver().readAccounts("accounts", accounts);
+    }
+    catch (IOException e){
+        throw new IllegalArgumentException("Databasen med kontoer ble ikke funnet, venlist lag kontoer på nytt");
+    }
         if (getAccountMap().isEmpty()) {
             throw new IllegalArgumentException("Det er foreløpig ingen kontoer lagret");
         }

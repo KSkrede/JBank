@@ -156,9 +156,13 @@ public class StockController {
 
     public void importStock() throws IOException {
         try {
-            if (ticker.getText() == null || value.getText() == null) {
+            if (ticker.getText() == null || value.getText() == null || !JBankHelp.isAllLetters(ticker.getText())) {
                 throw new IllegalArgumentException("Du må fylle ut alle feltene");
             }
+            if (value.getText() == null || !JBankHelp.isAllDigit(value.getText())) {
+                throw new IllegalArgumentException("Ugyidlge tegn i verdien");
+            }
+
 
             if (allStocks.stream()
                     .anyMatch(Stock -> ticker.getText().equals(Stock))) {
@@ -175,23 +179,25 @@ public class StockController {
 
     public void buyStock() {
 
-        try {
-            String stockToBuy = JBankHelp.choseStock(selectedStock, allStocks);
-            int number = JBankHelp.number();
-            ArrayList<BankAccount> loggedInPersonBankAccounts = jbank.getBankManager().getBankAccounts(loggedInPerson);
-            BankAccount source = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(0),
-                    loggedInPersonBankAccounts,
-                    "Overføring mellom kontoer", "Velg kontoen du ønsker å kjøpe " + stockToBuy + " fra",
-                    "Bankkonto: ");
+            try {
+                jbank.getBankManager().getBankAccounts(loggedInPerson);
+                String stockToBuy = JBankHelp.choseStock(selectedStock, allStocks);
+                int number = JBankHelp.number();
+                ArrayList<BankAccount> loggedInPersonBankAccounts = jbank.getBankManager()
+                        .getBankAccounts(loggedInPerson);
+                BankAccount source = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(0),
+                        loggedInPersonBankAccounts,
+                        "Overføring mellom kontoer", "Velg kontoen du ønsker å kjøpe " + stockToBuy + " fra",
+                        "Bankkonto: ");
 
-            jbank.buyStocks(stockToBuy, number, source, loggedInPerson.getUserId());
-        } catch (IllegalArgumentException | IllegalStateException e) {
-            JBankHelp.showErrorMessage(e.getMessage());
-        } catch (IndexOutOfBoundsException e) {
-            JBankHelp.showErrorMessage("Du kan ikke kjøpe aksjer uten en bankkonto");
+                jbank.buyStocks(stockToBuy, number, source, loggedInPerson.getUserId());
+            } catch (IllegalArgumentException | IllegalStateException e) {
+                JBankHelp.showErrorMessage(e.getMessage());
+            } catch (IndexOutOfBoundsException e) {
+                JBankHelp.showErrorMessage("Du kan ikke kjøpe aksjer uten en bankkonto");
+            }
+            updateViews();
         }
-        updateViews();
-    }
 
     public void sellStock() {
 

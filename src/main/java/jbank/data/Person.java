@@ -26,7 +26,7 @@ public class Person {
     }
 
     public void setName(String givenName, String surName) {
-        if (JBankHelp.isAllLetters(givenName)) {
+        if (JBankHelp.isAllLettersOrBlank(givenName)) {
             this.givenName = givenName;
         }
         

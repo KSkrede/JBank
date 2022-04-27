@@ -33,8 +33,8 @@ public class JBankHelp {
         return LocalDate.parse(date, formatter);
     }
 
-    public static boolean isAllDigit(String str) {
-        for (char c : str.toCharArray()) {
+    public static boolean isAllDigit(String string) {
+        for (char c : string.toCharArray()) {
             if (!Character.isDigit(c)) {
                 return false;
             }
@@ -42,16 +42,33 @@ public class JBankHelp {
         return true;
     }
 
-    public static boolean isAllLetters(String str) {
-        for (char c : str.toCharArray()) {
-            if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+    public static boolean isAllLetters(String string) {
+        for (char c : string.toCharArray()) {
+            if (!Character.isLetter(c)) {
                 return false;
             }
         }
         return true;
     }
 
-    // Kopiert fra Øvingsforelesning 18.03.22
+    public static boolean isAllLettersOrBlank(String string) {
+        int letters = 0;
+        for (char c : string.toCharArray()) {
+            if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                return false;
+            }
+            if(Character.isLetter(c)){
+                letters++;
+            }
+        }
+        if(letters > 0){
+            return true;
+        }
+        return false;
+    }
+
+
+    // inspirert fra Øvingsforelesning 18.03.22
     public static void showErrorMessage(String errorMessage) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Feilmelding");
@@ -93,7 +110,7 @@ public class JBankHelp {
         dialog.setTitle("Beløp");
         dialog.setHeaderText("Velg et beløp: ");
         dialog.setContentText("Antall kr: ");
-        if (dialog.showAndWait().get() == null || dialog.showAndWait().get() == "" || isAllDigit(dialog.showAndWait().get())){
+        if (dialog.showAndWait().get() == null || dialog.showAndWait().get() == "" || !isAllDigit(dialog.showAndWait().get())){
             throw new IllegalArgumentException("Ugyldig valg");
         }
         int amount = Integer.parseInt(dialog.showAndWait().get());
@@ -104,7 +121,7 @@ public class JBankHelp {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Antall");
         dialog.setHeaderText("Velg antall aksjer under: ");
-        if (dialog.showAndWait().get() == null || dialog.showAndWait().get() == "" || isAllDigit(dialog.showAndWait().get())){
+        if (dialog.showAndWait().get() == null || dialog.showAndWait().get() == "" || !isAllDigit(dialog.showAndWait().get())){
             throw new IllegalArgumentException("Ugyldig valg");
         }
         int number = Integer.parseInt(dialog.showAndWait().get());
@@ -115,7 +132,7 @@ public class JBankHelp {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Navn");
         dialog.setHeaderText("Velg et navn: ");
-        return dialog.showAndWait().get();
+        return dialog.showAndWait().get().strip();
     }
 
     public static String pin(String content) {
