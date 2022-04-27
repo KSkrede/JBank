@@ -15,8 +15,8 @@ import jbank.Jbank;
 import jbank.data.BankAccount;
 import jbank.data.Person;
 import jbank.data.StockMarket;
+import jbank.data.StockTracker;
 import jbank.logic.JBankHelp;
-import jbank.logic.StockTracker;
 
 public class StockController {
 
@@ -30,7 +30,7 @@ public class StockController {
     @FXML
     private Button importStock;
     @FXML
-    private Button test;
+    private Button updateButton;
     @FXML
     private ListView<String> stockList;
     @FXML
@@ -82,6 +82,7 @@ public class StockController {
         System.out.println(stockTracker.getStocklogs());
 
     }
+
 
     public void updateViews() {
         updateStockView();

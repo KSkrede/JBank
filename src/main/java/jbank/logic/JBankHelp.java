@@ -106,6 +106,14 @@ public class JBankHelp {
         return chosenStock;
     }
 
+        public static String choseSort() {
+        ChoiceDialog<String> dialog = new ChoiceDialog<String>("Navn økende", "Navn økende", "Navn synkende", "Verdi økende", "Verdi synkende");
+        dialog.setTitle("Velg sortering");
+        dialog.setHeaderText("Velg sortering under:");
+        String sort = dialog.showAndWait().get();
+        return sort;
+    }
+
     public static int amount() throws NumberFormatException, IllegalArgumentException {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Beløp");

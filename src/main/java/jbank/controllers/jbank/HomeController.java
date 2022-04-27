@@ -11,7 +11,7 @@ import jbank.data.BankAccount;
 import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.data.StockMarket;
-import jbank.logic.StockTracker;
+import jbank.data.StockTracker;
 
 public class HomeController {
 

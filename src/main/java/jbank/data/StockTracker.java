@@ -1,4 +1,4 @@
-package jbank.logic;
+package jbank.data;
 
 import java.util.HashMap;
 import java.util.Map;

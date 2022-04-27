@@ -2,6 +2,8 @@ package jbank.controllers.jbank;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.NoSuchElementException;
 
 import javafx.event.ActionEvent;
@@ -26,7 +28,9 @@ public class BankAccountsController {
     @FXML
     private Button createBank;
     @FXML
-    private Button test;
+    private Button updateButton;
+    @FXML
+    private Button sortButton;
     @FXML
     private ListView<BankAccount> bankList;
     @FXML
@@ -37,6 +41,8 @@ public class BankAccountsController {
     private Button deleteButton;
     private ArrayList<BankAccount> loggedInPersonBankAccounts;
     private BankAccount selectedBankAccount;
+    private Comparator<BankAccount> sorting;
+    private Boolean toSort = false;
 
     @FXML
     public void initialize() {
@@ -46,10 +52,8 @@ public class BankAccountsController {
 
     }
 
-    public void test() {
-
-        System.out.println(jbank.getBankManager().getBankAccounts(loggedInPerson));
-
+    public void update() {
+        updateListView();
     }
 
     public void viewBankAccount() {
@@ -68,6 +72,22 @@ public class BankAccountsController {
         }
     }
 
+    public void choseSort(){
+        try{
+            String sort = JBankHelp.choseSort();
+            Comparator<BankAccount> comparator = jbank.getSort(sort);
+            this.sorting = comparator;
+            toSort = true;
+        }
+        catch(IllegalArgumentException e){
+            JBankHelp.showErrorMessage(e.getMessage());
+        }
+        catch(NoSuchElementException e){
+            JBankHelp.showErrorMessage("Du må ta et valg");
+        }
+
+    }
+
     public void updateListView() {
         bankList.getItems().clear();
         viewBankAccount();
@@ -78,6 +98,9 @@ public class BankAccountsController {
         catch (IllegalStateException e) {
             JBankHelp.showInformation(e.getMessage(), "Venligst lag en under fanen Bankkonto");
             loggedInPersonBankAccounts = new ArrayList<>();
+        }
+        if(toSort && sorting != null){
+            Collections.sort(loggedInPersonBankAccounts, sorting);
         }
         bankList.getItems().addAll(loggedInPersonBankAccounts);
     }

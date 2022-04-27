@@ -46,7 +46,7 @@
       </Label>
       <AnchorPane fx:id="importStockPane" layoutX="14.0" layoutY="148.0" minWidth="10.0" prefHeight="374.0" prefWidth="202.0">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" prefHeight="54.0" prefWidth="234.0" text="Importer ønsket aksje:">
+            <Label layoutX="8.0" layoutY="14.0" prefHeight="54.0" prefWidth="234.0" text="Importer ønsket aksje:">
                <font>
                   <Font size="20.0" />
                </font>
@@ -67,7 +67,8 @@
             <Label layoutX="8.0" layoutY="60.0" text="(Kan kun gjøres på nåværende dag)" />
          </children>
       </AnchorPane>
-      <Label layoutX="882.0" layoutY="215.0" prefHeight="17.0" prefWidth="34.0" text="Verdi" />
-      <Label layoutX="1232.0" layoutY="524.0" prefHeight="17.0" prefWidth="34.0" text="Dager" />
+      <Label layoutX="868.0" layoutY="215.0" prefHeight="17.0" prefWidth="34.0" text="Verdi" />
+      <Label layoutX="1239.0" layoutY="527.0" prefHeight="17.0" prefWidth="34.0" text="Dager" />
+      <Button fx:id="updateButton" layoutX="786.0" layoutY="149.0" mnemonicParsing="false" onAction="#updateViews" text="Oppdater" />
    </children>
 </AnchorPane>

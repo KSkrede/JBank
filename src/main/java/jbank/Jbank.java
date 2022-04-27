@@ -1,6 +1,8 @@
 package jbank;
 
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -10,8 +12,9 @@ import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.data.StockIndex;
 import jbank.data.StockMarket;
-import jbank.logic.StockTracker;
+import jbank.data.StockTracker;
 import jbank.logic.files.AccountSaver;
+import jbank.logic.bankcomparators.*;
 
 public class Jbank {
     // Singleton
@@ -26,6 +29,10 @@ public class Jbank {
     private StockIndex stockIndex;
     private Person loggedInPerson;
     private int days;
+    private Map<String, Comparator<BankAccount>> sortMap;
+    private Comparator<BankAccount> nameSort = new NameSort();
+    private Comparator<BankAccount> valueSort = new ValueSort();
+    
 
     private Jbank() {
         this.app = new JbankApp();
@@ -36,7 +43,7 @@ public class Jbank {
         this.stockTracker = new StockTracker();
         this.stockIndex =  new StockIndex("indeks", stockMarket);
         this.loggedInPerson = getAccountObject().getLoggedInPerson();
-
+        this.sortMap = new HashMap<>();
     }
 
 
@@ -174,6 +181,16 @@ public class Jbank {
 
     public StockIndex getStockIndex() {
         return stockIndex;
+    }
+
+
+
+    public Comparator<BankAccount> getSort(String sort){
+        sortMap.put("Navn økende", nameSort);
+        sortMap.put("Navn synkende", nameSort.reversed());
+        sortMap.put("Verdi økende", valueSort);
+        sortMap.put("Verdi synkende", valueSort.reversed());
+        return sortMap.get(sort);
     }
 
 
