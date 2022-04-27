@@ -149,7 +149,8 @@ public class StockController {
         }
         XYChart.Series<Integer, Integer> index = new XYChart.Series<>();
         index.setName("Indeks");
-        // stockTracker.getStocklogs().forEach((day, stocks) -> index.getData().add(new XYChart.Data<>(day, stocks.get(stock))));
+        stockTracker.getIndexlogs().forEach((day, avgIndex) -> index.getData().add(new XYChart.Data<>(day, avgIndex)));
+        indexChart.getData().add(index);
 
     }
 

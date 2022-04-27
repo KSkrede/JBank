@@ -50,7 +50,7 @@ public class JBankController {
 
     @FXML
     public void nextDay(){
-        jbank.getStockTracker().log(jbank.getStockMarket().getStocks(), jbank.getDays());
+        jbank.getStockTracker().log(jbank.getStockMarket().getStocks(), jbank.getDays(), jbank.getStockIndex().getAvg());
         jbank.getStockMarket().nextDay();
         stockController.nextDay();
         jbank.daysIncrease();

@@ -8,6 +8,7 @@ import jbank.data.Accounts;
 import jbank.data.BankAccount;
 import jbank.data.BankManager;
 import jbank.data.Person;
+import jbank.data.StockIndex;
 import jbank.data.StockMarket;
 import jbank.logic.StockTracker;
 import jbank.logic.files.AccountSaver;
@@ -22,6 +23,7 @@ public class Jbank {
     private BankManager BankManager;
     private StockMarket stockMarket;
     private StockTracker stockTracker;
+    private StockIndex stockIndex;
     private Person loggedInPerson;
     private int days;
 
@@ -32,9 +34,11 @@ public class Jbank {
         this.BankManager = new BankManager();
         this.stockMarket = new StockMarket();
         this.stockTracker = new StockTracker();
+        this.stockIndex =  new StockIndex("indeks", stockMarket);
         this.loggedInPerson = getAccountObject().getLoggedInPerson();
 
     }
+
 
     // Static method
     // Static method to create instance of Singleton class
@@ -161,5 +165,10 @@ public class Jbank {
     public void daysIncrease() {
         this.days++;
     }
+
+    public StockIndex getStockIndex() {
+        return stockIndex;
+    }
+
 
 }

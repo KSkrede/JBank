@@ -3,8 +3,6 @@ package jbank.controllers.jbank;
 import java.util.ArrayList;
 
 import javafx.fxml.FXML;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -12,7 +10,6 @@ import jbank.Jbank;
 import jbank.data.BankAccount;
 import jbank.data.Person;
 import jbank.data.StockMarket;
-import jbank.logic.JBankHelp;
 import jbank.logic.StockTracker;
 
 public class HomeController {

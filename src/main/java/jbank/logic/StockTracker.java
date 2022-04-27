@@ -2,16 +2,18 @@ package jbank.logic;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class StockTracker {
     private Map<Integer, Map<String, Integer>> stocklogs;
+    private Map<Integer, Integer> indexlogs;
 
-    public void log(Map<String, Integer> stocks, int days) {
+    public void log(Map<String, Integer> stocks, int days, int indexAvg) {
         if (stocklogs == null) {
             stocklogs = new HashMap<>();
+            indexlogs = new HashMap<>();
         }
         stocklogs.put(days, stocks);
+        indexlogs.put(days, indexAvg);
     }
 
 
@@ -29,6 +31,14 @@ public class StockTracker {
             return new HashMap<>();
         }
         return stocklogs;
+    }
+
+    
+    public Map<Integer, Integer> getIndexlogs() {
+        if (indexlogs == null) {
+            return new HashMap<>();
+        }
+        return indexlogs;
     }
 
 }
