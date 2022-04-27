@@ -54,31 +54,50 @@ public class SettingsController {
     public void changeGivenName() throws IOException {
         if (JBankHelp.confirm("Er du sikker på at du vil endre fornavnet ditt?")) {
             String newName = JBankHelp.name();
-            jbank.getAccountObject().changeGivenName(newName);
-            jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
-            JBankHelp.showInformation("Navnebytte", "Navnebyttet var vellyket, velkommen tilbake " + newName + "\n Venligst logg inn på nytt");
-            jbank.getApp().changeScene("login.fxml");
+            if (!JBankHelp.isAllLettersOrBlank(newName)) {
+                JBankHelp.showErrorMessage("Ulovlig navn " + newName);
+            } else {
+                jbank.getAccountObject().changeGivenName(newName);
+                jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
+                JBankHelp.showInformation("Navnebytte",
+                        "Navnebyttet var vellyket, velkommen tilbake " + newName + "\n Venligst logg inn på nytt");
+                jbank.getApp().changeScene("login.fxml");
+            }
         }
     }
 
     public void changeSurName() throws IOException {
         if (JBankHelp.confirm("Er du sikker på at du vil endre etternavnet ditt?")) {
             String newName = JBankHelp.name();
-            jbank.getAccountObject().changeSurName(newName);
-            jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
-            JBankHelp.showInformation("Navnebytte", "Navnebyttet var vellyket, ditt nye etternavn er nå " + newName + "\n Venligst logg inn på nytt");
-            jbank.getApp().changeScene("login.fxml");
+            if (!JBankHelp.isAllLetters(newName)) {
+                JBankHelp.showErrorMessage("Ulovlig navn " + newName);
+            } else {
+                jbank.getAccountObject().changeSurName(newName);
+                jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
+                JBankHelp.showInformation("Navnebytte", "Navnebyttet var vellyket, ditt nye etternavn er nå " + newName
+                        + "\n Venligst logg inn på nytt");
+                jbank.getApp().changeScene("login.fxml");
+            }
         }
     }
 
     public void changePin() throws IOException {
         String currentPin = JBankHelp.pin("Skriv inn din nåværene pin: ");
-        if (currentPin.equals(loggedInPerson.getBankIDPin())){
+        if (currentPin.equals(loggedInPerson.getBankIDPin())) {
             String newPin = JBankHelp.pin("Skriv inn ny pin: ");
-            jbank.getAccountObject().changePin(newPin);
-            jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
-            JBankHelp.showInformation("Pin bytte", "Pin bytte var vellyket, dinn nye pin er nå " + newPin + "\n Venligst logg inn på nytt");
-            jbank.getApp().changeScene("login.fxml");
+            if (!JBankHelp.isAllDigit(newPin)) {
+                JBankHelp.showErrorMessage("Ulovlig pin");
+            } else {
+                try {
+                    jbank.getAccountObject().changePin(newPin);
+                    jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
+                    JBankHelp.showInformation("Pin bytte",
+                            "Pin bytte var vellyket, dinn nye pin er nå " + newPin + "\n Venligst logg inn på nytt");
+                    jbank.getApp().changeScene("login.fxml");
+                } catch (IllegalArgumentException e) {
+                    JBankHelp.showErrorMessage(e.getMessage());
+                }
+            }
         }
     }
 

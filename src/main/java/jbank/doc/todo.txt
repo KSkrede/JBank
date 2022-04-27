@@ -1,23 +1,20 @@
 
-
-
-Bedre håndtering om det ikke er noen accounts fil i starten
-
-amount to only allow input int 
+ 
 
 sorting av bankkontoer og aksjer, med dropdown til å velge sortering
 
 catche cancel ved valg
-catche andre erros
+
 
 
 Arv på bankkontoer?
 
+
+Dokumentasjon:
+
 Teit filhåndtering for at det skal fungere på mac
 
 Readme som brukerdokumentasjon
-
-Fikse på stocks, implementere indeks
 
 
 

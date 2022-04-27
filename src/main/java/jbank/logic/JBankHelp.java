@@ -3,6 +3,7 @@ package jbank.logic;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javafx.scene.control.Alert;
@@ -86,7 +87,7 @@ public class JBankHelp {
     }
 
     public static BankAccount choseBankAccount(BankAccount selectedBankAccount,
-            ArrayList<BankAccount> loggedInPersonBankManager, String title, String header, String content){
+            ArrayList<BankAccount> loggedInPersonBankManager, String title, String header, String content) throws NoSuchElementException{
         ChoiceDialog<BankAccount> dialog = new ChoiceDialog<BankAccount>(selectedBankAccount,
                 loggedInPersonBankManager);
         dialog.setTitle(title);
@@ -110,10 +111,11 @@ public class JBankHelp {
         dialog.setTitle("Beløp");
         dialog.setHeaderText("Velg et beløp: ");
         dialog.setContentText("Antall kr: ");
-        if (dialog.showAndWait().get() == null || dialog.showAndWait().get() == "" || !isAllDigit(dialog.showAndWait().get())){
+        String tester = dialog.showAndWait().get();
+        if (tester == null || tester == "" || !isAllDigit(tester)){
             throw new IllegalArgumentException("Ugyldig valg");
         }
-        int amount = Integer.parseInt(dialog.showAndWait().get());
+        int amount = Integer.parseInt(tester);
         return amount;
     }
 
@@ -121,10 +123,11 @@ public class JBankHelp {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Antall");
         dialog.setHeaderText("Velg antall aksjer under: ");
-        if (dialog.showAndWait().get() == null || dialog.showAndWait().get() == "" || !isAllDigit(dialog.showAndWait().get())){
+        String tester = dialog.showAndWait().get();
+        if (tester == null || tester == "" || !isAllDigit(tester)){
             throw new IllegalArgumentException("Ugyldig valg");
         }
-        int number = Integer.parseInt(dialog.showAndWait().get());
+        int number = Integer.parseInt(tester);
         return number;
     }
 

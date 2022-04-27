@@ -2,6 +2,7 @@ package jbank.controllers.jbank;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -88,11 +89,11 @@ public class BankAccountsController {
                 throw new IllegalArgumentException("Du må fylle ut alle feltene");
             }
 
-            if (!JBankHelp.isAllLetters(bankName.getText())){
+            if (!JBankHelp.isAllLetters(bankName.getText())) {
                 throw new IllegalArgumentException("Venligst bare bruk bokstaver i kontonavn");
             }
 
-            if (!JBankHelp.isAllDigit(bankAmount.getText())){
+            if (!JBankHelp.isAllDigit(bankAmount.getText())) {
                 throw new IllegalArgumentException("Venligst bare bruk tall i beløpet");
             }
 
@@ -125,13 +126,17 @@ public class BankAccountsController {
             BankAccount source = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
                     "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
             BankAccount destination = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(1),
-            loggedInPersonBankAccounts,
+                    loggedInPersonBankAccounts,
                     "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");
+            System.out.println("før yoyo");
             int amount = JBankHelp.amount();
+            System.out.println("yoyo");
 
             jbank.getBankManager().movefunds(source, destination, amount);
         } catch (IllegalArgumentException e) {
             JBankHelp.showErrorMessage(e.getMessage());
+        } catch (NoSuchElementException e) {
+            JBankHelp.showErrorMessage("Du tokk ikke et valg");
         }
         updateListView();
     }
@@ -159,7 +164,10 @@ public class BankAccountsController {
             }
         } catch (IllegalArgumentException e) {
             JBankHelp.showErrorMessage(e.getMessage());
+        } catch (NoSuchElementException e) {
+            JBankHelp.showErrorMessage("Du tokk ikke et valg");
         }
+
         updateListView();
 
     }
