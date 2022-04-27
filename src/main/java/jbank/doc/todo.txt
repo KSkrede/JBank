@@ -1,7 +1,6 @@
 
  
 
-sorting av bankkontoer og aksjer, med dropdown til å velge sortering
 lagring av tilstander
 Arv på bankkontoer?
 

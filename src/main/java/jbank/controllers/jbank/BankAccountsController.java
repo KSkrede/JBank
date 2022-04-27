@@ -128,7 +128,8 @@ public class BankAccountsController {
             else {
 
                 BankAccount bankAccount = new BankAccount(bankName.getText(), Integer.parseInt(bankAmount.getText()));
-                jbank.getBankManager().addPerson(loggedInPerson.getUserId(), bankAccount);
+                jbank.getBankManager().addBank(loggedInPerson.getUserId(), bankAccount);
+                jbank.getManagerSaver().writeObject(loggedInPerson.getUserId(), jbank);
                 JBankHelp.showInformation("Ny bankkonto opprettet", bankAccount.toString());
             }
 

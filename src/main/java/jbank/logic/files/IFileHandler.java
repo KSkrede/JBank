@@ -2,12 +2,12 @@ package jbank.logic.files;
 
 import java.io.IOException;
 
-import jbank.data.Accounts;
+import jbank.Jbank;
 
 public interface IFileHandler {
 
-    Accounts readAccounts(String file, Accounts accounts) throws IOException;
+    void readObject(String file, Jbank jbank) throws IOException;
 
-    void writeAccounts(String file, Accounts accounts) throws IOException;
+    void writeObject(String file, Jbank jbank) throws IOException;
 
 }

@@ -1,5 +1,6 @@
 package jbank.controllers.jbank;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.data.StockMarket;
 import jbank.data.StockTracker;
+import jbank.logic.JBankHelp;
 
 public class HomeController {
 
@@ -45,6 +47,11 @@ public class HomeController {
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
         stockmarket = jbank.getStockMarket();
         bankManager = jbank.getBankManager();
+        try {
+            jbank.getManagerSaver().readObject(loggedInPerson.getUserId(), jbank);
+        } catch (IOException e) {
+            JBankHelp.showErrorMessage("Noe kan ha gått galt ved fillesing. Dette kan være at du ikke har noe konto her enda");
+        }
         updateViews();
 
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
@@ -125,7 +132,7 @@ public class HomeController {
 
     public void updateSum() {
         int sum = jbank.sumBankAccounts() + jbank.sumStocks();
-        sumBank.setText("Sum penger: " + jbank.sumBankAccounts() + "kr");
+        sumBank.setText("Sum valuta: " + jbank.sumBankAccounts() + "kr");
         sumStocks.setText("Sum aksjer: " + jbank.sumStocks() + "kr" );
         totalSum.setText("Sum totalt: " + sum + "kr");
 

@@ -11,7 +11,7 @@ import jbank.data.Accounts;
 import jbank.data.Person;
 import jbank.logic.JBankHelp;
 
-public class AccountSaver implements IFileHandler {
+public class AccountSaver implements IAccountSaver {
     @Override
     public Accounts readAccounts(String fileName, Accounts accounts) throws IOException, IllegalArgumentException, FileNotFoundException {
         File file = new File(fileName + ".txt");

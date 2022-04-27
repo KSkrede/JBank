@@ -14,6 +14,7 @@ import jbank.data.StockIndex;
 import jbank.data.StockMarket;
 import jbank.data.StockTracker;
 import jbank.logic.files.AccountSaver;
+import jbank.logic.files.BankManagerSaver;
 import jbank.logic.bankcomparators.*;
 
 public class Jbank {
@@ -23,6 +24,7 @@ public class Jbank {
     private JbankApp app;
     private Accounts accounts;
     private AccountSaver accountSaver;
+    private BankManagerSaver bankManagerSaver;
     private BankManager BankManager;
     private StockMarket stockMarket;
     private StockTracker stockTracker;
@@ -44,6 +46,7 @@ public class Jbank {
         this.stockIndex =  new StockIndex("indeks", stockMarket);
         this.loggedInPerson = getAccountObject().getLoggedInPerson();
         this.sortMap = new HashMap<>();
+        this.bankManagerSaver  =new BankManagerSaver();
     }
 
 
@@ -79,11 +82,15 @@ public class Jbank {
     }
 
     public StockMarket getStockMarket() {
-        return stockMarket;
+        return this.stockMarket;
     }
 
     public StockTracker getStockTracker() {
-        return stockTracker;
+        return this.stockTracker;
+    }
+
+    public BankManagerSaver getManagerSaver(){
+        return this.bankManagerSaver;
     }
 
     // Login

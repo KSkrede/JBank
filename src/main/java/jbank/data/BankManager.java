@@ -31,7 +31,7 @@ public class BankManager {
         }
     }
 
-    public void addPerson(String userid, BankAccount bankAccount) {
+    public void addBank(String userid, BankAccount bankAccount) {
 
         if (BankManager.get(userid) == null) {
             BankManager.put(userid, new ArrayList<BankAccount>());
