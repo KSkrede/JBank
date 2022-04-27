@@ -38,13 +38,13 @@ public class AccountSaver implements IFileHandler {
         writer.close();
     }
     // Simple cipher to not save pin as complete plaintext
-   public String cipher(String s){
+   private String cipher(String s){
        Integer pin = Integer.parseInt(s);
        Integer cipheredPin = pin*13;
        return cipheredPin.toString();
    }
 
-   public String deCipher(String s){
+   private String deCipher(String s){
     Integer cipheredPin = Integer.parseInt(s);
     Integer pin = cipheredPin/13;
     return pin.toString();

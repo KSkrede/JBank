@@ -4,7 +4,8 @@
 sorting av bankkontoer og aksjer, med dropdown til å velge sortering
 lagring av tilstander
 Arv på bankkontoer?
-Hashing på bankpin
+
+
 Sjekke opp mot læringsmål
 
 
