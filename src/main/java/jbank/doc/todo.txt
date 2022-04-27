@@ -6,9 +6,6 @@ lagring av tilstander
 Arv på bankkontoer?
 Hashing på bankpin
 Sjekke opp mot læringsmål
-Warning på for langt fullnsme
-
-Legge inn kilder på alt, feks indeks fra øvinger
 
 Lage tester
 

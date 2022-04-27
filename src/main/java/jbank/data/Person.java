@@ -26,6 +26,9 @@ public class Person {
     }
 
     public void setName(String givenName, String surName) {
+        if((givenName+surName).length() > 25 ){
+            throw new  IllegalArgumentException("Du har valgt et veldig langt navn, venligst kort det ned");
+        }
         if (JBankHelp.isAllLettersOrBlank(givenName)) {
             this.givenName = givenName;
         }
@@ -41,6 +44,7 @@ public class Person {
         else {
             throw new IllegalArgumentException("Det er et ulovlig tegn i " + surName);
         }
+
     }
 
     public String getBirthday() {
