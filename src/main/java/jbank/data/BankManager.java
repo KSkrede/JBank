@@ -72,6 +72,16 @@ public class BankManager {
 
     }
 
+    public int getValue(Person user, String bank){
+        for (BankAccount bankAccount : getBankAccounts(user)) {
+            if(bankAccount.getName().equals(bank)){
+                return bankAccount.getValue();
+            }
+            
+        }
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "" + BankManager;

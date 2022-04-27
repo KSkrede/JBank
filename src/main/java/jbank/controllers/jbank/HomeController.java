@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import jbank.Jbank;
 import jbank.data.BankAccount;
+import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.data.StockMarket;
 import jbank.logic.StockTracker;
@@ -37,6 +38,7 @@ public class HomeController {
     private ArrayList<String> ownedStocks;
     private StockMarket stockmarket;
     private StockTracker stockTracker;
+    private BankManager bankManager;
     private ArrayList<BankAccount> loggedInPersonBankAccounts;
 
     @FXML
@@ -46,6 +48,7 @@ public class HomeController {
         stockmarket = jbank.getStockMarket();
         allStocks = stockmarket.getTickers();
         stockTracker = jbank.getStockTracker();
+        bankManager = jbank.getBankManager();
         updateViews();
 
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
@@ -86,20 +89,18 @@ public class HomeController {
             } else if (selectedItem == bankList.getSelectionModel().getSelectedItem().toString()) {
                 info.getItems().clear();
                 info.getItems().add(selectedItem);
-                info.getItems().add("Bank");
+                info.getItems().add("Verdi: " + bankManager.getValue(loggedInPerson, selectedItem));
             }
 
             else if (selectedItem == stockOwned.getSelectionModel().getSelectedItem() && selectedItem != null) {
-                // int value = stockmarket.getValue(selectedItem);
-                // int number = stockmarket.numberOwnedStocks(loggedInPerson.getUserId(),
-                // selectedItem);
+                int value = stockmarket.getValue(selectedItem);
+                int number = stockmarket.numberOwnedStocks(loggedInPerson.getUserId(), selectedItem);
 
                 info.getItems().clear();
                 info.getItems().add(selectedItem);
-                info.getItems().add("Stock");
-                // info.getItems().add("Verdi: " + value + "kr");
-                // info.getItems().add("Antall du eier: " + number);
-                // info.getItems().add("Total verdi: " + number * value + "kr");
+                info.getItems().add("Verdi: " + value + "kr");
+                info.getItems().add("Antall du eier: " + number);
+                info.getItems().add("Total verdi: " + number * value + "kr");
             }
         }
     }
@@ -127,9 +128,10 @@ public class HomeController {
     }
 
     public void updateSum() {
+        int sum = jbank.sumBankAccounts() + jbank.sumStocks();
         sumBank.setText("Sum penger: " + jbank.sumBankAccounts() + "kr");
         sumStocks.setText("Sum aksjer: " + jbank.sumStocks() + "kr" );
-        totalSum.setText("Sum totalt: " + jbank.sumBankAccounts() + jbank.sumStocks() + "kr");
+        totalSum.setText("Sum totalt: " + sum + "kr");
 
     }
 }

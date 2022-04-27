@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class BankAccount {
 
-    String name;
-    Integer value;
+    private String name;
+    private Integer value;
     private Map<String, Integer> bankAccount;
 
     

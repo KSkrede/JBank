@@ -69,7 +69,7 @@ public class JBankHelp {
     }
 
     public static BankAccount choseBankAccount(BankAccount selectedBankAccount,
-            ArrayList<BankAccount> loggedInPersonBankManager, String title, String header, String content) {
+            ArrayList<BankAccount> loggedInPersonBankManager, String title, String header, String content){
         ChoiceDialog<BankAccount> dialog = new ChoiceDialog<BankAccount>(selectedBankAccount,
                 loggedInPersonBankManager);
         dialog.setTitle(title);
@@ -88,19 +88,25 @@ public class JBankHelp {
         return chosenStock;
     }
 
-    public static int amount() throws NumberFormatException {
+    public static int amount() throws NumberFormatException, IllegalArgumentException {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Beløp");
         dialog.setHeaderText("Velg et beløp: ");
         dialog.setContentText("Antall kr: ");
+        if (dialog.showAndWait().get() == null || dialog.showAndWait().get() == "" || isAllDigit(dialog.showAndWait().get())){
+            throw new IllegalArgumentException("Ugyldig valg");
+        }
         int amount = Integer.parseInt(dialog.showAndWait().get());
         return amount;
     }
 
-    public static int number() throws NumberFormatException {
+    public static int number() throws NumberFormatException, IllegalArgumentException {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Antall");
         dialog.setHeaderText("Velg antall aksjer under: ");
+        if (dialog.showAndWait().get() == null || dialog.showAndWait().get() == "" || isAllDigit(dialog.showAndWait().get())){
+            throw new IllegalArgumentException("Ugyldig valg");
+        }
         int number = Integer.parseInt(dialog.showAndWait().get());
         return number;
     }

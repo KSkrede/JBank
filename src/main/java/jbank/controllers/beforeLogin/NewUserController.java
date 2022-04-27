@@ -66,6 +66,7 @@ public class NewUserController {
                 jbank.getAccountObject().addPerson(person.getUserId(), person);
                 jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
                 JBankHelp.showInformation("Ny bruker laget", person.prettyString());
+                jbank.getApp().changeScene("login.fxml");
             }
         }
 

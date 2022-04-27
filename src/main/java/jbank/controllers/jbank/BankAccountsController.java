@@ -84,8 +84,16 @@ public class BankAccountsController {
     public void createBank(ActionEvent event) throws IOException {
 
         try {
-            if (bankName.getText() == null || bankAmount.getText() == null) {
+            if (bankName.getText() == "" || bankAmount.getText() == "") {
                 throw new IllegalArgumentException("Du må fylle ut alle feltene");
+            }
+
+            if (!JBankHelp.isAllLetters(bankName.getText())){
+                throw new IllegalArgumentException("Venligst bare bruk bokstaver i kontonavn");
+            }
+
+            if (!JBankHelp.isAllDigit(bankAmount.getText())){
+                throw new IllegalArgumentException("Venligst bare bruk tall i beløpet");
             }
 
             if (loggedInPersonBankAccounts.stream()

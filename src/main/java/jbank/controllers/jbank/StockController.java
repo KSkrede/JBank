@@ -174,10 +174,10 @@ public class StockController {
     }
 
     public void buyStock() {
-        String stockToBuy = JBankHelp.choseStock(selectedStock, allStocks);
-        int number = JBankHelp.number();
 
         try {
+            String stockToBuy = JBankHelp.choseStock(selectedStock, allStocks);
+            int number = JBankHelp.number();
             ArrayList<BankAccount> loggedInPersonBankAccounts = jbank.getBankManager().getBankAccounts(loggedInPerson);
             BankAccount source = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(0),
                     loggedInPersonBankAccounts,
@@ -187,30 +187,35 @@ public class StockController {
             jbank.buyStocks(stockToBuy, number, source, loggedInPerson.getUserId());
         } catch (IllegalArgumentException | IllegalStateException e) {
             JBankHelp.showErrorMessage(e.getMessage());
-        }
-        catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             JBankHelp.showErrorMessage("Du kan ikke kjøpe aksjer uten en bankkonto");
         }
         updateViews();
     }
 
     public void sellStock() {
-        String stockToSell = JBankHelp.choseStock(selectedStock, ownedStocks );
-        int number = JBankHelp.number();
 
-        try {
-            ArrayList<BankAccount> loggedInPersonBankAccounts = jbank.getBankManager().getBankAccounts(loggedInPerson);
-            BankAccount destination = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(0),
-                    loggedInPersonBankAccounts,
-                    "Overføring mellom kontoer", "Velg kontoen du å plassere gevinst fra " + stockToSell + " fra",
-                    "Bankkonto: ");
+        if (ownedStocks.isEmpty()) {
+            JBankHelp.showErrorMessage("Du kan ikke selge aksjer når du ikke eier noen");
+        } else {
 
-            jbank.sellStocks(stockToSell, number, destination, loggedInPerson.getUserId());
-        } catch (IllegalArgumentException | IllegalStateException e) {
-            JBankHelp.showErrorMessage(e.getMessage());
-        }
-        catch (IndexOutOfBoundsException e){
-            JBankHelp.showErrorMessage("Du kan ikke kjøpe aksjer uten en bankkonto");
+            String stockToSell = JBankHelp.choseStock(selectedStock, ownedStocks);
+            int number = JBankHelp.number();
+
+            try {
+                ArrayList<BankAccount> loggedInPersonBankAccounts = jbank.getBankManager()
+                        .getBankAccounts(loggedInPerson);
+                BankAccount destination = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(0),
+                        loggedInPersonBankAccounts,
+                        "Overføring mellom kontoer", "Velg kontoen du å plassere gevinst fra " + stockToSell + " fra",
+                        "Bankkonto: ");
+
+                jbank.sellStocks(stockToSell, number, destination, loggedInPerson.getUserId());
+            } catch (IllegalArgumentException | IllegalStateException e) {
+                JBankHelp.showErrorMessage(e.getMessage());
+            } catch (IndexOutOfBoundsException e) {
+                JBankHelp.showErrorMessage("Du kan ikke kjøpe aksjer uten en bankkonto");
+            }
         }
         updateViews();
     }
