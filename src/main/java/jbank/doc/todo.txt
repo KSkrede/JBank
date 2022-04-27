@@ -12,6 +12,9 @@ Sjekke opp mot læringsmål
 
 Lage tester
 
+
+Er en bug med at man må trykke på bankkontoer også aksjer i starten før info vises
+
 Dokumentasjon:
 
 lage readme.md

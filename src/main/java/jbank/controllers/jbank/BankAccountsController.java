@@ -68,7 +68,6 @@ public class BankAccountsController {
             bankInfo.getItems().clear();
             bankInfo.getItems().add(selectedBankAccount.toString());
             bankInfo.getItems().add("Beløp: " + selectedBankAccount.getValue() + " kr");
-            bankInfo.getItems().add("Her skal det komme kontoutskrift");
         }
     }
 

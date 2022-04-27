@@ -100,7 +100,6 @@ public class StockController {
                 stockInfo.getItems().clear();
                 stockInfo.getItems().add(selectedStock);
                 stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selectedStock).toString() + "kr");
-                stockInfo.getItems().add("Public stocks");
             }
 
             else if (selectedStock == stockOwned.getSelectionModel().getSelectedItem()) {

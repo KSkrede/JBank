@@ -12,7 +12,6 @@ import jbank.data.BankAccount;
 import jbank.data.BankManager;
 import jbank.data.Person;
 import jbank.data.StockMarket;
-import jbank.data.StockTracker;
 import jbank.logic.JBankHelp;
 
 public class HomeController {
@@ -72,7 +71,7 @@ public class HomeController {
                 updateInfo();
             }
         });
-        updateInfo();
+        updateViews();
 
     }
 
@@ -96,7 +95,7 @@ public class HomeController {
                 info.getItems().add("Verdi: " + bankManager.getValue(loggedInPerson, selectedItem));
             }
 
-            else if (selectedItem == stockOwned.getSelectionModel().getSelectedItem() && selectedItem != null) {
+            else if (selectedItem == stockOwned.getSelectionModel().getSelectedItem() ) {
                 int value = stockmarket.getValue(selectedItem);
                 int number = stockmarket.numberOwnedStocks(loggedInPerson.getUserId(), selectedItem);
 
