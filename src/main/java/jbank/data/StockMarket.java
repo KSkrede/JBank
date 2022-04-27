@@ -78,6 +78,9 @@ public class StockMarket implements IValuable, Runnable {
             throw new IllegalArgumentException("Du kan ikke selge flere aksjer enn de du eier");
         } else {
             ownedStocks.get(userID).merge(ticker, amount, (a, b) -> a - b);
+            if (ownedStocks.get(userID).get(ticker) <= 0){
+                ownedStocks.get(userID).remove(ticker);
+            }
         }
     }
 
@@ -90,7 +93,14 @@ public class StockMarket implements IValuable, Runnable {
     }
 
     public int numberOwnedStocks(String userID, String stock) {
-        return ownedStocks.get(userID).get(stock);
+        int numberOwnedStocks = 0;
+        try{
+            numberOwnedStocks = ownedStocks.get(userID).get(stock);
+        }
+        catch(NullPointerException e){
+            return 0;
+        }
+        return numberOwnedStocks;
     }
 
     // hentet fra Stock eksempelete fra forelesning

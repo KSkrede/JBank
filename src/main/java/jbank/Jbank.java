@@ -1,6 +1,5 @@
 package jbank;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
@@ -160,7 +159,7 @@ public class Jbank {
             return 0;
         }
         for (String stock : stockMarket.listOwnedStocks(loggedInPerson.getUserId())) {
-            sum = sum + stockMarket.getValue(stock);
+            sum = sum + stockMarket.getValue(stock)*stockMarket.numberOwnedStocks(loggedInPerson.getUserId(), stock);
         }
         return sum;
     }

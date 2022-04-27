@@ -34,10 +34,8 @@ public class HomeController {
     private Button update;
 
     private String selectedItem;
-    private ArrayList<String> allStocks;
     private ArrayList<String> ownedStocks;
     private StockMarket stockmarket;
-    private StockTracker stockTracker;
     private BankManager bankManager;
     private ArrayList<BankAccount> loggedInPersonBankAccounts;
 
@@ -46,8 +44,6 @@ public class HomeController {
         jbank = Jbank.getInstance();
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
         stockmarket = jbank.getStockMarket();
-        allStocks = stockmarket.getTickers();
-        stockTracker = jbank.getStockTracker();
         bankManager = jbank.getBankManager();
         updateViews();
 

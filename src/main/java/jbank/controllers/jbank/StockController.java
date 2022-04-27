@@ -129,12 +129,12 @@ public class StockController {
     }
 
     public void updateStockOwnedView() {
-        stockOwned.getItems().clear();
         try {
             ownedStocks = jbank.getStockMarket().listOwnedStocks(loggedInPerson.getUserId());
         } catch (IllegalStateException e) {
             ownedStocks = new ArrayList<>();
         }
+        stockOwned.getItems().clear();
         stockOwned.getItems().addAll(ownedStocks);
     }
 

@@ -25,7 +25,11 @@ public class StockIndex implements StockListener {
 	}
 
 	public int getIndex() {
-		return index;
+		return this.index;
+	}
+
+	public String getName(){
+		return this.name;
 	}
 
 	public int getAvg(){
