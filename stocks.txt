@@ -1,3 +1,5 @@
-Aksje1;1015
-Aksje2;753
-Aksje3;307
+Tesla;260
+bby;251
+Aksje1;963
+Aksje2;585
+Aksje3;354

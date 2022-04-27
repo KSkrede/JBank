@@ -33,8 +33,6 @@ public class StockIndex implements StockListener {
 	}
 
 	public int getAvg(){
-		System.out.println(index);
-		System.out.println(stocksList.size());
 		return index / stocksList.size();
 	}
 }

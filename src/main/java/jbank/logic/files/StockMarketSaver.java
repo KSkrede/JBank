@@ -19,7 +19,6 @@ public class StockMarketSaver implements IFileHandler {
             stockMarket.buy(fileName, element[0], Integer.parseInt(element[1]));
         }
         scanner.close();
-        System.out.println("scanner closed");
 
         File stocks = new File("stocks.txt");
         Scanner stockScanner = new Scanner(stocks);
@@ -28,7 +27,6 @@ public class StockMarketSaver implements IFileHandler {
             stockMarket.update(element[0], Integer.parseInt(element[1]));
         }
         stockScanner.close();
-
     }
 
     @Override
@@ -45,14 +43,11 @@ public class StockMarketSaver implements IFileHandler {
 
         File stocks = new File("stocks.txt");
         FileWriter stockWriter = new FileWriter(stocks);
-        for (String stock : jbank.getStockMarket().getTickers() ) {
+        for (String stock : jbank.getStockMarket().getTickers()) {
             stockWriter.write(stock + ";");
             stockWriter.write("" + stockMarket.getValue(stock));
             stockWriter.write("\n");
         }
         stockWriter.close();
-
-
     }
-
 }

@@ -78,12 +78,6 @@ public class StockController {
 
     }
 
-    public void test() {
-        System.out.println(stockTracker.getStocklogs());
-
-    }
-
-
     public void updateViews() {
         updateStockView();
         updateStockInfo();

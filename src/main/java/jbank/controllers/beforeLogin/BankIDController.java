@@ -54,9 +54,6 @@ public class BankIDController {
 
     @FXML
     private void Login() throws IOException {
-        System.out.println(loggedInPerson.getPin());
-        System.out.println(pinField.getText().toString());
-
         if(loggedInPerson.getPin().equals(pinField.getText().toString())) {
             jbank.getApp().changeScene("jbank/jBank.fxml");
         }
