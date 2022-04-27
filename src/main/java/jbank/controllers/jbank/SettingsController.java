@@ -1,6 +1,7 @@
 package jbank.controllers.jbank;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -54,7 +55,7 @@ public class SettingsController {
     public void changeGivenName() throws IOException {
         if (JBankHelp.confirm("Er du sikker på at du vil endre fornavnet ditt?")) {
             String newName = JBankHelp.name();
-            if (!JBankHelp.isAllLettersOrBlank(newName)) {
+            if (!JBankHelp.isAllLettersOrBlank(newName) || newName.equals("")) {
                 JBankHelp.showErrorMessage("Ulovlig navn " + newName);
             } else {
                 jbank.getAccountObject().changeGivenName(newName);
@@ -69,7 +70,7 @@ public class SettingsController {
     public void changeSurName() throws IOException {
         if (JBankHelp.confirm("Er du sikker på at du vil endre etternavnet ditt?")) {
             String newName = JBankHelp.name();
-            if (!JBankHelp.isAllLetters(newName)) {
+            if (!JBankHelp.isAllLetters(newName) || newName.equals("")) {
                 JBankHelp.showErrorMessage("Ulovlig navn " + newName);
             } else {
                 jbank.getAccountObject().changeSurName(newName);
@@ -82,22 +83,27 @@ public class SettingsController {
     }
 
     public void changePin() throws IOException {
-        String currentPin = JBankHelp.pin("Skriv inn din nåværene pin: ");
-        if (currentPin.equals(loggedInPerson.getBankIDPin())) {
-            String newPin = JBankHelp.pin("Skriv inn ny pin: ");
-            if (!JBankHelp.isAllDigit(newPin)) {
-                JBankHelp.showErrorMessage("Ulovlig pin");
-            } else {
-                try {
+        try {
+            String currentPin = JBankHelp.pin("Skriv inn din nåværene pin: ");
+            if (currentPin.equals(loggedInPerson.getBankIDPin())) {
+                String newPin = JBankHelp.pin("Skriv inn ny pin: ");
+                if (!JBankHelp.isAllDigit(newPin) || newPin.equals("")) {
+                    JBankHelp.showErrorMessage("Ulovlig pin");
+                } else {
                     jbank.getAccountObject().changePin(newPin);
                     jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
                     JBankHelp.showInformation("Pin bytte",
                             "Pin bytte var vellyket, dinn nye pin er nå " + newPin + "\n Venligst logg inn på nytt");
                     jbank.getApp().changeScene("login.fxml");
-                } catch (IllegalArgumentException e) {
-                    JBankHelp.showErrorMessage(e.getMessage());
                 }
             }
+            else{
+                JBankHelp.showErrorMessage(currentPin + "Er ikke din pin");
+            }
+        } catch (IllegalArgumentException e) {
+            JBankHelp.showErrorMessage(e.getMessage());
+        } catch (NoSuchElementException e) {
+            JBankHelp.showErrorMessage("Du skrev ikke inn noe pin");
         }
     }
 

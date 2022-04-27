@@ -123,14 +123,12 @@ public class BankAccountsController {
                 throw new IllegalArgumentException("Du må ha minimum to kontoer for å overføre penger");
             }
 
-            BankAccount source = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
-                    "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
-            BankAccount destination = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(1),
-                    loggedInPersonBankAccounts,
-                    "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");
-            System.out.println("før yoyo");
+            BankAccount source = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts, "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
+
+            ArrayList<BankAccount> bankAccountsreduced = new ArrayList<BankAccount>(loggedInPersonBankAccounts);
+            bankAccountsreduced.remove(source);
+            BankAccount destination = JBankHelp.choseBankAccount(bankAccountsreduced.get(0), bankAccountsreduced, "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");;
             int amount = JBankHelp.amount();
-            System.out.println("yoyo");
 
             jbank.getBankManager().movefunds(source, destination, amount);
         } catch (IllegalArgumentException e) {

@@ -2,15 +2,22 @@
  
 
 sorting av bankkontoer og aksjer, med dropdown til å velge sortering
-
-catche cancel ved valg
-
-
-
+lagring av tilstander
 Arv på bankkontoer?
+Hashing på bankpin
+Sjekke opp mot læringsmål
+Aldersgrense på å lage konto
+Høy målforståelse er å reflektere over det du har gjort. Hvorfor private der etc
+Super kontroller som kan arves nedover i kontrollere
+Warning på for langt fullnsme
 
+Legge inn kilder på alt, feks indeks fra øvinger
+
+Lage tester
 
 Dokumentasjon:
+
+lage readme.md
 
 Teit filhåndtering for at det skal fungere på mac
 
