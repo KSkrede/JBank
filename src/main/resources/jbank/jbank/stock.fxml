@@ -11,27 +11,27 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jbank.controllers.jbank.StockController">
    <children>
-      <Label layoutX="441.0" layoutY="169.0" prefHeight="54.0" prefWidth="222.0" text="Mine Aksjer">
+      <Label layoutX="461.0" layoutY="169.0" prefHeight="54.0" prefWidth="128.0" text="Mine Aksjer">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ListView fx:id="stockOwned" layoutX="441.0" layoutY="243.0" prefHeight="246.0" prefWidth="146.0" />
-      <Button fx:id="buyStock" layoutX="669.0" layoutY="520.0" mnemonicParsing="false" onAction="#buyStock" text="Kjøp Aksje" />
-      <Button fx:id="sellStock" layoutX="763.0" layoutY="520.0" mnemonicParsing="false" onAction="#sellStock" text="Selg Aksje" />
-      <Label layoutX="667.0" layoutY="169.0" prefHeight="54.0" prefWidth="305.0" text="Aksjeinfo">
+      <ListView fx:id="stockOwned" layoutX="461.0" layoutY="243.0" prefHeight="246.0" prefWidth="146.0" />
+      <Button fx:id="buyStock" layoutX="640.0" layoutY="510.0" mnemonicParsing="false" onAction="#buyStock" text="Kjøp Aksje" />
+      <Button fx:id="sellStock" layoutX="749.0" layoutY="510.0" mnemonicParsing="false" onAction="#sellStock" text="Selg Aksje" />
+      <Label layoutX="640.0" layoutY="169.0" prefHeight="54.0" prefWidth="305.0" text="Aksjeinfo">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ListView fx:id="stockInfo" layoutX="668.0" layoutY="243.0" prefHeight="246.0" prefWidth="202.0" />
-      <Label layoutX="231.0" layoutY="169.0" prefHeight="54.0" prefWidth="317.0" text="Tilgjengelige Aksjer">
+      <ListView fx:id="stockInfo" layoutX="640.0" layoutY="243.0" prefHeight="246.0" prefWidth="202.0" />
+      <Label layoutX="251.0" layoutY="169.0" prefHeight="54.0" prefWidth="185.0" text="Tilgjengelige Aksjer">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ListView fx:id="stockList" layoutX="250.0" layoutY="244.0" prefHeight="246.0" prefWidth="156.0" />
-      <LineChart fx:id="indexChart" layoutX="868.0" layoutY="234.0" prefHeight="303.0" prefWidth="414.0">
+      <ListView fx:id="stockList" layoutX="265.0" layoutY="243.0" prefHeight="246.0" prefWidth="156.0" />
+      <LineChart fx:id="indexChart" layoutX="852.0" layoutY="232.0" prefHeight="303.0" prefWidth="414.0">
         <xAxis>
           <NumberAxis side="BOTTOM" />
         </xAxis>
@@ -39,19 +39,19 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
-      <Label layoutX="944.0" layoutY="169.0" prefHeight="54.0" prefWidth="305.0" text="Indeks (Verdi/ dager)">
+      <Label layoutX="1024.0" layoutY="161.0" prefHeight="54.0" prefWidth="70.0" text="Indeks">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <AnchorPane fx:id="importStockPane" layoutX="14.0" layoutY="148.0" minWidth="10.0" prefHeight="374.0" prefWidth="202.0">
          <children>
-            <Label layoutX="9.0" layoutY="14.0" prefHeight="54.0" prefWidth="185.0" text="Importer aksje:">
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="54.0" prefWidth="234.0" text="Importer ønsket aksje:">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="118.0" prefHeight="30.0" prefWidth="128.0" text="Ticker:">
+            <Label layoutX="14.0" layoutY="118.0" prefHeight="30.0" prefWidth="128.0" text="Aksjenavn">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -64,8 +64,10 @@
             </Label>
             <TextField fx:id="value" layoutX="14.0" layoutY="237.0" prefHeight="32.0" prefWidth="185.0" promptText="kr" />
             <Button fx:id="importStock" layoutX="14.0" layoutY="288.0" mnemonicParsing="false" onAction="#importStock" text="Legg til aksje" />
-            <Label layoutX="1.0" layoutY="60.0" text="(Må blir gjort før du går til neste dag)" />
+            <Label layoutX="8.0" layoutY="60.0" text="(Kan kun gjøres på nåværende dag)" />
          </children>
       </AnchorPane>
+      <Label layoutX="882.0" layoutY="215.0" prefHeight="17.0" prefWidth="34.0" text="Verdi" />
+      <Label layoutX="1232.0" layoutY="524.0" prefHeight="17.0" prefWidth="34.0" text="Dager" />
    </children>
 </AnchorPane>

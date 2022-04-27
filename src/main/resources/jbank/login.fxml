@@ -34,7 +34,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="71.0" layoutY="27.0" text="Logg inn">
+            <Label layoutX="45.0" layoutY="28.0" text="Logg inn">
                <font>
                   <Font size="45.0" />
                </font>

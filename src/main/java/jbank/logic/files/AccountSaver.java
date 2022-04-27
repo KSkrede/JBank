@@ -37,4 +37,7 @@ public class AccountSaver implements IFileHandler {
         writer.close();
     }
 
+   // public String Hash()
+   // *12345678
+
 }

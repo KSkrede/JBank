@@ -106,7 +106,7 @@ public class BankAccountsController {
 
                 BankAccount bankAccount = new BankAccount(bankName.getText(), Integer.parseInt(bankAmount.getText()));
                 jbank.getBankManager().addPerson(loggedInPerson.getUserId(), bankAccount);
-                JBankHelp.showInformation("Ny bankkonto lagd", bankAccount.toString());
+                JBankHelp.showInformation("Ny bankkonto opprettet", bankAccount.toString());
             }
 
             updateListView();
