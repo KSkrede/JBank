@@ -66,6 +66,9 @@ public class StockMarket implements IValuable, Runnable {
     public void buy(String userID, String ticker, int amount) {
         // Eiter puts amount as value, or previous amount + new amount
         // https://stackoverflow.com/questions/81346/most-efficient-way-to-increment-a-map-value-in-java
+        if(ownedStocks.get(userID) == null){
+            ownedStocks.put(userID, new HashMap<>());
+        }
         ownedStocks.get(userID).merge(ticker, amount, (a, b) -> a + b);
     }
 

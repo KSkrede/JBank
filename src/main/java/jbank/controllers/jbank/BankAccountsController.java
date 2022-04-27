@@ -129,7 +129,7 @@ public class BankAccountsController {
 
                 BankAccount bankAccount = new BankAccount(bankName.getText(), Integer.parseInt(bankAmount.getText()));
                 jbank.getBankManager().addBank(loggedInPerson.getUserId(), bankAccount);
-                jbank.getManagerSaver().writeObject(loggedInPerson.getUserId(), jbank);
+                jbank.getBankManagerSaver().writeObject(loggedInPerson.getUserId(), jbank);
                 JBankHelp.showInformation("Ny bankkonto opprettet", bankAccount.toString());
             }
 
@@ -155,6 +155,9 @@ public class BankAccountsController {
             int amount = JBankHelp.amount();
 
             jbank.getBankManager().movefunds(source, destination, amount);
+            jbank.getBankManagerSaver().writeObject(loggedInPerson.getUserId(), jbank);
+        } catch (IOException e) {
+            JBankHelp.showErrorMessage("Det har skjedd noe feil under lagring, data kan ha gått tapt.");
         } catch (IllegalArgumentException e) {
             JBankHelp.showErrorMessage(e.getMessage());
         } catch (NoSuchElementException e) {
@@ -180,8 +183,11 @@ public class BankAccountsController {
                         bankInfo.getItems().clear();
                     }
                     jbank.getBankManager().deleteBankAccount(loggedInPerson, bank);
+                    jbank.getBankManagerSaver().writeObject(loggedInPerson.getUserId(), jbank);
                 } catch (IllegalArgumentException e) {
                     JBankHelp.showErrorMessage(e.getMessage());
+                } catch (IOException e) {
+                    JBankHelp.showErrorMessage("Det har skjedd noe feil under lagring, data kan ha gått tapt.");
                 }
             }
         } catch (IllegalArgumentException e) {

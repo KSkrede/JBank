@@ -48,11 +48,11 @@ public class HomeController {
         stockmarket = jbank.getStockMarket();
         bankManager = jbank.getBankManager();
         try {
-            jbank.getManagerSaver().readObject(loggedInPerson.getUserId(), jbank);
+            jbank.getBankManagerSaver().readObject(loggedInPerson.getUserId(), jbank);
+            jbank.getStockMarketSaver().readObject(loggedInPerson.getUserId(), jbank);
         } catch (IOException e) {
-            JBankHelp.showErrorMessage("Noe kan ha gått galt ved fillesing. Dette kan være at du ikke har noe konto her enda");
+            JBankHelp.showErrorMessage("Noe kan ha gått galt ved fillesing. Dette kan være at du ikke har noen bankkonto eller aksjer enda");
         }
-        updateViews();
 
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
         bankList.setOnMouseClicked(me -> {
@@ -72,6 +72,7 @@ public class HomeController {
                 updateInfo();
             }
         });
+        updateInfo();
 
     }
 

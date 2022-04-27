@@ -193,6 +193,9 @@ public class StockController {
                         "Bankkonto: ");
 
                 jbank.buyStocks(stockToBuy, number, source, loggedInPerson.getUserId());
+                jbank.getStockMarketSaver().writeObject(loggedInPerson.getUserId(), jbank);
+            } catch (IOException e) {
+                JBankHelp.showErrorMessage("Det har skjedd noe feil under lagring, data kan ha gått tapt.");
             } catch (IllegalArgumentException | IllegalStateException e) {
                 JBankHelp.showErrorMessage(e.getMessage());
             } catch (IndexOutOfBoundsException e) {
@@ -222,6 +225,9 @@ public class StockController {
                         "Bankkonto: ");
 
                 jbank.sellStocks(stockToSell, number, destination, loggedInPerson.getUserId());
+                jbank.getStockMarketSaver().writeObject(loggedInPerson.getUserId(), jbank);
+            } catch (IOException e) {
+                JBankHelp.showErrorMessage("Det har skjedd noe feil under lagring, data kan ha gått tapt.");
             } catch (IllegalArgumentException | IllegalStateException e) {
                 JBankHelp.showErrorMessage(e.getMessage());
             } catch (IndexOutOfBoundsException e) {
