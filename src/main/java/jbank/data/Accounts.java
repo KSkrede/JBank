@@ -29,26 +29,35 @@ public class Accounts {
         this.loggedInPerson = loggedInPerson;
     }
 
+
     public void removePerson(){
-        //TODO Validate that account exist
+        if(accounts.containsKey(loggedInPerson.getUserId())){
+            throw new IllegalArgumentException("Konto finnes ikke");
+        }
         accounts.remove(loggedInPerson.getUserId());
         this.loggedInPerson = null;
     }
 
     public void changeGivenName(String newName){
-        //TODO Validate that account exist
+        if(accounts.containsKey(loggedInPerson.getUserId())){
+            throw new IllegalArgumentException("Konto finnes ikke");
+        }
         accounts.get(loggedInPerson.getUserId()).setGivenName(newName);
         this.loggedInPerson = null;
     }
 
     public void changeSurName(String newName){
-        //TODO Validate that account exist
+        if(accounts.containsKey(loggedInPerson.getUserId())){
+            throw new IllegalArgumentException("Konto finnes ikke");
+        }
         accounts.get(loggedInPerson.getUserId()).setSurName(newName);
         this.loggedInPerson = null;
     }
 
     public void changePin(String newPin){
-        //TODO Validate that account exist
+        if(accounts.containsKey(loggedInPerson.getUserId())){
+            throw new IllegalArgumentException("Konto finnes ikke");
+        }
         accounts.get(loggedInPerson.getUserId()).setPin(newPin);
         this.loggedInPerson = null;
     }
