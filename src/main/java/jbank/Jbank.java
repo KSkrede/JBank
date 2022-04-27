@@ -197,8 +197,6 @@ public class Jbank {
         return stockIndex;
     }
 
-
-
     public Comparator<BankAccount> getSort(String sort){
         sortMap.put("Navn økende", nameSort);
         sortMap.put("Navn synkende", nameSort.reversed());

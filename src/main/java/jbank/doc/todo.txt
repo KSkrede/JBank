@@ -1,11 +1,4 @@
 
- 
-
-Arv på bankkontoer?
-
-
-Sjekke opp mot læringsmål
-
 
 
 
@@ -13,6 +6,8 @@ Lage tester
 
 
 Er en bug med at man må trykke på bankkontoer også aksjer i starten før info vises
+
+Burde håndtert negativ aksjepris
 
 Dokumentasjon:
 
