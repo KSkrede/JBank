@@ -2,6 +2,7 @@ package jbank.controllers.jbank;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -196,6 +197,9 @@ public class StockController {
             } catch (IndexOutOfBoundsException e) {
                 JBankHelp.showErrorMessage("Du kan ikke kjøpe aksjer uten en bankkonto");
             }
+             catch (NoSuchElementException e) {
+            JBankHelp.showErrorMessage("Du må ta et valg");
+        }
             updateViews();
         }
 
@@ -205,10 +209,10 @@ public class StockController {
             JBankHelp.showErrorMessage("Du kan ikke selge aksjer når du ikke eier noen");
         } else {
 
+            try {
             String stockToSell = JBankHelp.choseStock(selectedStock, ownedStocks);
             int number = JBankHelp.number();
 
-            try {
                 ArrayList<BankAccount> loggedInPersonBankAccounts = jbank.getBankManager()
                         .getBankAccounts(loggedInPerson);
                 BankAccount destination = JBankHelp.choseBankAccount(loggedInPersonBankAccounts.get(0),
@@ -221,6 +225,9 @@ public class StockController {
                 JBankHelp.showErrorMessage(e.getMessage());
             } catch (IndexOutOfBoundsException e) {
                 JBankHelp.showErrorMessage("Du kan ikke kjøpe aksjer uten en bankkonto");
+            }
+            catch (NoSuchElementException e) {
+                JBankHelp.showErrorMessage("Du må ta et valg");
             }
         }
         updateViews();

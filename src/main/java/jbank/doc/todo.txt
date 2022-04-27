@@ -7,6 +7,8 @@ Arv på bankkontoer?
 Hashing på bankpin
 Sjekke opp mot læringsmål
 
+sum stocks is wrong
+
 Lage tester
 
 Dokumentasjon:
