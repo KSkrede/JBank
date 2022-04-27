@@ -85,7 +85,7 @@ public class SettingsController {
     public void changePin() throws IOException {
         try {
             String currentPin = JBankHelp.pin("Skriv inn din nåværene pin: ");
-            if (currentPin.equals(loggedInPerson.getBankIDPin())) {
+            if (currentPin.equals(loggedInPerson.getPin())) {
                 String newPin = JBankHelp.pin("Skriv inn ny pin: ");
                 if (!JBankHelp.isAllDigit(newPin) || newPin.equals("")) {
                     JBankHelp.showErrorMessage("Ulovlig pin");

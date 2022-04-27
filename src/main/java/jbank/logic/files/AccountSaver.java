@@ -19,7 +19,7 @@ public class AccountSaver implements IFileHandler {
         while (scanner.hasNextLine()) {
             String[] element = scanner.nextLine().split(";");
             accounts.addPerson(element[0],
-                    new Person(element[1], JBankHelp.stringToDate(element[2]), element[3], element[4], element[5]));
+                    new Person(element[1], JBankHelp.stringToDate(element[2]), element[3], element[4], deCipher(element[5])));
         }
         scanner.close();
         return accounts;
@@ -31,13 +31,23 @@ public class AccountSaver implements IFileHandler {
         FileWriter writer = new FileWriter(file);
         for (Map.Entry<String, Person> entry : accounts.getAccounts().entrySet()) {
             writer.write(entry.getKey() + ";");
-            writer.write(entry.getValue().toString());
+            writer.write(entry.getValue().toString() + ";");
+            writer.write(cipher(entry.getValue().getPin()));
             writer.write("\n");
         }
         writer.close();
     }
+    // Simple cipher to not save pin as complete plaintext
+   public String cipher(String s){
+       Integer pin = Integer.parseInt(s);
+       Integer cipheredPin = pin*13;
+       return cipheredPin.toString();
+   }
 
-   // public String Hash()
-   // *12345678
+   public String deCipher(String s){
+    Integer cipheredPin = Integer.parseInt(s);
+    Integer pin = cipheredPin/13;
+    return pin.toString();
+}
 
 }

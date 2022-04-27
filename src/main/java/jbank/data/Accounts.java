@@ -49,7 +49,7 @@ public class Accounts {
 
     public void changePin(String newPin){
         //TODO Validate that account exist
-        accounts.get(loggedInPerson.getUserId()).setBankIDPin(newPin);
+        accounts.get(loggedInPerson.getUserId()).setPin(newPin);
         this.loggedInPerson = null;
     }
 

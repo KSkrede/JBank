@@ -10,16 +10,16 @@ public class Person {
     private String surName;
     private String givenName;
     private String phoneNumber;
-    private String bankIDPin;
+    private String pin;
     private String birthDate;
     private String userId;
     public Accounts a;
 
-    public Person(String phoneNumber, LocalDate birthDate, String givenName, String surName, String bankIDPin) throws FileNotFoundException {
+    public Person(String phoneNumber, LocalDate birthDate, String givenName, String surName, String pin) throws FileNotFoundException {
         setName(givenName, surName);
         setPhoneNumber(phoneNumber);
         setBirthday(birthDate);
-        setBankIDPin(bankIDPin);
+        setPin(pin);
         this.userId = phoneNumber + JBankHelp.dateToString(birthDate);
         Accounts a = new Accounts();
         a.addPerson(this.userId, this);
@@ -80,11 +80,11 @@ public class Person {
         }
     }
 
-    public void setBankIDPin(String bankIDPin) {
-        if (JBankHelp.isAllDigit(bankIDPin)) {
-            this.bankIDPin = bankIDPin;
+    public void setPin(String pin) {
+        if (JBankHelp.isAllDigit(pin)) {
+            this.pin = pin;
         } else {
-            throw new IllegalArgumentException("Ulovelig BankIDpin " + bankIDPin);
+            throw new IllegalArgumentException("Ulovelig BankIDpin " + pin);
         }
     }
 
@@ -110,13 +110,13 @@ public class Person {
     }
 
 
-    public String getBankIDPin() {
-        return bankIDPin;
+    public String getPin() {
+        return pin;
     }
 
     @Override
     public String toString() {
-        return String.format("%s;%s;%s;%s;%s", phoneNumber, birthDate, givenName, surName, bankIDPin);
+        return String.format("%s;%s;%s;%s", phoneNumber, birthDate, givenName, surName);
     }
 
     public String prettyString(){
