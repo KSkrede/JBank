@@ -58,6 +58,11 @@ public class JBankController {
         homeController.updateViews();
         jbank.daysIncrease();
         currentDate.setText("Dato: " + JBankHelp.todayToString(jbank.getDays()));
+        try {
+            jbank.getStockMarketSaver().writeObject(loggedInPerson.getUserId(), jbank);
+        } catch (IOException e) {
+            JBankHelp.showErrorMessage("Det har skjedd noe feil under lagring, data kan ha gått tapt.");
+        }
     }
 
 

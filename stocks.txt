@@ -1,0 +1,3 @@
+Aksje1;1015
+Aksje2;753
+Aksje3;307
