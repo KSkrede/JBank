@@ -88,7 +88,7 @@ public class JBankHelp {
         return chosenStock;
     }
 
-    public static int amount() {
+    public static int amount() throws NumberFormatException {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Beløp");
         dialog.setHeaderText("Velg et beløp: ");
@@ -97,7 +97,7 @@ public class JBankHelp {
         return amount;
     }
 
-    public static int number() {
+    public static int number() throws NumberFormatException {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Antall");
         dialog.setHeaderText("Velg antall aksjer under: ");
