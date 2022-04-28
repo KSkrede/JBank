@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class StockMarket implements IValuable, Runnable {
+public class StockMarket implements IValuable {
 
-    //Hentet fra min egen Øving 6 StockListner og Runnable eksempelet
+    //Hentet fra min egen Øving 6 StockListner og eksempelet på stock simulering
    // https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/students/-/tree/main/foreksempel/src/main/java/uke12/listener/stocks
 
     private Map<String, Integer> stocks = new HashMap<>();
@@ -53,7 +53,7 @@ public class StockMarket implements IValuable, Runnable {
         for (StockListener listeners : listeners) {
             for (String stock : getTickers()) {
             int oldValue = getValue(stock);
-            run();
+            simulate(stock);
             int newValue = getValue(stock);
             listeners.stockPriceChanged(stock, oldValue ,newValue );    
             }
@@ -111,19 +111,11 @@ public class StockMarket implements IValuable, Runnable {
 
     // hentet fra Stock eksempelete fra forelesning
     // https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/students/-/tree/main/foreksempel/src/main/java/uke12/listener/stocks
-    @Override
-    public void run() {
+
+    public void simulate(String stock) {
 
         for (int i = 0; i < 50; i++) {
-
-            try { 
-                Thread.sleep(1); 
-                String[] keys = stocks.keySet().toArray(new String[stocks.size()]);
-                String randomKey = keys[random.nextInt(keys.length)];
-                update(randomKey, random.nextInt(22) - 10);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+                update(stock, random.nextInt(22) - 10);
         }
     }
 

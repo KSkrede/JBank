@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class BankID {
 
-
+//List of norwegian words from the web
     private static List<String> adjectives = Arrays.asList("UGREI", "VITTIG", "BLAUT", "VERDIG", "GYLDIG", "BRYSOM", "KALD", "RYDDIG", "BREIAL", "STRANDA", "SINNA", "STILIG", "SOLFYLT",
      "RUND", "TRENERT", "DIGER", "STYRKET", "PLUMP", "GOD", "VARM", "HET", "RAUS", "KRY", "FISEFIN", "KOSETE", "TRENT", "GNIEN", "TRO", "GREI", "VIRAL", "PLATT", "TANDER", "GALANT",
      "FARLIG", "SART", "BILLIG", "KILEN", "KNAPP", "PREGA", "NY", "TAM", "SMIDIG", "BABELSK", "DIGG", "DYRKET", "SVEKKET", "SMEKKER", "LUMPEN", "SYK", "FORSERT", "PEN", "SPORTY",
