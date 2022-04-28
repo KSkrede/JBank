@@ -7,16 +7,9 @@ Cleanup scenebuilder
 Kildeføre øving /forelesning - ja, vær obs på plagiat
 Fikse aksjeview som homeview listview
 Override Bankacount sånn at den thrower noe
-encoding error
 
 
 
-
-Burde håndtert negativ aksjepris
-
-Dokumentasjon:
-
-Teit filhåndtering for at det skal fungere på mac
 
 
 

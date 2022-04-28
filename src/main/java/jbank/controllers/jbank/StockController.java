@@ -87,17 +87,15 @@ public class StockController {
     }
 
     public void updateStockInfo() {
-        if (selectedStock == null) {
-            stockInfo.getItems().clear();
-            stockInfo.getItems().add("");
-        } else {
-            if (selectedStock == stockList.getSelectionModel().getSelectedItem()) {
+        stockInfo.getItems().clear();
+        try {
+            if (selectedStock == stockList.getSelectionModel().getSelectedItem() && selectedStock != null) {
                 stockInfo.getItems().clear();
                 stockInfo.getItems().add("Navn: "+selectedStock);
                 stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selectedStock).toString() + "kr");
             }
 
-            else if (selectedStock == stockOwned.getSelectionModel().getSelectedItem()) {
+            if (selectedStock == stockOwned.getSelectionModel().getSelectedItem() && selectedStock != null) {
                 int value = stockmarket.getValue(selectedStock);
                 int number = stockmarket.numberOwnedStocks(loggedInPerson.getUserId(), selectedStock);
 
@@ -107,6 +105,9 @@ public class StockController {
                 stockInfo.getItems().add("Antall du eier: " + number);
                 stockInfo.getItems().add("Total verdi: " + number * value + "kr");
             }
+
+        } catch (NullPointerException e) {
+            //Do nothing when no item is selected
         }
     }
 
