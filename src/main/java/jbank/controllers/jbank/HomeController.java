@@ -50,7 +50,8 @@ public class HomeController {
             jbank.getBankManagerSaver().readObject(loggedInPerson.getUserId(), jbank);
             jbank.getStockMarketSaver().readObject(loggedInPerson.getUserId(), jbank);
         } catch (IOException e) {
-            JBankHelp.showInformation("Info om oppstart", "Det ser ut som at du ikke har noen bankkonto eller aksjer enda");
+            JBankHelp.showInformation("Info om oppstart",
+                    "Det ser ut som at du ikke har noen bankkonto eller aksjer enda");
         }
 
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1
@@ -84,18 +85,9 @@ public class HomeController {
     }
 
     public void updateInfo() {
-        if (selectedItem == null) {
-            info.getItems().add("");
-        } else {
-            if (bankList.getSelectionModel().getSelectedItem() == null) {
-                // do nothing
-            } else if (selectedItem == bankList.getSelectionModel().getSelectedItem().toString()) {
-                info.getItems().clear();
-                info.getItems().add(selectedItem);
-                info.getItems().add("Verdi: " + bankManager.getValue(loggedInPerson, selectedItem));
-            }
+        try {
 
-            else if (selectedItem == stockOwned.getSelectionModel().getSelectedItem() ) {
+            if (selectedItem == stockOwned.getSelectionModel().getSelectedItem()) {
                 int value = stockmarket.getValue(selectedItem);
                 int number = stockmarket.numberOwnedStocks(loggedInPerson.getUserId(), selectedItem);
 
@@ -105,6 +97,15 @@ public class HomeController {
                 info.getItems().add("Antall du eier: " + number);
                 info.getItems().add("Total verdi: " + number * value + "kr");
             }
+
+            if (selectedItem == bankList.getSelectionModel().getSelectedItem().toString()) {
+                info.getItems().clear();
+                info.getItems().add(selectedItem);
+                info.getItems().add("Verdi: " + bankManager.getValue(loggedInPerson, selectedItem));
+            }
+
+        } catch (NullPointerException e) {
+            //Do nothing when no item is selected
         }
     }
 
@@ -133,7 +134,7 @@ public class HomeController {
     public void updateSum() {
         int sum = jbank.sumBankAccounts() + jbank.sumStocks();
         sumBank.setText("Sum valuta: " + jbank.sumBankAccounts() + "kr");
-        sumStocks.setText("Sum aksjer: " + jbank.sumStocks() + "kr" );
+        sumStocks.setText("Sum aksjer: " + jbank.sumStocks() + "kr");
         totalSum.setText("Sum totalt: " + sum + "kr");
 
     }

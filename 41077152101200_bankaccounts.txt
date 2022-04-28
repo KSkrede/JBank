@@ -1,4 +1,0 @@
-Sparekonto;100
-Sofa;100
-Pære;500
-Toalett;4008

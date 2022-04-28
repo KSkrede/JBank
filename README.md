@@ -4,6 +4,7 @@ Jbank skal er en "Bank simulator" som skal la deg investere penger.
 
 # Instruksjoner:
 # Oppstart
+0. Kjør appen ved å starte JbankApp.java
 1. Venligst start med å opprette en bruker med "Opprett bruker"
 2. Fyll inn alle detaljene. Merk at du må bruke datovelgeren, og ikke kan skrive inn dato selv i Fødselsdato feltet
 3. Logg inn med Mobilnummer og fødselsdato, trykke neste etter å ha skrevet inn detaljene.

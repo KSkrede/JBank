@@ -10,9 +10,10 @@ Flytte logikk ut av kontrolleren, se StockController - går greit
 
 
 
-Fjerne kode som ikke brukes, men som kan være med å utvide
+Fjerne kode som ikke brukes, men som kan være med å utvide - ja, nevn i Dokumentasjon
+Legge ved data i txt filer - lage tom fil om det ikke finnes, catche
+Kildeføre øving /forelesning - ja, vær obs på plagiat
 Bug med å trykke på aksjer i starten av appen
-Ta inspirasjon fra kode fra øvinger / forelesninger
 Mer elegant måte å løse valg av sortering;
 
 
