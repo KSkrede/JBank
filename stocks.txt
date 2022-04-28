@@ -1,5 +1,4 @@
-Tesla;260
-bby;251
-Aksje1;963
-Aksje2;585
-Aksje3;354
+AAPL;934
+TSLA;614
+TWTR;606
+ORCL;662

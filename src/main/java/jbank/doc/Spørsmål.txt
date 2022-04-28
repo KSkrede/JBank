@@ -12,5 +12,7 @@ Flytte logikk ut av kontrolleren, se StockController - går greit
 
 Fjerne kode som ikke brukes, men som kan være med å utvide
 Bug med å trykke på aksjer i starten av appen
+Ta inspirasjon fra kode fra øvinger / forelesninger
+Mer elegant måte å løse valg av sortering;
 
 

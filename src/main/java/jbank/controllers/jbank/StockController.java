@@ -92,7 +92,7 @@ public class StockController {
         } else {
             if (selectedStock == stockList.getSelectionModel().getSelectedItem()) {
                 stockInfo.getItems().clear();
-                stockInfo.getItems().add(selectedStock);
+                stockInfo.getItems().add("Navn: "+selectedStock);
                 stockInfo.getItems().add("Verdi: " + stockmarket.getValue(selectedStock).toString() + "kr");
             }
 
@@ -101,7 +101,7 @@ public class StockController {
                 int number = stockmarket.numberOwnedStocks(loggedInPerson.getUserId(), selectedStock);
 
                 stockInfo.getItems().clear();
-                stockInfo.getItems().add(selectedStock);
+                stockInfo.getItems().add("Navn: "+selectedStock);
                 stockInfo.getItems().add("Verdi: " + value + "kr");
                 stockInfo.getItems().add("Antall du eier: " + number);
                 stockInfo.getItems().add("Total verdi: " + number * value + "kr");

@@ -5,6 +5,8 @@
 Lage tester
 Cleanup scenebuilder
 
+Metoder i controller private?
+
 
 
 
