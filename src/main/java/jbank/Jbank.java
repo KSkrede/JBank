@@ -20,6 +20,8 @@ import jbank.logic.bankcomparators.*;
 
 public class Jbank {
     // Singleton
+    //https://www.geeksforgeeks.org/singleton-class-java/
+
     private static Jbank single_instance = null;
 
     private JbankApp app;

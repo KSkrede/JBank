@@ -27,6 +27,9 @@ public class StockMarket implements IValuable {
     }
 
     public Integer getValue(String name) {
+        if(!stocks.containsKey(name)){
+            throw new IllegalArgumentException("Denne aksjen finnes ikke på bøsen" + name);
+        }
         return this.stocks.get(name);
     }
 
@@ -37,15 +40,23 @@ public class StockMarket implements IValuable {
     }
 
     public void addValuableListner(ValuableListner observator) {
+        if (listeners.contains(observator)){
+            throw new IllegalArgumentException("Observatør er allerede i listen");
+        }
         listeners.add(observator);
     }
 
     public void removeValuableListener(ValuableListner observator) {
+        if (!listeners.contains(observator)){
+            throw new IllegalArgumentException("Observator er ikke i listen");
+        }
         listeners.remove(observator);
     }
 
     public void update(String name, int value) {
-        this.stocks.put(name, stocks.getOrDefault(name, 0) + value);
+        // Eiter puts amount as value, or previous amount + new amount
+        // https://stackoverflow.com/questions/81346/most-efficient-way-to-increment-a-map-value-in-java
+        stocks.merge(name, value, (a, b) -> a + b);
     }
 
 
@@ -70,8 +81,6 @@ public class StockMarket implements IValuable {
         if(ownedStocks.get(userID) == null){
             ownedStocks.put(userID, new HashMap<>());
         }
-        // Eiter puts amount as value, or previous amount + new amount
-        // https://stackoverflow.com/questions/81346/most-efficient-way-to-increment-a-map-value-in-java
         ownedStocks.get(userID).merge(ticker, amount, (a, b) -> a + b);
     }
 

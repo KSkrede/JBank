@@ -85,9 +85,12 @@ public class HomeController {
     }
 
     public void updateInfo() {
-        try {
+        try { 
+            if(selectedItem == null){
+                //Do nothing
+            }
 
-            if (selectedItem == stockOwned.getSelectionModel().getSelectedItem()) {
+            else if (selectedItem == stockOwned.getSelectionModel().getSelectedItem()) {
                 int value = stockmarket.getValue(selectedItem);
                 int number = stockmarket.numberOwnedStocks(loggedInPerson.getUserId(), selectedItem);
 
@@ -98,7 +101,7 @@ public class HomeController {
                 info.getItems().add("Total verdi: " + number * value + "kr");
             }
 
-            if (selectedItem == bankList.getSelectionModel().getSelectedItem().toString()) {
+            else if (selectedItem == bankList.getSelectionModel().getSelectedItem().toString()) {
                 info.getItems().clear();
                 info.getItems().add(selectedItem);
                 info.getItems().add("Verdi: " + bankManager.getValue(loggedInPerson, selectedItem));

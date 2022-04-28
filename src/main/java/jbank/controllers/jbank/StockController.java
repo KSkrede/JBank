@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import jbank.Jbank;
 import jbank.data.BankAccount;
 import jbank.data.Person;
+import jbank.data.StockIndex;
 import jbank.data.StockMarket;
 import jbank.data.StockTracker;
 import jbank.logic.JBankHelp;
