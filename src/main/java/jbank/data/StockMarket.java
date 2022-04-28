@@ -8,11 +8,11 @@ import java.util.Random;
 
 public class StockMarket implements IValuable {
 
-    //Hentet fra min egen Øving 6 StockListner og eksempelet på stock simulering
+    //Inspirert av Stock eksempelet
    // https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/students/-/tree/main/foreksempel/src/main/java/uke12/listener/stocks
 
     private Map<String, Integer> stocks = new HashMap<>();
-    List<StockListener> listeners = new ArrayList<StockListener>();
+    List<ValuableListner> listeners = new ArrayList<ValuableListner>();
     private Map<String, Map<String, Integer>> ownedStocks;
     private ArrayList<String> ownedStocksList;
     Random random = new Random();
@@ -36,11 +36,11 @@ public class StockMarket implements IValuable {
 
     }
 
-    public void addStockListener(StockListener observator) {
+    public void addValuableListner(ValuableListner observator) {
         listeners.add(observator);
     }
 
-    public void removeStockListener(StockListener observator) {
+    public void removeValuableListener(ValuableListner observator) {
         listeners.remove(observator);
     }
 
@@ -50,12 +50,12 @@ public class StockMarket implements IValuable {
 
 
     public void nextDay() {
-        for (StockListener listeners : listeners) {
+        for (ValuableListner listeners : listeners) {
             for (String stock : getTickers()) {
             int oldValue = getValue(stock);
             simulate(stock);
             int newValue = getValue(stock);
-            listeners.stockPriceChanged(stock, oldValue ,newValue );    
+            listeners.valuableChanged(stock, oldValue ,newValue );    
             }
         }
     }
@@ -67,11 +67,11 @@ public class StockMarket implements IValuable {
     }
 
     public void buy(String userID, String ticker, int amount) {
-        // Eiter puts amount as value, or previous amount + new amount
-        // https://stackoverflow.com/questions/81346/most-efficient-way-to-increment-a-map-value-in-java
         if(ownedStocks.get(userID) == null){
             ownedStocks.put(userID, new HashMap<>());
         }
+        // Eiter puts amount as value, or previous amount + new amount
+        // https://stackoverflow.com/questions/81346/most-efficient-way-to-increment-a-map-value-in-java
         ownedStocks.get(userID).merge(ticker, amount, (a, b) -> a + b);
     }
 
@@ -109,7 +109,7 @@ public class StockMarket implements IValuable {
         return numberOwnedStocks;
     }
 
-    // hentet fra Stock eksempelete fra forelesning
+    // Inspirert av Stock eksempelet fra forelesning
     // https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/students/-/tree/main/foreksempel/src/main/java/uke12/listener/stocks
 
     public void simulate(String stock) {
