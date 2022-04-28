@@ -8,8 +8,11 @@ public class BankAccount extends AbstractAccount{
     }
 
     @Override
-    public String toString() {
-        return name;
+    public void removeValue(int funds){
+        if(funds > value){
+            throw new IllegalArgumentException("Kan ikke ta ut flere penger enn du har på konto");
+        }
+        value = value - funds;
     }
 
     

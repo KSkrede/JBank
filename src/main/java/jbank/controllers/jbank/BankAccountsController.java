@@ -77,6 +77,8 @@ public class BankAccountsController {
             Comparator<BankAccount> comparator = jbank.getSort(sort);
             this.sorting = comparator;
             toSort = true;
+            updateListView();
+
         }
         catch(IllegalArgumentException e){
             JBankHelp.showErrorMessage(e.getMessage());

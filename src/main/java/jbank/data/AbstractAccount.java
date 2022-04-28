@@ -21,9 +21,6 @@ public abstract class AbstractAccount {
         value = value - funds;
     }
 
-
-
-
     @Override
     public String toString() {
         return name;
