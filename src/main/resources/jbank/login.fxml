@@ -54,8 +54,8 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="phoneNumber" layoutX="14.0" layoutY="179.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 41234567" text="40612594" />
-            <TextField fx:id="birthDate" layoutX="16.0" layoutY="260.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 010100" text="230100" />
+            <TextField fx:id="phoneNumber" layoutX="14.0" layoutY="179.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 41234567" />
+            <TextField fx:id="birthDate" layoutX="16.0" layoutY="260.0" prefHeight="32.0" prefWidth="200.0" promptText="F.eks 010100" />
             <Button fx:id="nextButton" layoutX="197.0" layoutY="336.0" mnemonicParsing="false" onAction="#userLogIn" prefHeight="35.0" prefWidth="84.0" style="-fx-background-color: #2AAEBB;" text="Neste" textFill="WHITE" />
             <Label fx:id="wrongLogIn" layoutX="14.0" layoutY="291.0" maxWidth="260.0" prefHeight="38.0" prefWidth="260.0" wrapText="true" />
             <Button fx:id="newUserButton" layoutX="74.0" layoutY="336.0" mnemonicParsing="false" onAction="#newUser" prefHeight="35.0" prefWidth="103.0" style="-fx-background-color: #2AAEBB;" text="Opprett bruker" textFill="WHITE" />

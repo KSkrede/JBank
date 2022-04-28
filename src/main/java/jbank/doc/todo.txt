@@ -3,9 +3,7 @@
 
 
 Lage tester
-Cleanup scenebuilder
-Kildeføre øving /forelesning - ja, vær obs på plagiat
-Override Bankacount sånn at den thrower noe
+
 
 
 

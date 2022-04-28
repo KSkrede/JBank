@@ -36,7 +36,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <PasswordField fx:id="pinField" layoutX="216.0" layoutY="279.0" prefHeight="46.0" prefWidth="170.0" promptText="F.eks 1234" text="1234" />
+      <PasswordField fx:id="pinField" layoutX="216.0" layoutY="279.0" prefHeight="46.0" prefWidth="170.0" promptText="F.eks 1234" />
       <Button fx:id="backButton" layoutX="404.0" layoutY="345.0" mnemonicParsing="false" onAction="#Back" prefHeight="35.0" prefWidth="84.0" style="-fx-background-color: #2AAEBB;" text="Tilbake" textFill="WHITE" />
       <Button fx:id="nextButton" layoutX="502.0" layoutY="345.0" mnemonicParsing="false" onAction="#Login" prefHeight="35.0" prefWidth="84.0" style="-fx-background-color: #2AAEBB;" text="Neste" textFill="WHITE" />
    </children>
