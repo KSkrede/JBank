@@ -37,7 +37,7 @@ public class BankManagerTest {
         assertThrows(IllegalStateException.class, () -> {
             BankManager b1 = new BankManager();
             b1.getBankAccounts(person);
-        }, "Ingen bankkontoer eksisterer foreløpig");
+        }, "Ingen bankkontoer burde eksistere");
 
         assertEquals(new ArrayList<>(Arrays.asList(bank)), bankManager.getAllBankAccounts().get(person.getUserId()));
         assertEquals(new ArrayList<>(Arrays.asList(bank)), bankManager.getBankAccounts(person));
@@ -48,7 +48,7 @@ public class BankManagerTest {
         assertThrows(IllegalArgumentException.class, () -> {
             BankManager b2 = new BankManager();
             b2.deleteBankAccount(otherPerson, bank);
-        }, "Du kan ikke slette en konto som du ikke har");
+        }, "Du skal ikke kunne slette en konto som du ikke har");
 
         bankManager.deleteBankAccount(person, bank);
         bankManager.addBank(person.getUserId(), otherBank);
@@ -63,15 +63,15 @@ public class BankManagerTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             bankManager.addFunds(bank, -1);
-        }, "Kan ikke legge til et negativt beløp");
+        }, "Du skal ikke kunne legge til et negativt beløp");
 
         assertThrows(IllegalArgumentException.class, () -> {
             bankManager.removeFunds(bank, -1);
-        }, "Kan ikke fjerne et negativt beløp");
+        }, "Du skal ikke kunne fjerne et negativt beløp");
 
         assertThrows(IllegalArgumentException.class, () -> {
             bankManager.movefunds(bank, otherBank, 200);
-        }, "Kan ikke overføre mer enn du har");
+        }, "Du skal ikke kunne overføre mer enn du har");
 
         bankManager.movefunds(bank, otherBank, 100);
         assertEquals(0, bank.getValue());

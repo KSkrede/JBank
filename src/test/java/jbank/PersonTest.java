@@ -24,7 +24,7 @@ public class PersonTest {
     public void testName(){
         assertThrows(IllegalArgumentException.class, () -> {
             Person p1 = new Person("12345678", LocalDate.now().minusYears(19), "0123456789","123456789101112", "1234");
-        },"Du har valgt et veldig langt navn, venligst kort det ned");
+        },"Bør få en feil ved veldig langt navn");
 
         assertThrows(IllegalArgumentException.class, () -> {
             Person p2 = new Person("12345678", LocalDate.now().minusYears(19), "34t","Nordmann", "1234");
@@ -43,7 +43,7 @@ public class PersonTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             Person p1 = new Person("12345678", null, "Ola","Nordmann", "1234");
-        },"Du må velge fødselsdato");
+        },"Du må velge en korrekt fødselsdato");
 
         assertThrows(IllegalArgumentException.class, () -> {
             Person p2 = new Person("12345678", LocalDate.now().minusYears(15), "Ola","Nordmann", "1234");
@@ -75,11 +75,11 @@ public class PersonTest {
     public void testPin(){
         assertThrows(IllegalArgumentException.class, () -> {
             Person p1 = new Person("12345678", LocalDate.now().minusYears(19), "Ola","Nordmann", "");
-        },"Ulovelig BankIDpin ");
+        },"Ulovelig BankIDpin");
 
         assertThrows(IllegalArgumentException.class, () -> {
             Person p1 = new Person("12345678", LocalDate.now().minusYears(19), "Ola","Nordmann", "abc");
-        },"Ulovelig BankIDpin abc");
+        },"Ulovelig BankIDpin");
 
         assertEquals("1234", person.getPin());
     }

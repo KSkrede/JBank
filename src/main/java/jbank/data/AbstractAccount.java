@@ -1,6 +1,8 @@
 package jbank.data;
 
 public abstract class AbstractAccount {
+
+    //Inspirert av Øving 7;
  
     protected String name;
     protected Integer value;
