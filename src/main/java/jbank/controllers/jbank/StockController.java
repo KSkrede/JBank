@@ -88,6 +88,7 @@ public class StockController {
 
     public void updateStockInfo() {
         if (selectedStock == null) {
+            stockInfo.getItems().clear();
             stockInfo.getItems().add("");
         } else {
             if (selectedStock == stockList.getSelectionModel().getSelectedItem()) {
