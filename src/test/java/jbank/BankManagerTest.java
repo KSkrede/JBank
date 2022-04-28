@@ -58,8 +58,30 @@ public class BankManagerTest {
     @Test
     public void testFunds() {
 
+        assertEquals(true, bankManager.hasFunds(bank, 100));
+        assertEquals(false, bankManager.hasFunds(bank, 101));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            bankManager.addFunds(bank, -1);
+        }, "Kan ikke legge til et negativt beløp");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            bankManager.removeFunds(bank, -1);
+        }, "Kan ikke fjerne et negativt beløp");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            bankManager.movefunds(bank, otherBank, 200);
+        }, "Kan ikke overføre mer enn du har");
+
+        bankManager.movefunds(bank, otherBank, 100);
+        assertEquals(0, bank.getValue());
+        assertEquals(223, otherBank.getValue());
+
+    }
+
+    @Test
+    public void testGetValue() {
+        assertEquals(100, bankManager.getValue(person, bank.getName()));
+
     }
 }
-
-// assertEquals(true, bankManager.hasFunds(bank, 100));
-// new BankAccount("random", 123)
