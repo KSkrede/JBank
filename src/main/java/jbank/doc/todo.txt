@@ -3,15 +3,14 @@
 
 
 Lage tester
+Cleanup scenebuilder
+gå gjennom å se om noen metoder kan bli private
 
 
-Er en bug med at man må trykke på bankkontoer også aksjer i starten før info vises
 
 Burde håndtert negativ aksjepris
 
 Dokumentasjon:
-
-lage readme.md
 
 Teit filhåndtering for at det skal fungere på mac
 

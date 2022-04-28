@@ -116,7 +116,7 @@ public class StockController {
         }
 
         catch (IllegalStateException e) {
-            JBankHelp.showInformation(e.getMessage(), "Venligst lag en under fanen Aksjer");
+            //This error comes when you dont have an account yet
             allStocks = new ArrayList<>();
         }
         stockList.getItems().addAll(allStocks);

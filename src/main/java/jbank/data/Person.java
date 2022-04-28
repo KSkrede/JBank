@@ -15,7 +15,7 @@ public class Person {
     private String userId;
     public Accounts a;
 
-    public Person(String phoneNumber, LocalDate birthDate, String givenName, String surName, String pin) throws FileNotFoundException {
+    public Person(String phoneNumber, LocalDate birthDate, String givenName, String surName, String pin) {
         setName(givenName, surName);
         setPhoneNumber(phoneNumber);
         setBirthday(birthDate);

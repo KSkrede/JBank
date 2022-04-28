@@ -95,7 +95,7 @@ public class BankAccountsController {
         }
 
         catch (IllegalStateException e) {
-            JBankHelp.showInformation(e.getMessage(), "Venligst lag en under fanen Bankkonto");
+            //This error comes when you dont have an account yet
             loggedInPersonBankAccounts = new ArrayList<>();
         }
         if(toSort && sorting != null){

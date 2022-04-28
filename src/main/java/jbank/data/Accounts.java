@@ -1,6 +1,5 @@
 package jbank.data;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ public class Accounts {
         return accounts;
     }
 
-    public void addPerson(String s, Person person) throws FileNotFoundException {
+    public void addPerson(String s, Person person) {
         accounts.put(s, person);
     }
 
