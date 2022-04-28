@@ -1,3 +1,0 @@
-At alle brukere bare har fornavn og etternavn, ingen mellomnavn.
-At År behandles med bare 2 siffer som kan medføre feil
-Sjekker ikke at mobilnummer har blitt brukt før, bare i kombinasjon med fødselsdato
