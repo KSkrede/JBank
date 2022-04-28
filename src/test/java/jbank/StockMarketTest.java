@@ -2,6 +2,7 @@ package jbank;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +36,6 @@ public class StockMarketTest {
 	@Test
 	public void testValuableListners() {
 		StockIndex listner = new StockIndex("index", stockMarket);
-		stockMarket.addValuableListner(new StockIndex("newListner", new StockMarket()));
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			stockMarket.addValuableListner(listner);
@@ -57,10 +57,33 @@ public class StockMarketTest {
 
 	}
 
-// 	@Test
-// 	public void testValuableChanged() {
-// 		assertEquals(245, index.getAvg());
-// 		index.valuableChanged("AAPL", 300, 100);
-// 		assertEquals(195, index.getAvg());
-// 	}
+	@Test
+	public void testNextDay() {
+		//Also tests simulate
+		StockIndex listner = new StockIndex("index", stockMarket);
+		int before = listner.getAvg();
+		stockMarket.nextDay();
+		int after = listner.getAvg();
+		assertNotEquals(before, after, "Indeksen burde være endret");
+	}
+
+	@Test
+	public void testBuySell() {
+		//Also tests numberOwnedStocks
+		stockMarket.buy("1234", "AAPL", 5);
+		assertEquals(5, stockMarket.numberOwnedStocks("1234", "AAPL"));
+		stockMarket.sell("1234", "AAPL", 2);
+		assertEquals(3, stockMarket.numberOwnedStocks("1234", "AAPL"));
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			stockMarket.sell("1234", "RandomStock", 2);
+        }, "Skal ikke kunne selge en aksje du ikke eier");
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			stockMarket.sell("1234", "RandomStock", 10);
+        }, "Skal ikke kunne selge flere aksjer enn du eier");
+
+
+
+	}
  }

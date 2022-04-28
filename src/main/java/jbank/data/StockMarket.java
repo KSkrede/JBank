@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class StockMarket implements IValuable {
 
-    //Inspirert av Stock eksempelet
-   // https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/students/-/tree/main/foreksempel/src/main/java/uke12/listener/stocks
+    // Inspirert av Stock eksempelet
+    // https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/students/-/tree/main/foreksempel/src/main/java/uke12/listener/stocks
 
     private Map<String, Integer> stocks = new HashMap<>();
     List<ValuableListner> listeners = new ArrayList<ValuableListner>();
@@ -27,7 +27,7 @@ public class StockMarket implements IValuable {
     }
 
     public Integer getValue(String name) {
-        if(!stocks.containsKey(name)){
+        if (!stocks.containsKey(name)) {
             throw new IllegalArgumentException("Denne aksjen finnes ikke på bøsen" + name);
         }
         return this.stocks.get(name);
@@ -40,14 +40,14 @@ public class StockMarket implements IValuable {
     }
 
     public void addValuableListner(ValuableListner observator) {
-        if (listeners.contains(observator)){
+        if (listeners.contains(observator)) {
             throw new IllegalArgumentException("Observatør er allerede i listen");
         }
         listeners.add(observator);
     }
 
     public void removeValuableListener(ValuableListner observator) {
-        if (!listeners.contains(observator)){
+        if (!listeners.contains(observator)) {
             throw new IllegalArgumentException("Observator er ikke i listen");
         }
         listeners.remove(observator);
@@ -59,14 +59,13 @@ public class StockMarket implements IValuable {
         stocks.merge(name, value, (a, b) -> a + b);
     }
 
-
     public void nextDay() {
-        for (ValuableListner listeners : listeners) {
-            for (String stock : getTickers()) {
+        for (String stock : getTickers()) {
             int oldValue = getValue(stock);
             simulate(stock);
             int newValue = getValue(stock);
-            listeners.valuableChanged(stock, oldValue ,newValue );    
+            for (ValuableListner valuableListner : listeners) {
+                valuableListner.valuableChanged(stock, oldValue, newValue);
             }
         }
     }
@@ -78,7 +77,7 @@ public class StockMarket implements IValuable {
     }
 
     public void buy(String userID, String ticker, int amount) {
-        if(ownedStocks.get(userID) == null){
+        if (ownedStocks.get(userID) == null) {
             ownedStocks.put(userID, new HashMap<>());
         }
         ownedStocks.get(userID).merge(ticker, amount, (a, b) -> a + b);
@@ -93,7 +92,7 @@ public class StockMarket implements IValuable {
             throw new IllegalArgumentException("Du kan ikke selge flere aksjer enn de du eier");
         } else {
             ownedStocks.get(userID).merge(ticker, amount, (a, b) -> a - b);
-            if (ownedStocks.get(userID).get(ticker) <= 0){
+            if (ownedStocks.get(userID).get(ticker) <= 0) {
                 ownedStocks.get(userID).remove(ticker);
             }
         }
@@ -109,10 +108,9 @@ public class StockMarket implements IValuable {
 
     public int numberOwnedStocks(String userID, String stock) {
         int numberOwnedStocks = 0;
-        try{
+        try {
             numberOwnedStocks = ownedStocks.get(userID).get(stock);
-        }
-        catch(NullPointerException e){
+        } catch (NullPointerException e) {
             return 0;
         }
         return numberOwnedStocks;
@@ -124,7 +122,7 @@ public class StockMarket implements IValuable {
     public void simulate(String stock) {
 
         for (int i = 0; i < 50; i++) {
-                update(stock, random.nextInt(22) - 10);
+            update(stock, random.nextInt(22) - 10);
         }
     }
 
