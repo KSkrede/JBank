@@ -5,38 +5,41 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BankManager {
-    private Map<String, ArrayList<BankAccount>> BankManager;
+    private Map<String, ArrayList<BankAccount>> bankManager;
 
     public BankManager() {
-        BankManager = new HashMap<>();
+        bankManager = new HashMap<>();
     }
 
     public Map<String, ArrayList<BankAccount>> getAllBankAccounts() {
-        return BankManager;
+        return bankManager;
     }
 
     public ArrayList<BankAccount> getBankAccounts(Person user) {
-        if (BankManager.get(user.getUserId()) == null) {
+        if (bankManager.get(user.getUserId()) == null) {
             throw new IllegalStateException("Ingen bankkontoer eksisterer foreløpig");
         } else
-            return new ArrayList<>(BankManager.get(user.getUserId()));
+            return new ArrayList<>(bankManager.get(user.getUserId()));
     }
 
     public void deleteBankAccount(Person user, BankAccount bankAccount){
-        if (!BankManager.get(user.getUserId()).contains(bankAccount)){
-            throw new IllegalArgumentException("Du kan ikke slette en konto som ikke finnes");
+        if(bankManager.get(user.getUserId()) == null){
+            throw new IllegalArgumentException("Du kan ikke slette kontoer før du har noen");
+        }
+        if (!bankManager.get(user.getUserId()).contains(bankAccount)){// || getAllBankAccounts().get(user.getUserId()).contains(bankAccount)){
+            throw new IllegalArgumentException("Du kan ikke slette en konto som du ikke har");
         }
         else {
-            BankManager.get(user.getUserId()).remove(bankAccount);
+            bankManager.get(user.getUserId()).remove(bankAccount);
         }
     }
 
     public void addBank(String userid, BankAccount bankAccount) {
 
-        if (BankManager.get(userid) == null) {
-            BankManager.put(userid, new ArrayList<BankAccount>());
+        if (bankManager.get(userid) == null) {
+            bankManager.put(userid, new ArrayList<BankAccount>());
         }
-        BankManager.get(userid).add(bankAccount);
+        bankManager.get(userid).add(bankAccount);
     }
 
     public Boolean hasFunds(BankAccount bank, int value){
@@ -84,7 +87,7 @@ public class BankManager {
 
     @Override
     public String toString() {
-        return "" + BankManager;
+        return "" + bankManager;
     }
 
 }

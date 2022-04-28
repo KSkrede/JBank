@@ -75,12 +75,12 @@ public class Person {
         if (phoneNumber.length() == 8 && JBankHelp.isAllDigit(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
-            throw new IllegalArgumentException("Ulovelig telefonnummer " + phoneNumber);
+            throw new IllegalArgumentException("Ulovelig telefonnummer " + phoneNumber + ". Du må ha 8 siffer");
         }
     }
 
     public void setPin(String pin) {
-        if (JBankHelp.isAllDigit(pin)) {
+        if (JBankHelp.isAllDigit(pin) && pin != ""){
             this.pin = pin;
         } else {
             throw new IllegalArgumentException("Ulovelig BankIDpin " + pin);
@@ -119,7 +119,7 @@ public class Person {
     }
 
     public String prettyString(){
-        return givenName + " " + surName;
+        return getFullName();
     }
 
     public String getFullName(){

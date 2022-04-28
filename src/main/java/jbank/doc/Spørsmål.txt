@@ -8,7 +8,9 @@ Flytte logikk ut av kontrolleren, se StockController - går greit
  Filhåndtering Mac - legge alle resources i resource mappen
  Lagrings av maps av maps - gjør manuelt eller ikke
 
- Arv på kontrollerne?
- Er JBankHelp klassen delegering, når det bare er statiske metoder?
- Om eg har observatør-observert i en aksjeindeks, evt med mouseclick?
- Burde eg ha et stort diagram, eller flere små som viser hver sin del av appen?
+
+
+Fjerne kode som ikke brukes, men som kan være med å utvide
+Bug med å trykke på aksjer i starten av appen
+
+

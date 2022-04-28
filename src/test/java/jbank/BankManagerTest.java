@@ -1,0 +1,65 @@
+package jbank;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import jbank.data.BankAccount;
+import jbank.data.BankManager;
+import jbank.data.Person;
+
+public class BankManagerTest {
+
+    BankManager bankManager;
+    BankAccount bank;
+    BankAccount otherBank;
+    Person person;
+    Person otherPerson;
+
+    @BeforeEach
+    public void setup() {
+        this.bankManager = new BankManager();
+        this.bank = new BankAccount("Test", 100);
+        this.otherBank = new BankAccount("other", 123);
+        this.person = new Person("12345678", LocalDate.now().minusYears(19), "Ola", "Nordmann", "1234");
+        bankManager.addBank(person.getUserId(), bank);
+        this.otherPerson = new Person("87654321", LocalDate.now().minusYears(19), "Erna", "Solberg", "1234");
+    }
+
+    @Test
+    public void testGetBankAccounts() {
+        assertThrows(IllegalStateException.class, () -> {
+            BankManager b1 = new BankManager();
+            b1.getBankAccounts(person);
+        }, "Ingen bankkontoer eksisterer foreløpig");
+
+        assertEquals(new ArrayList<>(Arrays.asList(bank)), bankManager.getAllBankAccounts().get(person.getUserId()));
+        assertEquals(new ArrayList<>(Arrays.asList(bank)), bankManager.getBankAccounts(person));
+    }
+
+    @Test
+    public void testDeleteBankAccount() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            BankManager b2 = new BankManager();
+            b2.deleteBankAccount(otherPerson, bank);
+        }, "Du kan ikke slette en konto som du ikke har");
+
+        bankManager.deleteBankAccount(person, bank);
+        bankManager.addBank(person.getUserId(), otherBank);
+        assertEquals(new ArrayList<>(Arrays.asList(otherBank)), bankManager.getBankAccounts(person));
+    }
+
+    @Test
+    public void testFunds() {
+
+    }
+}
+
+// assertEquals(true, bankManager.hasFunds(bank, 100));
+// new BankAccount("random", 123)
