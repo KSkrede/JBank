@@ -1,6 +1,5 @@
 package jbank.data;
 
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 import jbank.logic.JBankHelp;

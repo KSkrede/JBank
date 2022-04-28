@@ -8,6 +8,8 @@ import java.util.Random;
 
 public class StockMarket implements IValuable, Runnable {
 
+    //Hentet fra min egen Øving 6 StockListner og Runnable eksempelet
+   // https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/students/-/tree/main/foreksempel/src/main/java/uke12/listener/stocks
 
     private Map<String, Integer> stocks = new HashMap<>();
     List<StockListener> listeners = new ArrayList<StockListener>();
@@ -17,9 +19,10 @@ public class StockMarket implements IValuable, Runnable {
 
     public StockMarket() {
         stocks = new HashMap<>();
-        update("Aksje1", 500);
-        update("Aksje2", 250);
-        update("Aksje3", 12);
+        update("AAPL", 300);
+        update("ORCL", 250);
+        update("TSLA", 420);
+        update("TWTR", 12);
         ownedStocks = new HashMap<>();
     }
 
