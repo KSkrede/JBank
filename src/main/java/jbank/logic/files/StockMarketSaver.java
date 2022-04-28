@@ -12,6 +12,7 @@ public class StockMarketSaver implements IFileHandler {
     @Override
     public void readObject(String fileName, Jbank jbank) throws IOException {
         StockMarket stockMarket = jbank.getStockMarket();
+        try{
         File file = new File(fileName + "_stocks.txt");
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
@@ -19,6 +20,9 @@ public class StockMarketSaver implements IFileHandler {
             stockMarket.buy(fileName, element[0], Integer.parseInt(element[1]));
         }
         scanner.close();
+    } catch (IOException e) {
+        writeObject(fileName, jbank);
+    }
 
         File stocks = new File("stocks.txt");
         Scanner stockScanner = new Scanner(stocks);

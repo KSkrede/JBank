@@ -17,7 +17,7 @@ public class BankManager {
 
     public ArrayList<BankAccount> getBankAccounts(Person user) {
         if (bankManager.get(user.getUserId()) == null) {
-            throw new IllegalStateException("Ingen bankkontoer eksisterer foreløpig");
+            return new ArrayList<>();
         } else
             return new ArrayList<>(bankManager.get(user.getUserId()));
     }

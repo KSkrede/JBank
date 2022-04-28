@@ -105,14 +105,11 @@ public class Jbank {
     public void jBankLogin() throws IllegalArgumentException, IOException {
         try{
 
-        this.getAccountSaver().readAccounts("accounts", accounts);
+        this.getAccountSaver().readObject("accounts", this);
     }
     catch (IOException e){
         throw new IllegalStateException("Databasen med kontoer ble ikke funnet, venlist lag kontoer på nytt");
     }
-        if (getAccountMap().isEmpty()) {
-            throw new IllegalArgumentException("Det er foreløpig ingen kontoer lagret");
-        }
     }
 
     public Boolean userLogin(String userID) {

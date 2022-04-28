@@ -11,13 +11,17 @@ import jbank.data.BankAccount;
 public class BankManagerSaver implements IFileHandler {
     @Override
     public void readObject(String fileName, Jbank jbank) throws IOException {
-        File file = new File(fileName + "_bankaccounts.txt");
-        Scanner scanner = new Scanner(file);
-        while (scanner.hasNextLine()) {
-            String[] element = scanner.nextLine().split(";");
-            jbank.getBankManager().addBank(fileName, new BankAccount(element[0], Integer.parseInt(element[1])));
+        try {
+            File file = new File(fileName + "_bankaccounts.txt");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String[] element = scanner.nextLine().split(";");
+                jbank.getBankManager().addBank(fileName, new BankAccount(element[0], Integer.parseInt(element[1])));
+            }
+            scanner.close();
+        } catch (IOException e) {
+            writeObject(fileName, jbank);
         }
-        scanner.close();
     }
 
     @Override

@@ -5,7 +5,9 @@
 Lage tester
 Cleanup scenebuilder
 Kildeføre øving /forelesning - ja, vær obs på plagiat
-les til fik som eksempelet
+Fikse aksjeview som homeview listview
+Override Bankacount sånn at den thrower noe
+encoding error
 
 
 
@@ -16,7 +18,7 @@ Dokumentasjon:
 
 Teit filhåndtering for at det skal fungere på mac
 
-Readme som brukerdokumentasjon
+
 
 
 

@@ -47,7 +47,7 @@ public class SettingsController {
     public void removePerson() throws IOException {
         if (JBankHelp.confirm("Er du sikker på at du vil slette kontoen din?")) {
             jbank.getAccountObject().removePerson();
-            jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
+            jbank.getAccountSaver().writeObject("accounts", jbank);
             jbank.getApp().changeScene("login.fxml");
         }
     }
@@ -59,7 +59,7 @@ public class SettingsController {
                 JBankHelp.showErrorMessage("Ulovlig navn " + newName);
             } else {
                 jbank.getAccountObject().changeGivenName(newName);
-                jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
+                jbank.getAccountSaver().writeObject("accounts", jbank);
                 JBankHelp.showInformation("Navnebytte",
                         "Navnebyttet var vellyket, velkommen tilbake " + newName + "\n Venligst logg inn på nytt");
                 jbank.getApp().changeScene("login.fxml");
@@ -74,7 +74,7 @@ public class SettingsController {
                 JBankHelp.showErrorMessage("Ulovlig navn " + newName);
             } else {
                 jbank.getAccountObject().changeSurName(newName);
-                jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
+                jbank.getAccountSaver().writeObject("accounts", jbank);
                 JBankHelp.showInformation("Navnebytte", "Navnebyttet var vellyket, ditt nye etternavn er nå " + newName
                         + "\n Venligst logg inn på nytt");
                 jbank.getApp().changeScene("login.fxml");
@@ -91,7 +91,7 @@ public class SettingsController {
                     JBankHelp.showErrorMessage("Ulovlig pin");
                 } else {
                     jbank.getAccountObject().changePin(newPin);
-                    jbank.getAccountSaver().writeAccounts("accounts", jbank.getAccountObject());
+                    jbank.getAccountSaver().writeObject("accounts", jbank);
                     JBankHelp.showInformation("Pin bytte",
                             "Pin bytte var vellyket, dinn nye pin er nå " + newPin + "\n Venligst logg inn på nytt");
                     jbank.getApp().changeScene("login.fxml");
