@@ -26,7 +26,7 @@ public class BankManager {
         if(bankManager.get(user.getUserId()) == null){
             throw new IllegalArgumentException("Du kan ikke slette kontoer før du har noen");
         }
-        if (!bankManager.get(user.getUserId()).contains(bankAccount)){// || getAllBankAccounts().get(user.getUserId()).contains(bankAccount)){
+        if (!bankManager.get(user.getUserId()).contains(bankAccount)){
             throw new IllegalArgumentException("Du kan ikke slette en konto som du ikke har");
         }
         else {

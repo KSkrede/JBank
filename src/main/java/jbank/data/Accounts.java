@@ -35,36 +35,34 @@ public class Accounts {
     }
 
 
-    public void removePerson(){
-        if(accounts.containsKey(loggedInPerson.getUserId())){
-            throw new IllegalArgumentException("Konto finnes ikke");
-        }
+    public void removePerson() throws IllegalAccessException{
+        verifyUser();
         accounts.remove(loggedInPerson.getUserId());
         this.loggedInPerson = null;
     }
 
-    public void changeGivenName(String newName){
-        if(accounts.containsKey(loggedInPerson.getUserId())){
-            throw new IllegalArgumentException("Konto finnes ikke");
-        }
+    public void changeGivenName(String newName) throws IllegalAccessException{
+        verifyUser();
         accounts.get(loggedInPerson.getUserId()).setGivenName(newName);
         this.loggedInPerson = null;
     }
 
-    public void changeSurName(String newName){
-        if(accounts.containsKey(loggedInPerson.getUserId())){
-            throw new IllegalArgumentException("Konto finnes ikke");
-        }
+    public void changeSurName(String newName) throws IllegalAccessException{
+        verifyUser();
         accounts.get(loggedInPerson.getUserId()).setSurName(newName);
         this.loggedInPerson = null;
     }
 
-    public void changePin(String newPin){
-        if(accounts.containsKey(loggedInPerson.getUserId())){
-            throw new IllegalArgumentException("Konto finnes ikke");
-        }
+    public void changePin(String newPin) throws IllegalAccessException{
+        verifyUser();
         accounts.get(loggedInPerson.getUserId()).setPin(newPin);
         this.loggedInPerson = null;
+    }
+
+    private void verifyUser() throws IllegalAccessException{
+        if( getLoggedInPerson() == null || !accounts.containsKey(loggedInPerson.getUserId())){
+            throw new IllegalArgumentException("Konto finnes ikke");
+        }
     }
 
     @Override

@@ -1,6 +1,5 @@
 package jbank;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import jbank.data.Accounts;
 import jbank.data.Person;
-import jbank.logic.JBankHelp;
 
 public class AccountsTest {
 
@@ -24,77 +22,41 @@ public class AccountsTest {
     }
 
     @Test
-    public void testName() {
+    public void testAddPerson() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Person("12345678", LocalDate.now().minusYears(19), "abcdefghijklmnop", "abcdefghijklmnop", "1234");
-        }, "Bør få en feil ved veldig langt navn");
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Person("12345678", LocalDate.now().minusYears(19), "34t", "Nordmann", "1234");
-        }, "Det er et ulovlig tegn i 34t");
-
-        assertEquals("Ola", person.getGivenName());
-        assertEquals("Nordmann", person.getSurName());
-        assertEquals("Ola Nordmann", person.getFullName());
-        person.setName("Jens", "Stoltenberg");
-        assertEquals("Jens Stoltenberg", person.getFullName());
+            accounts.addPerson(person);
+            accounts.addPerson(person);
+        }, "Skal ikke kunne legge til samme konto flere ganger");
     }
 
     @Test
-    public void testBirthday() {
+    public void testRemovePerson() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Person("12345678", null, "Ola", "Nordmann", "1234");
-        }, "Du må velge en korrekt fødselsdato");
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Person("12345678", LocalDate.now().minusYears(15), "Ola", "Nordmann", "1234");
-        }, "Du må minst være 18 år for å lage konto her");
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Person("12345678", LocalDate.now().plusDays(5), "Ola", "Nordmann", "1234");
-        }, "Du kan ikke ha fødselsdato i fremtiden");
-
-        assertEquals(JBankHelp.dateToString(LocalDate.now().minusYears(19)), person.getBirthday());
+            accounts.removePerson();
+        }, "Skal ikke kunne fjerne bruker som ikke er logget inn");
 
     }
 
     @Test
-    public void testPhone() {
+    public void testChangeName() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Person("1234567", LocalDate.now().minusYears(19), "Ola", "Nordmann", "1234");
-        }, "Ulovelig telefonnummer 1234567. Du må ha 8 siffer");
+            accounts.changeGivenName("newName");
+        }, "Skal ikke kunne endre navn uten at du er logget inn");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Person("1234567a", LocalDate.now().minusYears(19), "Ola", "Nordmann", "1234");
-        }, "Ulovelig telefonnummer 1234567a. Du må ha 8 siffer");
+            accounts.changeSurName("newName");
+        }, "Skal ikke kunne endre navn uten at du er logget inn");
 
-        assertEquals("12345678", person.getPhoneNumber());
     }
 
     @Test
-    public void testPin() {
+    public void testChangePin() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Person("12345678", LocalDate.now().minusYears(19), "Ola", "Nordmann", "");
-        }, "Ulovelig BankIDpin");
+            accounts.changePin("1234");
+        }, "Skal ikke kunne endre navn uten at du er logget inn");
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Person("12345678", LocalDate.now().minusYears(19), "Ola", "Nordmann", "abc");
-        }, "Ulovelig BankIDpin");
-
-        assertEquals("1234", person.getPin());
-    }
-
-    @Test
-    public void testUserID() {
-        assertEquals("12345678" + (person.getBirthday()), person.getUserId());
-    }
-
-    @Test
-    public void testToString() {
-        assertEquals("12345678;" + JBankHelp.dateToString(LocalDate.now().minusYears(19)) + ";Ola;Nordmann",
-                person.toString());
     }
 
 }
