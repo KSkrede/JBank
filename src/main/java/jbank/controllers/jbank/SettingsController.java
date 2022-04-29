@@ -44,7 +44,7 @@ public class SettingsController {
         phoneNumber.setText("Mobilnummer: " + loggedInPerson.getPhoneNumber());
     }
 
-    public void removePerson() throws IOException {
+    public void removePerson() throws IOException, IllegalAccessException {
         if (JBankHelp.confirm("Er du sikker på at du vil slette kontoen din?")) {
             jbank.getAccountObject().removePerson();
             jbank.getAccountSaver().writeObject("accounts", jbank);
@@ -52,7 +52,7 @@ public class SettingsController {
         }
     }
 
-    public void changeGivenName() throws IOException {
+    public void changeGivenName() throws IOException, IllegalAccessException {
         if (JBankHelp.confirm("Er du sikker på at du vil endre fornavnet ditt?")) {
             String newName = JBankHelp.name();
             if (!JBankHelp.isAllLettersOrBlank(newName) || newName.equals("")) {
@@ -67,7 +67,7 @@ public class SettingsController {
         }
     }
 
-    public void changeSurName() throws IOException {
+    public void changeSurName() throws IOException, IllegalAccessException {
         if (JBankHelp.confirm("Er du sikker på at du vil endre etternavnet ditt?")) {
             String newName = JBankHelp.name();
             if (!JBankHelp.isAllLetters(newName) || newName.equals("")) {
@@ -82,7 +82,7 @@ public class SettingsController {
         }
     }
 
-    public void changePin() throws IOException {
+    public void changePin() throws IOException, IllegalAccessException {
         try {
             String currentPin = JBankHelp.pin("Skriv inn din nåværene pin: ");
             if (currentPin.equals(loggedInPerson.getPin())) {
