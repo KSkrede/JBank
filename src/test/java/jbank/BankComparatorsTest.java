@@ -14,19 +14,17 @@ public class BankComparatorsTest {
     private BankAccount b1;
     private BankAccount b2;
     private BankAccount b3;
-    private BankAccount b4;
 
-    private ValueSort nameSort;
-    private NameSort valueSort;
+    private ValueSort valueSort;
+    private NameSort nameSort;
 
     @BeforeEach
 	public void setup() {
-		nameSort = new ValueSort();
-        valueSort = new NameSort();
+		valueSort = new ValueSort();
+        nameSort = new NameSort();
 		b1 = new BankAccount("Bank1", 10);
         b2 = new BankAccount("Bank1", 20);
         b3 = new BankAccount("aa", 10);
-        b3 = new BankAccount("bb", 20);
 	}
 
     @Test
@@ -35,9 +33,15 @@ public class BankComparatorsTest {
         assertEquals(0, valueSort.compare(b1, b3));
     }
 
+    @Test
     public void testName() {
-        assertEquals(0, nameSort.compare(b1, b1));
-        assertEquals(0, valueSort.compare(b1, b2));
+        assertEquals(-31, nameSort.compare(b1, b3));
+        assertEquals(31, nameSort.compare(b3, b1));
+    }
+
+    public void testValue() {
+        assertEquals(-10, valueSort.compare(b1, b2));
+        assertEquals(10, valueSort.compare(b2, b1));
     }
 
 
