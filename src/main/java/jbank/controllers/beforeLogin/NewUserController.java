@@ -50,7 +50,7 @@ public class NewUserController {
             }
 
             String userID = phoneNumber.getText() + JBankHelp.dateToString(birthDate.getValue());
-            
+
             if (jbank.getAccountMap().containsKey(userID)) {
                 throw new IllegalArgumentException("Denne kontoen eksisterer allerede");
 
@@ -75,7 +75,6 @@ public class NewUserController {
         }
 
     }
-
 
     public void back(ActionEvent event) throws IOException {
         jbank.getApp().changeScene("login.fxml");

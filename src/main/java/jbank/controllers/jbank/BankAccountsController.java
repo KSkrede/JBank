@@ -65,19 +65,17 @@ public class BankAccountsController {
         }
     }
 
-    public void choseSort(){
-        try{
+    public void choseSort() {
+        try {
             String sort = JBankHelp.choseSort();
             Comparator<BankAccount> comparator = jbank.getSort(sort);
             this.sorting = comparator;
             toSort = true;
             updateListView();
 
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             JBankHelp.showErrorMessage(e.getMessage());
-        }
-        catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             JBankHelp.showErrorMessage("Du må ta et valg");
         }
 
@@ -91,10 +89,10 @@ public class BankAccountsController {
         }
 
         catch (IllegalStateException e) {
-            //This error comes when you dont have an account yet
+            // This error comes when you dont have an account yet
             loggedInPersonBankAccounts = new ArrayList<>();
         }
-        if(toSort && sorting != null){
+        if (toSort && sorting != null) {
             Collections.sort(loggedInPersonBankAccounts, sorting);
         }
         bankList.getItems().addAll(loggedInPersonBankAccounts);
@@ -126,6 +124,9 @@ public class BankAccountsController {
                 jbank.getBankManager().addBank(loggedInPerson.getUserId(), bankAccount);
                 jbank.getBankManagerSaver().writeObject(loggedInPerson.getUserId(), jbank);
                 JBankHelp.showInformation("Ny bankkonto opprettet", bankAccount.toString());
+                bankName.clear();
+                bankAmount.clear();
+
             }
 
             updateListView();
@@ -141,10 +142,12 @@ public class BankAccountsController {
             if (loggedInPersonBankAccounts.size() < 2) {
                 throw new IllegalArgumentException("Du må ha minimum to kontoer for å overføre penger");
             }
-            BankAccount source = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts, "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
+            BankAccount source = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts,
+                    "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
             ArrayList<BankAccount> bankAccountsreduced = new ArrayList<BankAccount>(loggedInPersonBankAccounts);
             bankAccountsreduced.remove(source);
-            BankAccount destination = JBankHelp.choseBankAccount(bankAccountsreduced.get(0), bankAccountsreduced, "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");;
+            BankAccount destination = JBankHelp.choseBankAccount(bankAccountsreduced.get(0), bankAccountsreduced,
+                    "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");
             int amount = JBankHelp.amount();
 
             jbank.getBankManager().movefunds(source, destination, amount);

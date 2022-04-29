@@ -35,11 +35,11 @@ public class BankManagerTest {
     @Test
     public void testGetBankAccounts() {
 
-        //When no accounnts, shoud get null
+        // When no accounnts, shoud get null
         BankManager b1 = new BankManager();
         b1.getBankAccounts(person);
         assertEquals(null, b1.getAllBankAccounts().get(person.getUserId()));
-        
+
         assertEquals(new ArrayList<>(Arrays.asList(bank)), bankManager.getAllBankAccounts().get(person.getUserId()));
         assertEquals(new ArrayList<>(Arrays.asList(bank)), bankManager.getBankAccounts(person));
     }

@@ -12,21 +12,13 @@ import jbank.data.Person;
 
 public class AccountsTest {
 
-   Accounts accounts;
-   Person person;
+    Accounts accounts;
+    Person person;
 
     @BeforeEach
     public void setup() {
         this.person = new Person("12345678", LocalDate.now().minusYears(19), "Ola", "Nordmann", "1234");
         this.accounts = new Accounts();
-    }
-
-    @Test
-    public void testAddPerson() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            accounts.addPerson(person);
-            accounts.addPerson(person);
-        }, "Skal ikke kunne legge til samme konto flere ganger");
     }
 
     @Test

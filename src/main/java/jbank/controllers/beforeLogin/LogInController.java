@@ -30,10 +30,9 @@ public class LogInController {
             jbank.jBankLogin();
         } catch (IllegalArgumentException | IOException e) {
             JBankHelp.showErrorMessage(e.getMessage());
+        } catch (IllegalStateException e) {
+            // its fine that you dont have any accounts the first time you login
         }
-        // catch (IllegalStateException e){
-        //     //its fine that you dont have any accounts the first time you login
-        // }
     }
 
     public void newUser() throws IOException {

@@ -44,9 +44,8 @@ public class StockMarketSaverTest {
         File stocks = new File("stocks.txt");
         stocks.delete();
 
-        
     }
-    
+
     @Test
     public void testReader() throws IOException {
         File fileRead = new File("testfile_read_stocks.txt");

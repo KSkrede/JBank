@@ -11,51 +11,48 @@ import jbank.data.StockMarket;
 public class StockIndexTest {
 
 	private StockIndex index;
-    private StockMarket stockMarket;
+	private StockMarket stockMarket;
 
 	@BeforeEach
 	public void setup() {
-        this.stockMarket = new StockMarket();
+		this.stockMarket = new StockMarket();
 		this.index = new StockIndex("index", stockMarket);
 	}
-
 
 	@Test
 	public void testAddStock() {
 
-		//Looks weird because there are default stocks initiated
-        assertEquals(245, index.getAvg());
-        stockMarket.addStock("NewStock", 100);
+		// Looks weird because there are default stocks initiated
+		assertEquals(245, index.getAvg());
+		stockMarket.addStock("NewStock", 100);
 		index.addStock("NewStock");
-        assertEquals(216, index.getAvg());
+		assertEquals(216, index.getAvg());
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			index.addStock("RandomStock");
-        }, "Du skal ikke kunne legge til en aksje ikke er på aksjemarkedet");
+		}, "Du skal ikke kunne legge til en aksje ikke er på aksjemarkedet");
 
-    }
-
+	}
 
 	@Test
 	public void testAddDuplicateStock() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			index.addStock("AAPL");
-        }, "Du skal ikke kunne legge til en aksje som allerede");
-		
+		}, "Du skal ikke kunne legge til en aksje som allerede");
+
 	}
 
 	@Test
 	public void testRemoveStock() {
-        assertEquals(245, index.getAvg());
-        this.stockMarket.addStock("NewStock", 100);
+		assertEquals(245, index.getAvg());
+		this.stockMarket.addStock("NewStock", 100);
 		index.addStock("NewStock");
-        assertEquals(216, index.getAvg());
+		assertEquals(216, index.getAvg());
 		index.removeStock("NewStock");
-        assertEquals(245, index.getAvg());
-
+		assertEquals(245, index.getAvg());
 		assertThrows(IllegalArgumentException.class, () -> {
 			index.addStock("RandomStock");
-        }, "Du skal ikke kunne fjerne aksje som ikke er i indeksen");
+		}, "Du skal ikke kunne fjerne aksje som ikke er i indeksen");
 
 	}
 

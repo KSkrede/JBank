@@ -19,13 +19,13 @@ public class BankComparatorsTest {
     private NameSort nameSort;
 
     @BeforeEach
-	public void setup() {
-		valueSort = new ValueSort();
+    public void setup() {
+        valueSort = new ValueSort();
         nameSort = new NameSort();
-		b1 = new BankAccount("Bank1", 10);
+        b1 = new BankAccount("Bank1", 10);
         b2 = new BankAccount("Bank1", 20);
         b3 = new BankAccount("aa", 10);
-	}
+    }
 
     @Test
     public void testIdentical() {
@@ -44,7 +44,4 @@ public class BankComparatorsTest {
         assertEquals(10, valueSort.compare(b2, b1));
     }
 
-
-
-    
 }

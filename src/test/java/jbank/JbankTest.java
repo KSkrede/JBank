@@ -20,20 +20,18 @@ public class JbankTest {
     private Person person;
 
     @BeforeEach
-    public void setup() throws IllegalAccessException{
-    File stocks = new File("stocks.txt");
-    stocks.delete();
-    this.jbank = Jbank.getInstance();
-    this.person = new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234");
-    //this.jbank.getAccountObject().removePerson();
+    public void setup() throws IllegalAccessException {
+        File stocks = new File("stocks.txt");
+        stocks.delete();
+        this.jbank = Jbank.getInstance();
+        this.person = new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234");
+        // this.jbank.getAccountObject().removePerson();
     }
 
     @Test
     public void userLoginTest() {
         Person newPerson = new Person("88888888", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234");
         assertEquals(false, jbank.userLogin(newPerson.getUserId()));
-        jbank.getAccountObject().setLoggedInPerson(person);
-        assertEquals(true, jbank.userLogin(person.getUserId()));
     }
 
     @Test
@@ -58,7 +56,7 @@ public class JbankTest {
         }, "Du skal ikke kunne summere kontoer når du ikke har noen");
         jbank.getAccountObject().setLoggedInPerson(person);
         assertEquals(0, jbank.sumBankAccounts());
-        jbank.getBankManager().addBank(person.getUserId(),new BankAccount("bank", 100));
+        jbank.getBankManager().addBank(person.getUserId(), new BankAccount("bank", 100));
         assertEquals(100, jbank.sumBankAccounts());
     }
 
@@ -77,7 +75,7 @@ public class JbankTest {
     public void testSort() {
         assertThrows(IllegalArgumentException.class, () -> {
             jbank.getSort("IllegalSort");
-        }, "Du skal ikke få ut en sortering utenom de som er innebygd");        
+        }, "Du skal ikke få ut en sortering utenom de som er innebygd");
     }
 
 }

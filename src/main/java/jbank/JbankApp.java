@@ -13,7 +13,7 @@ public class JbankApp extends Application {
     private static Stage stage;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
         primaryStage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));

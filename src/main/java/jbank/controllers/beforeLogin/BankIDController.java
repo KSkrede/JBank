@@ -1,4 +1,5 @@
 package jbank.controllers.beforeLogin;
+
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -11,7 +12,8 @@ import jbank.logic.BankID;
 import jbank.logic.JBankHelp;
 
 public class BankIDController {
-    public BankIDController() {}
+    public BankIDController() {
+    }
 
     @FXML
     private Button backButton;
@@ -28,17 +30,16 @@ public class BankIDController {
 
     Jbank jbank;
     Person loggedInPerson;
-    
 
     @FXML
     public void initialize() {
         jbank = Jbank.getInstance();
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
         setBankIDLabel();
-        nameLabel.setText("Velkommen tilbake " + loggedInPerson.getGivenName() + ". Din BankID Referanse:"); 
+        nameLabel.setText("Velkommen tilbake " + loggedInPerson.getGivenName() + ". Din BankID Referanse:");
     }
 
-    private void setBankIDLabel(){
+    private void setBankIDLabel() {
         BankIDLabel.setText(BankID.getBankIDText());
     }
 
@@ -54,13 +55,11 @@ public class BankIDController {
 
     @FXML
     private void Login() throws IOException {
-        if(loggedInPerson.getPin().equals(pinField.getText().toString())) {
+        if (loggedInPerson.getPin().equals(pinField.getText().toString())) {
             jbank.getApp().changeScene("jbank/jBank.fxml");
-        }
-        else JBankHelp.showErrorMessage(pinField.getText().toString() + " er feil pin");
+        } else
+            JBankHelp.showErrorMessage(pinField.getText().toString() + " er feil pin");
+
+    }
 
 }
-
-}
-
-

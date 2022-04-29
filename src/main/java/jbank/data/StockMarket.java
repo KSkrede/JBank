@@ -83,12 +83,13 @@ public class StockMarket implements IValuable {
         if (value <= 0) {
             throw new IllegalArgumentException("Aksjen kan ikke ha 0 eller negativ verdi");
         }
-        if (stocks.keySet().stream().filter(stock->!defaultStocks.contains(stock)).anyMatch(stock -> name.equals(stock))) {
-                 throw new IllegalArgumentException("Denne akjsen eksisterer allerede");
-        } 
-        else {
+        if (stocks.keySet().stream().filter(stock -> !defaultStocks.contains(stock))
+                .anyMatch(stock -> name.equals(stock))) {
+            throw new IllegalArgumentException("Denne akjsen eksisterer allerede");
+        } else {
             stocks.merge(name, value, (a, b) -> a + b);
-        }}
+        }
+    }
 
     public void nextDay() {
         for (String stock : getTickers()) {

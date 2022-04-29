@@ -25,7 +25,7 @@ public class BankManagerSaverTest {
         assertDoesNotThrow(() -> {
             jbank = Jbank.getInstance();
             jbank.getAccountObject().addPerson(
-                new Person("56565656", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234"));
+                    new Person("56565656", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234"));
             bankManagerSaver.readObject("56565656010100", Jbank.getInstance());
         });
         File noFile = new File("56565656010100_bankaccounts.txt");
@@ -45,9 +45,9 @@ public class BankManagerSaverTest {
         }
         scanner.close();
         fileWrite.delete();
-        
+
     }
-    
+
     @Test
     public void testReader() throws IOException {
         File fileRead = new File("testfile_read_bankaccounts.txt");
@@ -58,7 +58,8 @@ public class BankManagerSaverTest {
         jbank.getBankManagerSaver().readObject("testfile_read", jbank);
         BankAccount bank = new BankAccount("Bankkonto", 321);
         assertEquals(bank.getName(), jbank.getBankManager().getAllBankAccounts().get("testfile_read").get(0).getName());
-        assertEquals(bank.getValue(), jbank.getBankManager().getAllBankAccounts().get("testfile_read").get(0).getValue());
+        assertEquals(bank.getValue(),
+                jbank.getBankManager().getAllBankAccounts().get("testfile_read").get(0).getValue());
         fileRead.delete();
 
     }

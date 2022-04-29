@@ -15,30 +15,29 @@ import jbank.data.StockTracker;
 
 public class StockTrackerTest {
 
-    private StockMarket stockMarket;
+	private StockMarket stockMarket;
 	private StockIndex stockIndex;
 	private StockTracker stockTracker;
 
 	@BeforeEach
 	public void setup() {
-        this.stockMarket = new StockMarket();
+		this.stockMarket = new StockMarket();
 		this.stockIndex = new StockIndex("indeks", stockMarket);
 		this.stockTracker = new StockTracker();
 	}
-
 
 	@Test
 	public void testLog() {
 		assertEquals(0, stockTracker.getStockprice(1, "AAPL"));
 		stockTracker.log(stockMarket.getStocks(), 1, 400);
 		assertEquals(300, stockTracker.getStockprice(1, "AAPL"));
-		
+
 		assertThrows(IllegalArgumentException.class, () -> {
-			stockTracker.log(stockMarket.getStocks(), -2, 400);stockTracker.getStockprice(-2, "AAPL");
-        }, "Skal ikke kunne logge negative dager");
+			stockTracker.log(stockMarket.getStocks(), -2, 400);
+			stockTracker.getStockprice(-2, "AAPL");
+		}, "Skal ikke kunne logge negative dager");
 
-    }
-
+	}
 
 	@Test
 	public void testGetStocklogs() {
@@ -58,4 +57,4 @@ public class StockTrackerTest {
 		assertEquals(indexLogs, stockTracker.getIndexlogs());
 	}
 
- }
+}

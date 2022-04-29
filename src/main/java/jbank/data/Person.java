@@ -20,8 +20,6 @@ public class Person {
         setBirthday(birthDate);
         setPin(pin);
         this.userId = phoneNumber + JBankHelp.dateToString(birthDate);
-        Accounts a = new Accounts();
-        a.addPerson(this);
     }
 
     public void setName(String givenName, String surName) {
@@ -54,8 +52,6 @@ public class Person {
         LocalDate today = LocalDate.now();
         if (birthDate == null) {
             throw new IllegalArgumentException("Du må velge fødselsdato");
-        } else if (birthDate.isAfter(today)) {
-            throw new IllegalArgumentException("Du kan ikke ha fødselsdato i fremtiden");
         } else if (birthDate.isAfter(today.minusYears(18))) {
             throw new IllegalArgumentException("Du må minst være 18 år for å lage konto her");
         }

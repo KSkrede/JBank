@@ -1,8 +1,8 @@
 package jbank.controllers.jbank;
+
 import java.util.ArrayList;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import jbank.Jbank;
@@ -80,9 +80,9 @@ public class HomeController {
     }
 
     public void updateInfo() {
-        try { 
-            if(selectedItem == null){
-                //Do nothing
+        try {
+            if (selectedItem == null) {
+                // Do nothing
             }
 
             else if (selectedItem == stockOwned.getSelectionModel().getSelectedItem()) {
@@ -103,7 +103,7 @@ public class HomeController {
             }
 
         } catch (NullPointerException e) {
-            //Do nothing when no item is selected
+            // Do nothing when no item is selected
         }
     }
 

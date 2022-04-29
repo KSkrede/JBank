@@ -40,4 +40,5 @@ public class BankManagerSaver implements IFileHandler {
         }
         writer.close();
 
-}}
+    }
+}

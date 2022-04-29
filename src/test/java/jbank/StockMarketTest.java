@@ -2,7 +2,6 @@ package jbank;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,25 +12,23 @@ import jbank.data.StockMarket;
 
 public class StockMarketTest {
 
-    private StockMarket stockMarket;
+	private StockMarket stockMarket;
 
 	@BeforeEach
 	public void setup() {
-        this.stockMarket = new StockMarket();
+		this.stockMarket = new StockMarket();
 	}
-
 
 	@Test
 	public void TestgetValue() {
-        assertEquals(300, stockMarket.getValue("AAPL"));
+		assertEquals(300, stockMarket.getValue("AAPL"));
 		assertThrows(IllegalArgumentException.class, () -> {
 			stockMarket.getValue("RandomStock");
-        }, "Skal kaste feilmeldingen når aksjen ikke eksisterer");
+		}, "Skal kaste feilmeldingen når aksjen ikke eksisterer");
 
 		assertEquals(300, stockMarket.getValue("AAPL"));
 
-    }
-
+	}
 
 	@Test
 	public void testValuableListners() {
@@ -39,13 +36,13 @@ public class StockMarketTest {
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			stockMarket.addValuableListner(listner);
-        }, "Skal kaste feilmeldingen når observatør allerede er i listen");
+		}, "Skal kaste feilmeldingen når observatør allerede er i listen");
 
 		stockMarket.removeValuableListener(listner);
 
-		assertDoesNotThrow(()->{
-            stockMarket.addValuableListner(listner);
-        });
+		assertDoesNotThrow(() -> {
+			stockMarket.addValuableListner(listner);
+		});
 	}
 
 	@Test
@@ -58,7 +55,8 @@ public class StockMarketTest {
 
 	@Test
 	public void testNextDay() {
-		//Below test is unstable as index sometimes does not change. But can still be usefull for testing
+		// Below test is unstable as index sometimes does not change. But can still be
+		// usefull for testing
 		// StockIndex listner = new StockIndex("index", stockMarket);
 		// int before = listner.getAvg();
 		// stockMarket.nextDay();
@@ -68,7 +66,7 @@ public class StockMarketTest {
 
 	@Test
 	public void testBuySell() {
-		//Also tests numberOwnedStocks
+		// Also tests numberOwnedStocks
 		stockMarket.buy("1234", "AAPL", 5);
 		assertEquals(5, stockMarket.numberOwnedStocks("1234", "AAPL"));
 		stockMarket.sell("1234", "AAPL", 2);
@@ -76,13 +74,11 @@ public class StockMarketTest {
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			stockMarket.sell("1234", "RandomStock", 2);
-        }, "Skal ikke kunne selge en aksje du ikke eier");
+		}, "Skal ikke kunne selge en aksje du ikke eier");
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			stockMarket.sell("1234", "RandomStock", 10);
-        }, "Skal ikke kunne selge flere aksjer enn du eier");
-
-
+		}, "Skal ikke kunne selge flere aksjer enn du eier");
 
 	}
- }
+}

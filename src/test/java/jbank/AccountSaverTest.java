@@ -47,7 +47,7 @@ public class AccountSaverTest {
         }
         scanner.close();
         fileWrite.delete();
-        
+
     }
 
     public void testReader() throws IOException {
@@ -59,7 +59,9 @@ public class AccountSaverTest {
         jbank.getAccountSaver().readObject("testfile_read", jbank);
         Person ola = new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234");
         assertEquals(ola, jbank.getAccountMap().get("12345678010100"));
+        File accounts = new File("accounts.txt");
         fileRead.delete();
+        accounts.delete();
 
     }
 }

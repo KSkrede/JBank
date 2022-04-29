@@ -2,8 +2,8 @@ package jbank.data;
 
 public abstract class AbstractBank {
 
-    //Inspirert av Øving 7;
- 
+    // Inspirert av Øving 7;
+
     protected String name;
     protected Integer value;
 
@@ -20,11 +20,11 @@ public abstract class AbstractBank {
         return value;
     }
 
-    public void addValue(int funds){
+    public void addValue(int funds) {
         value = value + funds;
     }
 
-    public void removeValue(int funds){
+    public void removeValue(int funds) {
         value = value - funds;
     }
 
@@ -33,10 +33,4 @@ public abstract class AbstractBank {
         return name;
     }
 
-    
-    
-
-
-
-    
 }

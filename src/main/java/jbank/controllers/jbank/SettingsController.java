@@ -96,8 +96,7 @@ public class SettingsController {
                             "Pin bytte var vellyket, dinn nye pin er nå " + newPin + "\n Venligst logg inn på nytt");
                     jbank.getApp().changeScene("login.fxml");
                 }
-            }
-            else{
+            } else {
                 JBankHelp.showErrorMessage(currentPin + "Er ikke din pin");
             }
         } catch (IllegalArgumentException e) {

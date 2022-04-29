@@ -156,6 +156,8 @@ public class StockController {
             stockmarket.addStock(name, price);
             jbank.getStockIndex().addStock(name);
             JBankHelp.showInformation("Ny aksje impotert", name);
+            ticker.clear();
+            value.clear();
         } catch (NumberFormatException e) {
             JBankHelp.showErrorMessage("Du låg inn en ulovlig verdi");
         } catch (IllegalArgumentException e) {

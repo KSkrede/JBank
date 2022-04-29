@@ -18,11 +18,7 @@ public class Accounts {
 
     public void addPerson(Person person) {
         String userID = person.getUserId();
-        if (accounts.containsKey(userID)){
-            throw new IllegalArgumentException("Denne brukeren eksisterer allerede");
-        }
-        else{
-        accounts.put(userID, person);}
+        accounts.put(userID, person);
     }
 
 

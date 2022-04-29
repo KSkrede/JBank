@@ -56,23 +56,22 @@ public class JBankHelp {
         return count > 0;
     }
 
-// so that you can have a middlename
+    // so that you can have a middlename
     public static boolean isAllLettersOrBlank(String string) {
         int letters = 0;
         for (char c : string.toCharArray()) {
             if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
                 return false;
             }
-            if(Character.isLetter(c)){
+            if (Character.isLetter(c)) {
                 letters++;
             }
         }
-        if(letters > 0){
+        if (letters > 0) {
             return true;
         }
         return false;
     }
-
 
     // inspirert fra Øvingsforelesning 18.03.22
     public static void showErrorMessage(String errorMessage) {
@@ -92,7 +91,8 @@ public class JBankHelp {
     }
 
     public static BankAccount choseBankAccount(BankAccount selectedBankAccount,
-            ArrayList<BankAccount> loggedInPersonBankManager, String title, String header, String content) throws NoSuchElementException{
+            ArrayList<BankAccount> loggedInPersonBankManager, String title, String header, String content)
+            throws NoSuchElementException {
         ChoiceDialog<BankAccount> dialog = new ChoiceDialog<BankAccount>(selectedBankAccount,
                 loggedInPersonBankManager);
         dialog.setTitle(title);
@@ -111,8 +111,9 @@ public class JBankHelp {
         return chosenStock;
     }
 
-        public static String choseSort() {
-        ChoiceDialog<String> dialog = new ChoiceDialog<String>("Navn økende", "Navn økende", "Navn synkende", "Verdi økende", "Verdi synkende");
+    public static String choseSort() {
+        ChoiceDialog<String> dialog = new ChoiceDialog<String>("Navn økende", "Navn økende", "Navn synkende",
+                "Verdi økende", "Verdi synkende");
         dialog.setTitle("Velg sortering");
         dialog.setHeaderText("Velg sortering under:");
         String sort = dialog.showAndWait().get();
@@ -125,7 +126,7 @@ public class JBankHelp {
         dialog.setHeaderText("Velg et beløp: ");
         dialog.setContentText("Antall kr: ");
         String tester = dialog.showAndWait().get();
-        if (tester == null || tester == "" || !isAllDigit(tester)){
+        if (tester == null || tester == "" || !isAllDigit(tester)) {
             throw new IllegalArgumentException("Ugyldig valg");
         }
         int amount = Integer.parseInt(tester);
@@ -137,7 +138,7 @@ public class JBankHelp {
         dialog.setTitle("Antall");
         dialog.setHeaderText("Velg antall aksjer under: ");
         String tester = dialog.showAndWait().get();
-        if (tester == null || tester == "" || !isAllDigit(tester)){
+        if (tester == null || tester == "" || !isAllDigit(tester)) {
             throw new IllegalArgumentException("Ugyldig valg");
         }
         int number = Integer.parseInt(tester);

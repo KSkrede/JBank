@@ -22,14 +22,13 @@ public class BankManager {
             return new ArrayList<>(bankManager.get(user.getUserId()));
     }
 
-    public void deleteBankAccount(Person user, BankAccount bankAccount){
-        if(bankManager.get(user.getUserId()) == null){
+    public void deleteBankAccount(Person user, BankAccount bankAccount) {
+        if (bankManager.get(user.getUserId()) == null) {
             throw new IllegalArgumentException("Du kan ikke slette kontoer før du har noen");
         }
-        if (!bankManager.get(user.getUserId()).contains(bankAccount)){
+        if (!bankManager.get(user.getUserId()).contains(bankAccount)) {
             throw new IllegalArgumentException("Du kan ikke slette en konto som du ikke har");
-        }
-        else {
+        } else {
             bankManager.get(user.getUserId()).remove(bankAccount);
         }
     }
@@ -42,45 +41,42 @@ public class BankManager {
         bankManager.get(userid).add(bankAccount);
     }
 
-    public Boolean hasFunds(BankAccount bank, int value){
-    return bank.getValue() >= value; }
+    public Boolean hasFunds(BankAccount bank, int value) {
+        return bank.getValue() >= value;
+    }
 
-
-    public void addFunds(BankAccount bank, int funds){
-        if(funds < 0){
+    public void addFunds(BankAccount bank, int funds) {
+        if (funds < 0) {
             throw new IllegalArgumentException("Kan ikke legge til et negativt beløp");
-        }
-        else {
+        } else {
             bank.addValue(funds);
         }
     }
 
-    public void removeFunds(BankAccount bank, int funds){
-        if(funds < 0){
+    public void removeFunds(BankAccount bank, int funds) {
+        if (funds < 0) {
             throw new IllegalArgumentException("Kan ikke trekke fra et negativt beløp");
-        }
-        else {
+        } else {
             bank.removeValue(funds);
         }
     }
 
     public void movefunds(BankAccount source, BankAccount destination, int amount) {
-        if(source.getValue() < amount){
+        if (source.getValue() < amount) {
             throw new IllegalArgumentException(source + " har ikke dekning");
-        }
-        else{
+        } else {
             source.removeValue(amount);
             destination.addValue(amount);
         }
 
     }
 
-    public int getValue(Person user, String bank){
+    public int getValue(Person user, String bank) {
         for (BankAccount bankAccount : getBankAccounts(user)) {
-            if(bankAccount.getName().equals(bank)){
+            if (bankAccount.getName().equals(bank)) {
                 return bankAccount.getValue();
             }
-            
+
         }
         return 0;
     }

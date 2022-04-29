@@ -20,7 +20,7 @@ import jbank.logic.bankcomparators.*;
 
 public class Jbank {
     // Singleton
-    //https://www.geeksforgeeks.org/singleton-class-java/
+    // https://www.geeksforgeeks.org/singleton-class-java/
 
     private static Jbank single_instance = null;
 
@@ -38,7 +38,6 @@ public class Jbank {
     private Map<String, Comparator<BankAccount>> sortMap;
     private Comparator<BankAccount> nameSort = new NameSort();
     private Comparator<BankAccount> valueSort = new ValueSort();
-    
 
     private Jbank() {
         this.app = new JbankApp();
@@ -47,13 +46,12 @@ public class Jbank {
         this.BankManager = new BankManager();
         this.stockMarket = new StockMarket();
         this.stockTracker = new StockTracker();
-        this.stockIndex =  new StockIndex("indeks", stockMarket);
+        this.stockIndex = new StockIndex("indeks", stockMarket);
         this.loggedInPerson = getAccountObject().getLoggedInPerson();
         this.sortMap = new HashMap<>();
         this.bankManagerSaver = new BankManagerSaver();
         this.stockMarketSaver = new StockMarketSaver();
     }
-
 
     // Static method
     // Static method to create instance of Singleton class
@@ -94,11 +92,11 @@ public class Jbank {
         return this.stockTracker;
     }
 
-    public BankManagerSaver getBankManagerSaver(){
+    public BankManagerSaver getBankManagerSaver() {
         return this.bankManagerSaver;
     }
 
-    public StockMarketSaver getStockMarketSaver(){
+    public StockMarketSaver getStockMarketSaver() {
         return this.stockMarketSaver;
     }
 
@@ -122,7 +120,7 @@ public class Jbank {
 
     public void buyStocks(String stockToBuy, int number, BankAccount source, String userID) {
         int value = stockMarket.getValue(stockToBuy) * number;
-        if(value < 0){
+        if (value < 0) {
             throw new IllegalArgumentException("Kan ikke kjøpe aksjer med negativ verdi");
         }
         if (!getBankManager().hasFunds(source, value)) {
@@ -153,31 +151,29 @@ public class Jbank {
     }
 
     public int sumBankAccounts() {
-        if(getAccountObject().getLoggedInPerson() == null){
+        if (getAccountObject().getLoggedInPerson() == null) {
             throw new IllegalArgumentException("Det er ingen bruker logget inn");
-        }
-        else{
+        } else {
             loggedInPerson = getAccountObject().getLoggedInPerson();
         }
         Integer sum = 0;
         // try {
-            if (BankManager.getBankAccounts(loggedInPerson).isEmpty()) {
-                return 0;
-            }
-            for (BankAccount bankAccount : BankManager.getBankAccounts(loggedInPerson)) {
-                sum = sum + bankAccount.getValue();
-            }
-            return sum;
+        if (BankManager.getBankAccounts(loggedInPerson).isEmpty()) {
+            return 0;
+        }
+        for (BankAccount bankAccount : BankManager.getBankAccounts(loggedInPerson)) {
+            sum = sum + bankAccount.getValue();
+        }
+        return sum;
         // } catch (IllegalStateException e) {
-        //     return 0;
+        // return 0;
         // }
     }
 
     public int sumStocks() {
-        if(getAccountObject().getLoggedInPerson() == null){
+        if (getAccountObject().getLoggedInPerson() == null) {
             throw new IllegalArgumentException("Det er ingen bruker logget inn");
-        }
-        else{
+        } else {
             loggedInPerson = getAccountObject().getLoggedInPerson();
         }
         Integer sum = 0;
@@ -185,7 +181,7 @@ public class Jbank {
             return 0;
         }
         for (String stock : stockMarket.listOwnedStocks(loggedInPerson.getUserId())) {
-            sum = sum + stockMarket.getValue(stock)*stockMarket.numberOwnedStocks(loggedInPerson.getUserId(), stock);
+            sum = sum + stockMarket.getValue(stock) * stockMarket.numberOwnedStocks(loggedInPerson.getUserId(), stock);
         }
         return sum;
     }
@@ -202,16 +198,15 @@ public class Jbank {
         return stockIndex;
     }
 
-    public Comparator<BankAccount> getSort(String sort){
+    public Comparator<BankAccount> getSort(String sort) {
         sortMap.put("Navn økende", nameSort);
         sortMap.put("Navn synkende", nameSort.reversed());
         sortMap.put("Verdi økende", valueSort);
         sortMap.put("Verdi synkende", valueSort.reversed());
-        if (!sortMap.keySet().contains(sort)){
+        if (!sortMap.keySet().contains(sort)) {
             throw new IllegalArgumentException("Denne sorteringen er ikke tilgjengelig");
         }
         return sortMap.get(sort);
     }
-
 
 }

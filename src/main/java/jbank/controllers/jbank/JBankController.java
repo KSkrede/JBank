@@ -1,4 +1,5 @@
 package jbank.controllers.jbank;
+
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -26,7 +27,6 @@ public class JBankController {
     @FXML
     private HomeController homeController;
 
-
     @FXML
     public void initialize() {
         jbank = Jbank.getInstance();
@@ -36,23 +36,24 @@ public class JBankController {
     }
 
     @FXML
-    public void setLoggedInUser(){
+    public void setLoggedInUser() {
         loggedInUser.setText(loggedInPerson.getFullName());
     }
 
     @FXML
-    public void setDateLabel(){
+    public void setDateLabel() {
         currentDate.setText("Dato: " + JBankHelp.todayToString(0));
     }
 
     @FXML
-    public void settings() throws IOException{
+    public void settings() throws IOException {
         jbank.getApp().changeScene("jbank/settings.fxml");
     }
 
     @FXML
-    public void nextDay(){
-        jbank.getStockTracker().log(jbank.getStockMarket().getStocks(), jbank.getDays(), jbank.getStockIndex().getAvg());
+    public void nextDay() {
+        jbank.getStockTracker().log(jbank.getStockMarket().getStocks(), jbank.getDays(),
+                jbank.getStockIndex().getAvg());
         jbank.getStockMarket().nextDay();
         stockController.nextDay();
         homeController.updateViews();
@@ -65,12 +66,11 @@ public class JBankController {
         }
     }
 
-
     @FXML
-    public void logOut() throws IOException{
+    public void logOut() throws IOException {
         jbank.getAccountObject().setLoggedInPerson(null);
         jbank.getApp().changeScene("login.fxml");
 
     }
 
-    }
+}
