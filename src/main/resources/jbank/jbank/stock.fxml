@@ -69,6 +69,5 @@
       </AnchorPane>
       <Label layoutX="868.0" layoutY="215.0" prefHeight="17.0" prefWidth="34.0" text="Verdi" />
       <Label layoutX="1239.0" layoutY="527.0" prefHeight="17.0" prefWidth="34.0" text="Dager" />
-      <Button fx:id="updateButton" layoutX="786.0" layoutY="149.0" mnemonicParsing="false" onAction="#updateViews" text="Oppdater" />
    </children>
 </AnchorPane>

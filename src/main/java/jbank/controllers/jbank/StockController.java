@@ -30,8 +30,6 @@ public class StockController {
     @FXML
     private Button importStock;
     @FXML
-    private Button updateButton;
-    @FXML
     private ListView<String> stockList;
     @FXML
     private ListView<String> stockInfo;

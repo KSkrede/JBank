@@ -28,8 +28,6 @@ public class BankAccountsController {
     @FXML
     private Button createBank;
     @FXML
-    private Button updateButton;
-    @FXML
     private Button sortButton;
     @FXML
     private ListView<BankAccount> bankList;
@@ -50,10 +48,6 @@ public class BankAccountsController {
         loggedInPerson = jbank.getAccountObject().getLoggedInPerson();
         updateListView();
 
-    }
-
-    public void update() {
-        updateListView();
     }
 
     public void viewBankAccount() {

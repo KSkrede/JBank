@@ -29,8 +29,6 @@ public class HomeController {
     private Label sumBank;
     @FXML
     private Label totalSum;
-    @FXML
-    private Button update;
 
     private String selectedItem;
     private ArrayList<String> ownedStocks;
