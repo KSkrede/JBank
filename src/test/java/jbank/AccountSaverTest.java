@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
@@ -30,13 +29,10 @@ public class AccountSaverTest {
     }
 
     @Test
-    public void testWriter() throws IOException {
-        if(jbank.getAccountMap().isEmpty()){
-            jbank.getAccountObject().addPerson(
+    public void testWriter() throws IOException, IllegalAccessException {
+        jbank.getAccountObject().addPerson(
                 new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234"));
-        }
-
-
+        jbank.getAccountObject().removePerson("56565656010100");
         File fileWrite = new File("testfile_write.txt");
         jbank.getAccountSaver().writeObject("testfile_write", jbank);
         Scanner scanner = new Scanner(fileWrite);

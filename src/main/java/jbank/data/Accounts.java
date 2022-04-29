@@ -41,6 +41,11 @@ public class Accounts {
         this.loggedInPerson = null;
     }
 
+    public void removePerson(String userID) throws IllegalAccessException{
+        accounts.remove(userID);
+        this.loggedInPerson = null;
+    }
+
     public void changeGivenName(String newName) throws IllegalAccessException{
         verifyUser();
         accounts.get(loggedInPerson.getUserId()).setGivenName(newName);

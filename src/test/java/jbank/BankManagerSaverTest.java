@@ -25,18 +25,18 @@ public class BankManagerSaverTest {
         assertDoesNotThrow(() -> {
             jbank = Jbank.getInstance();
             jbank.getAccountObject().addPerson(
-                new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234"));
-            bankManagerSaver.readObject("12345678010100", Jbank.getInstance());
+                new Person("56565656", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234"));
+            bankManagerSaver.readObject("56565656010100", Jbank.getInstance());
         });
-        File noFile = new File("12345678010100_bankaccounts.txt");
+        File noFile = new File("56565656010100_bankaccounts.txt");
         noFile.delete();
     }
 
     @Test
     public void testWriter() throws IOException {
-        File fileWrite = new File("12345678010100_bankaccounts.txt");
+        File fileWrite = new File("56565656010100_bankaccounts.txt");
         jbank = Jbank.getInstance();
-        jbank.getBankManagerSaver().writeObject("12345678010100", jbank);
+        jbank.getBankManagerSaver().writeObject("56565656010100", jbank);
         Scanner scanner = new Scanner(fileWrite);
         while (scanner.hasNextLine()) {
             String[] element = scanner.nextLine().split(";");

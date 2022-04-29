@@ -32,6 +32,7 @@ public class JbankTest {
     public void userLoginTest() {
         Person newPerson = new Person("88888888", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234");
         assertEquals(false, jbank.userLogin(newPerson.getUserId()));
+        jbank.getAccountObject().setLoggedInPerson(person);
         assertEquals(true, jbank.userLogin(person.getUserId()));
     }
 
@@ -68,11 +69,7 @@ public class JbankTest {
         }, "Du skal ikke kunne summere akjser når du ikke har noen");
         jbank.getAccountObject().setLoggedInPerson(person);
         assertEquals(0, jbank.sumStocks());
-        System.out.println(jbank.getStockMarket().numberOwnedStocks(person.getUserId(), "TSLA"));
         jbank.getStockMarket().buy(person.getUserId(), "TSLA", 1);
-        System.out.println(jbank.getStockMarket().numberOwnedStocks(person.getUserId(), "TSLA"));
-        System.out.println(jbank.getStockMarket().getValue("TSLA"));
-        //assertEquals(420, jbank.sumStocks());
         assertEquals(jbank.getStockMarket().getValue("TSLA"), jbank.sumStocks());
     }
 
