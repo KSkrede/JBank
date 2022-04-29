@@ -147,9 +147,7 @@ public class BankAccountsController {
             if (loggedInPersonBankAccounts.size() < 2) {
                 throw new IllegalArgumentException("Du må ha minimum to kontoer for å overføre penger");
             }
-
             BankAccount source = JBankHelp.choseBankAccount(selectedBankAccount, loggedInPersonBankAccounts, "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger fra", "Bankkonto: ");
-
             ArrayList<BankAccount> bankAccountsreduced = new ArrayList<BankAccount>(loggedInPersonBankAccounts);
             bankAccountsreduced.remove(source);
             BankAccount destination = JBankHelp.choseBankAccount(bankAccountsreduced.get(0), bankAccountsreduced, "Overføring mellom kontoer", "Velg kontoen du ønsker å overføre penger til", "Bankkonto: ");;

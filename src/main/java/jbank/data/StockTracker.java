@@ -30,7 +30,8 @@ public class StockTracker {
         if (stocklogs == null) {
             return new HashMap<>();
         }
-        return stocklogs;
+        Map<Integer, Map<String, Integer>> temp = this.stocklogs;
+        return temp;
     }
 
     
@@ -38,7 +39,8 @@ public class StockTracker {
         if (indexlogs == null) {
             return new HashMap<>();
         }
-        return indexlogs;
+        Map<Integer, Integer> temp = this.indexlogs;
+        return temp;
     }
 
 }

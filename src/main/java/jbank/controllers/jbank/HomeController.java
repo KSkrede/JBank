@@ -1,6 +1,4 @@
 package jbank.controllers.jbank;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.fxml.FXML;

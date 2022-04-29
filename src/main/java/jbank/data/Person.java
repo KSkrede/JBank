@@ -25,18 +25,18 @@ public class Person {
     }
 
     public void setName(String givenName, String surName) {
-        if((givenName+surName).length() > 25 ){
-            throw new  IllegalArgumentException("Du har valgt et veldig langt navn, venligst kort det ned");
+        if ((givenName + surName).length() > 25) {
+            throw new IllegalArgumentException("Du har valgt et veldig langt navn, venligst kort det ned");
         }
         if (JBankHelp.isAllLettersOrBlank(givenName)) {
             this.givenName = givenName;
         }
-        
+
         else {
             throw new IllegalArgumentException("Det er et ulovlig tegn i " + givenName);
         }
 
-        if(JBankHelp.isAllLetters(surName)){
+        if (JBankHelp.isAllLetters(surName)) {
             this.surName = surName;
         }
 
@@ -52,13 +52,11 @@ public class Person {
 
     public void setBirthday(LocalDate birthDate) {
         LocalDate today = LocalDate.now();
-        if(birthDate == null){
+        if (birthDate == null) {
             throw new IllegalArgumentException("Du må velge fødselsdato");
-        }
-        else if (birthDate.isAfter(today)) {
+        } else if (birthDate.isAfter(today)) {
             throw new IllegalArgumentException("Du kan ikke ha fødselsdato i fremtiden");
-        }
-        else if (birthDate.isAfter(today.minusYears(18))) {
+        } else if (birthDate.isAfter(today.minusYears(18))) {
             throw new IllegalArgumentException("Du må minst være 18 år for å lage konto her");
         }
 
@@ -80,7 +78,7 @@ public class Person {
     }
 
     public void setPin(String pin) {
-        if (JBankHelp.isAllDigit(pin) && pin != ""){
+        if (JBankHelp.isAllDigit(pin) && pin != "") {
             this.pin = pin;
         } else {
             throw new IllegalArgumentException("Ulovelig BankIDpin " + pin);
@@ -92,7 +90,11 @@ public class Person {
     }
 
     public void setSurName(String surName) {
-        this.surName = surName;
+        if (!JBankHelp.isAllLetters(surName) && !surName.equals("")) {
+            throw new IllegalArgumentException("Ulovlig etternavn" + surName);
+        } else {
+            this.surName = surName;
+        }
     }
 
     public String getGivenName() {
@@ -100,14 +102,16 @@ public class Person {
     }
 
     public void setGivenName(String givenName) {
-        this.givenName = givenName;
+        if (!JBankHelp.isAllLettersOrBlank(givenName) && !givenName.equals("")) {
+            throw new IllegalArgumentException("Ulovlig etternavn" + surName);
+        } else {
+            this.givenName = givenName;
+        }
     }
-
 
     public String getUserId() {
         return userId;
     }
-
 
     public String getPin() {
         return pin;
@@ -118,13 +122,12 @@ public class Person {
         return String.format("%s;%s;%s;%s", phoneNumber, birthDate, givenName, surName);
     }
 
-    public String prettyString(){
+    public String prettyString() {
         return getFullName();
     }
 
-    public String getFullName(){
+    public String getFullName() {
         return givenName + " " + surName;
     }
-
 
 }

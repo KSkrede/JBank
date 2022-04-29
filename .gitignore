@@ -203,3 +203,7 @@ buildNumber.properties
 # Jbank
 
 src/main/java/jbank/storage/accounts.txt
+40612594230100_bankaccounts.txt
+40612594230100_stocks.txt
+accounts.txt
+stocks.txt
