@@ -35,23 +35,28 @@ public class JBankHelp {
     }
 
     public static boolean isAllDigit(String string) {
+        int count = 0;
         for (char c : string.toCharArray()) {
             if (!Character.isDigit(c)) {
                 return false;
             }
+            count++;
         }
-        return true;
+        return count > 0;
     }
 
     public static boolean isAllLetters(String string) {
+        int count = 0;
         for (char c : string.toCharArray()) {
             if (!Character.isLetter(c)) {
                 return false;
             }
+            count++;
         }
-        return true;
+        return count > 0;
     }
 
+// so that you can have a middlename
     public static boolean isAllLettersOrBlank(String string) {
         int letters = 0;
         for (char c : string.toCharArray()) {
