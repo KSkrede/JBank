@@ -8,12 +8,12 @@ Jbank skal er en "Bank simulator" som skal la deg investere penger.
 1. Venligst start med å opprette en bruker med "Opprett bruker"
 2. Fyll inn alle detaljene. Merk at du må bruke datovelgeren, og ikke kan skrive inn dato selv i Fødselsdato feltet
 3. Logg inn med Mobilnummer og fødselsdato, trykke neste etter å ha skrevet inn detaljene.
-3. Tast inn din Pinkode
+4. Tast inn din Pinkode
 
 # Hjem
 * Her kan du se en oversikt over alle bankkontoer og aksjer du eier, samt total sum av verdier.
 * Første gang du bruker appen vil disse feltene være blanke.
-* Merk at det er en bug med at man må først trykke på bankkontoer og deretter aksjer før info om aksjer vises.
+
 
 # Bankkonto
 * Her kan du opprete bankkontoer, samt du kan se informasjon, overføre penger og slette kontoene dine
@@ -32,6 +32,10 @@ Jbank skal er en "Bank simulator" som skal la deg investere penger.
 # Instillinger 
 * Her kan du se alle våre personopplysninger om deg, samt endre navn og pinkode.
 * Du kan også slette kontoen din her
+
+# OBS 
+* Merk at alle filer lagres til root folderen av prosjektet ditt, selv om det egentlig ikke burde blitt gjort slik.
+* Dette er for å sørge for at filhåndtering fungerer på mac, da mac ikke støtter å legge inn paths til filer på samme måte som windows
 
 
 

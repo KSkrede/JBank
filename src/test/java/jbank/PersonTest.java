@@ -91,7 +91,7 @@ public class PersonTest {
 
     @Test
     public void testToString(){
-        assertEquals("12345678;280403;Ola;Nordmann", person.toString());
+        assertEquals("12345678;"+JBankHelp.dateToString(LocalDate.now().minusYears(19))+";Ola;Nordmann", person.toString());
     }
 
 

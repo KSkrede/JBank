@@ -49,9 +49,8 @@ public class HomeController {
         try {
             jbank.getBankManagerSaver().readObject(loggedInPerson.getUserId(), jbank);
             jbank.getStockMarketSaver().readObject(loggedInPerson.getUserId(), jbank);
-        } catch (IOException e) {
-            JBankHelp.showInformation("Info om oppstart",
-                    "Det ser ut som at du ikke har noen bankkonto eller aksjer enda");
+        } catch (IllegalArgumentException e) {
+            JBankHelp.showErrorMessage(e.getMessage());
         }
 
         // https://stackoverflow.com/questions/9722418/how-to-handle-listview-item-clicked-action?rq=1

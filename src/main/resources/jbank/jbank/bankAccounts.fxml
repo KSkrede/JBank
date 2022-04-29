@@ -19,13 +19,13 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="bankName" layoutX="20.0" layoutY="226.0" prefHeight="32.0" prefWidth="185.0" promptText="F.eks Sparekonto" text="Sparekonto" />
+      <TextField fx:id="bankName" layoutX="20.0" layoutY="226.0" prefHeight="32.0" prefWidth="185.0" promptText="F.eks Sparekonto" />
       <Label layoutX="20.0" layoutY="281.0" prefHeight="30.0" prefWidth="128.0" text="Beløp">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="bankAmount" layoutX="20.0" layoutY="311.0" prefHeight="32.0" prefWidth="185.0" promptText="F.eks Ola" text="100" />
+      <TextField fx:id="bankAmount" layoutX="20.0" layoutY="311.0" prefHeight="32.0" prefWidth="185.0" promptText="F.eks 100" />
       <Button fx:id="createBank" layoutX="23.0" layoutY="366.0" mnemonicParsing="false" onAction="#createBank" text="Opprett Konto" />
       <Label layoutX="385.0" layoutY="136.0" prefHeight="54.0" prefWidth="222.0" text="Kontoer">
          <font>

@@ -10,7 +10,7 @@ import jbank.data.BankAccount;
 
 public class BankManagerSaver implements IFileHandler {
     @Override
-    public void readObject(String fileName, Jbank jbank) throws IOException {
+    public void readObject(String fileName, Jbank jbank) {
         try {
             File file = new File(fileName + "_bankaccounts.txt");
             Scanner scanner = new Scanner(file);
@@ -20,7 +20,11 @@ public class BankManagerSaver implements IFileHandler {
             }
             scanner.close();
         } catch (IOException e) {
-            writeObject(fileName, jbank);
+            try {
+                writeObject(fileName, jbank);
+            } catch (IOException e1) {
+                // Do nothing after one try
+            }
         }
     }
 
@@ -35,6 +39,5 @@ public class BankManagerSaver implements IFileHandler {
             writer.write("\n");
         }
         writer.close();
-    }
 
-}
+}}

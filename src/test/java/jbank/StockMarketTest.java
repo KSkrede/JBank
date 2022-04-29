@@ -50,8 +50,6 @@ public class StockMarketTest {
 
 	@Test
 	public void testUpdate() {
-		stockMarket.update("test", 123);
-		assertEquals(123, stockMarket.getValue("test"));
 		stockMarket.update("AAPL", 100);
 		assertEquals(400, stockMarket.getValue("AAPL"));
 

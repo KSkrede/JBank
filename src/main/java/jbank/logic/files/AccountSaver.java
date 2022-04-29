@@ -26,7 +26,7 @@ public class AccountSaver implements IFileHandler {
     }
 
     @Override
-    public void readObject(String fileName, Jbank jbank) throws IOException {
+    public void readObject(String fileName, Jbank jbank) {
         try {
             File file = new File(fileName + ".txt");
             Scanner scanner = new Scanner(file);
@@ -38,7 +38,11 @@ public class AccountSaver implements IFileHandler {
             }
             scanner.close();
         } catch (IOException e) {
-            writeObject(fileName, jbank);
+            try {
+                writeObject(fileName, jbank);
+            } catch (IOException e1) {
+                // Do nothing after one try
+            }
         }
 
     }

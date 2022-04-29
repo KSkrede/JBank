@@ -25,7 +25,7 @@ public class StockIndexTest {
 
 		//Looks weird because there are default stocks initiated
         assertEquals(245, index.getAvg());
-        stockMarket.update("NewStock", 100);
+        stockMarket.addStock("NewStock", 100);
 		index.addStock("NewStock");
         assertEquals(216, index.getAvg());
 
@@ -47,7 +47,7 @@ public class StockIndexTest {
 	@Test
 	public void testRemoveStock() {
         assertEquals(245, index.getAvg());
-        this.stockMarket.update("NewStock", 100);
+        this.stockMarket.addStock("NewStock", 100);
 		index.addStock("NewStock");
         assertEquals(216, index.getAvg());
 		index.removeStock("NewStock");
