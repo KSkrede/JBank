@@ -1,13 +1,13 @@
 package jbank.data;
 
-public abstract class AbstractAccount {
+public abstract class AbstractBank {
 
     //Inspirert av Øving 7;
  
     protected String name;
     protected Integer value;
 
-    public AbstractAccount(String name, Integer value) {
+    public AbstractBank(String name, Integer value) {
         this.name = name;
         this.value = value;
     }

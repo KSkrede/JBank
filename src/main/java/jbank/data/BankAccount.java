@@ -1,6 +1,6 @@
 package jbank.data;
 
-public class BankAccount extends AbstractAccount{
+public class BankAccount extends AbstractBank{
 
 
     public BankAccount(String name, Integer value) {
