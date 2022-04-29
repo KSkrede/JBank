@@ -3,6 +3,9 @@ package jbank;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.File;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jbank.data.BankAccount;
@@ -13,8 +16,17 @@ public class JbankTest {
 
     // Most of Jbanks is delegated to other objects that have their own tests
 
-    Jbank jbank = Jbank.getInstance();
-    Person person = new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234");
+    private Jbank jbank;
+    private Person person;
+
+    @BeforeEach
+    public void setup(){
+    File stocks = new File("stocks.txt");
+    stocks.delete();
+    this.jbank = Jbank.getInstance();
+    this.person = new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234");
+    jbank.getAccountObject().setLoggedInPerson(null);
+    }
 
     @Test
     public void userLoginTest() {
@@ -33,7 +45,7 @@ public class JbankTest {
     @Test
     public void testSellStocks() {
         assertThrows(IllegalArgumentException.class, () -> {
-            jbank.sellStocks("AAPL", 1, new jbank.data.BankAccount("test2", 100), person.getUserId());
+            jbank.sellStocks("AAPL", 100, new jbank.data.BankAccount("test2", 100), person.getUserId());
         }, "Du skal ikke ha lov til å selge aksjer du ikke eier");
     }
 
