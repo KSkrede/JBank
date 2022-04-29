@@ -69,7 +69,7 @@ public class StockMarket implements IValuable {
         if (value == 0) {
             throw new IllegalArgumentException("Aksjen kan ikke ha 0 som verdi");
         }
-        if (getValue(name) - value < 0) {
+        if ((getValue(name) + value) < 0) {
             throw new IllegalArgumentException("Kan ikke ha 0 eller negativ aksjeverdi");
         } else {
             stocks.merge(name, value, (a, b) -> a + b);

@@ -12,7 +12,7 @@ public class StockTracker {
             stocklogs = new HashMap<>();
             indexlogs = new HashMap<>();
         }
-        if(days <= 0){
+        if(days < 0){
             throw new IllegalArgumentException("Kan ikke logge negativ dag");
         }
         stocklogs.put(days, stocks);

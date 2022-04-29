@@ -122,7 +122,9 @@ public class Jbank {
 
     public void buyStocks(String stockToBuy, int number, BankAccount source, String userID) {
         int value = stockMarket.getValue(stockToBuy) * number;
-
+        if(value < 0){
+            throw new IllegalArgumentException("Kan ikke kjøpe aksjer med negativ verdi");
+        }
         if (!getBankManager().hasFunds(source, value)) {
             throw new IllegalArgumentException(
                     "Du har ikke nok penger til å kjøpe " + number + " " + stockToBuy + "-aksjer");
@@ -151,9 +153,14 @@ public class Jbank {
     }
 
     public int sumBankAccounts() {
-        loggedInPerson = getAccountObject().getLoggedInPerson();
+        if(getAccountObject().getLoggedInPerson() == null){
+            throw new IllegalArgumentException("Det er ingen bruker logget inn");
+        }
+        else{
+            loggedInPerson = getAccountObject().getLoggedInPerson();
+        }
         Integer sum = 0;
-        try {
+        // try {
             if (BankManager.getBankAccounts(loggedInPerson).isEmpty()) {
                 return 0;
             }
@@ -161,13 +168,18 @@ public class Jbank {
                 sum = sum + bankAccount.getValue();
             }
             return sum;
-        } catch (IllegalStateException e) {
-            return 0;
-        }
+        // } catch (IllegalStateException e) {
+        //     return 0;
+        // }
     }
 
     public int sumStocks() {
-        loggedInPerson = getAccountObject().getLoggedInPerson();
+        if(getAccountObject().getLoggedInPerson() == null){
+            throw new IllegalArgumentException("Det er ingen bruker logget inn");
+        }
+        else{
+            loggedInPerson = getAccountObject().getLoggedInPerson();
+        }
         Integer sum = 0;
         if (stockMarket.listOwnedStocks(loggedInPerson.getUserId()).isEmpty()) {
             return 0;
@@ -195,6 +207,9 @@ public class Jbank {
         sortMap.put("Navn synkende", nameSort.reversed());
         sortMap.put("Verdi økende", valueSort);
         sortMap.put("Verdi synkende", valueSort.reversed());
+        if (!sortMap.keySet().contains(sort)){
+            throw new IllegalArgumentException("Denne sorteringen er ikke tilgjengelig");
+        }
         return sortMap.get(sort);
     }
 
