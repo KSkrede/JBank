@@ -32,7 +32,7 @@ public class AccountSaver implements IFileHandler {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String[] element = scanner.nextLine().split(";");
-                jbank.getAccountObject().addPerson(element[0],
+                jbank.getAccountObject().addPerson(
                         new Person(element[1], JBankHelp.stringToDate(element[2]), element[3], element[4],
                                 deCipher(element[5])));
             }

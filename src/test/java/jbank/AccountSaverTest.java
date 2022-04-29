@@ -17,7 +17,7 @@ import jbank.logic.files.AccountSaver;
 
 public class AccountSaverTest {
 
-    Jbank jbank;
+    Jbank jbank = Jbank.getInstance();
 
     @Test
     public void NoFileTest() {
@@ -31,10 +31,13 @@ public class AccountSaverTest {
 
     @Test
     public void testWriter() throws IOException {
-        File fileWrite = new File("testfile_write.txt");
-        jbank = Jbank.getInstance();
-        jbank.getAccountObject().addPerson("12345678010100",
+        if(jbank.getAccountMap().isEmpty()){
+            jbank.getAccountObject().addPerson(
                 new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234"));
+        }
+
+
+        File fileWrite = new File("testfile_write.txt");
         jbank.getAccountSaver().writeObject("testfile_write", jbank);
         Scanner scanner = new Scanner(fileWrite);
         while (scanner.hasNextLine()) {

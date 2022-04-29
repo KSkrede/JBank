@@ -21,7 +21,7 @@ public class Person {
         setPin(pin);
         this.userId = phoneNumber + JBankHelp.dateToString(birthDate);
         Accounts a = new Accounts();
-        a.addPerson(this.userId, this);
+        a.addPerson(this);
     }
 
     public void setName(String givenName, String surName) {

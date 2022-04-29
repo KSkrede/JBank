@@ -10,9 +10,6 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import jbank.data.BankAccount;
-import jbank.data.Person;
-import jbank.logic.JBankHelp;
 import jbank.logic.files.StockMarketSaver;
 
 public class StockMarketSaverTest {
@@ -24,8 +21,6 @@ public class StockMarketSaverTest {
         StockMarketSaver stockMarketSaver = new StockMarketSaver();
         assertDoesNotThrow(() -> {
             jbank = Jbank.getInstance();
-            jbank.getAccountObject().addPerson("12345678010100",
-                new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234"));
             stockMarketSaver.readObject("12345678010100", Jbank.getInstance());
         });
         File noFile = new File("12345678010100_stocks.txt");
@@ -36,8 +31,6 @@ public class StockMarketSaverTest {
     public void testWriter() throws IOException {
         File fileWrite = new File("12345678010100_stocks.txt");
         jbank = Jbank.getInstance();
-        jbank.getAccountObject().addPerson("12345678010100",
-                new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234"));
         jbank.getStockMarket().addStock("aksje", 100);
         jbank.getStockMarketSaver().writeObject("12345678010100", jbank);
         Scanner scanner = new Scanner(fileWrite);
@@ -48,6 +41,9 @@ public class StockMarketSaverTest {
         }
         scanner.close();
         fileWrite.delete();
+        File stocks = new File("stocks.txt");
+        stocks.delete();
+
         
     }
     

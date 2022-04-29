@@ -12,11 +12,17 @@ public class Accounts {
     }
 
     public Map<String, Person> getAccounts() {
-        return accounts;
+        Map<String, Person> temp = accounts;
+        return temp;
     }
 
-    public void addPerson(String s, Person person) {
-        accounts.put(s, person);
+    public void addPerson(Person person) {
+        String userID = person.getUserId();
+        if (accounts.containsKey(userID)){
+            throw new IllegalArgumentException("Denne brukeren eksisterer allerede");
+        }
+        else{
+        accounts.put(userID, person);}
     }
 
 
