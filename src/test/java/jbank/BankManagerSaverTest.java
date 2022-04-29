@@ -2,12 +2,10 @@ package jbank;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
@@ -25,9 +23,12 @@ public class BankManagerSaverTest {
     public void NoFileTest() {
         BankManagerSaver bankManagerSaver = new BankManagerSaver();
         assertDoesNotThrow(() -> {
-            bankManagerSaver.readObject("noFile", Jbank.getInstance());
+            jbank = Jbank.getInstance();
+            jbank.getAccountObject().addPerson("12345678010100",
+                new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234"));
+            bankManagerSaver.readObject("12345678010100", Jbank.getInstance());
         });
-        File noFile = new File("noFile.txt");
+        File noFile = new File("12345678010100_bankaccounts.txt");
         noFile.delete();
     }
 
