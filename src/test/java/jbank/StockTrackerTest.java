@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,66 +30,34 @@ public class StockTrackerTest {
 
 
 	@Test
-	public void TestgetValue() {
-        assertEquals(300, stockMarket.getValue("AAPL"));
+	public void testLog() {
+		assertEquals(0, stockTracker.getStockprice(1, "AAPL"));
+		stockTracker.log(stockMarket.getStocks(), 1, 400);
+		assertEquals(300, stockTracker.getStockprice(1, "AAPL"));
+		
 		assertThrows(IllegalArgumentException.class, () -> {
-			stockMarket.getValue("RandomStock");
-        }, "Skal kaste feilmeldingen når aksjen ikke eksisterer");
-
-		assertEquals(300, stockMarket.getValue("AAPL"));
+			stockTracker.log(stockMarket.getStocks(), -2, 400);stockTracker.getStockprice(-2, "AAPL");
+        }, "Skal ikke kunne logge negative dager");
 
     }
 
 
 	@Test
-	public void testValuableListners() {
-		StockIndex listner = new StockIndex("index", stockMarket);
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			stockMarket.addValuableListner(listner);
-        }, "Skal kaste feilmeldingen når observatør allerede er i listen");
-
-		stockMarket.removeValuableListener(listner);
-
-		assertDoesNotThrow(()->{
-            stockMarket.addValuableListner(listner);
-        });
+	public void testGetStocklogs() {
+		assertEquals(new HashMap<>(), stockTracker.getStocklogs());
+		stockTracker.log(stockMarket.getStocks(), 5, 400);
+		Map<Integer, Map<String, Integer>> stocklogs = new HashMap<>();
+		stocklogs.put(5, stockMarket.getStocks());
+		assertEquals(stocklogs, stockTracker.getStocklogs());
 	}
 
 	@Test
-	public void testUpdate() {
-		stockMarket.update("AAPL", 100);
-		assertEquals(400, stockMarket.getValue("AAPL"));
-
+	public void testIndexlogs() {
+		assertEquals(new HashMap<>(), stockTracker.getIndexlogs());
+		stockTracker.log(stockMarket.getStocks(), 5, 400);
+		Map<Integer, Integer> indexLogs = new HashMap<>();
+		indexLogs.put(5, 400);
+		assertEquals(indexLogs, stockTracker.getIndexlogs());
 	}
 
-	@Test
-	public void testNextDay() {
-		//Also tests simulate
-		StockIndex listner = new StockIndex("index", stockMarket);
-		int before = listner.getAvg();
-		stockMarket.nextDay();
-		int after = listner.getAvg();
-		assertNotEquals(before, after, "Indeksen burde være endret");
-	}
-
-	@Test
-	public void testBuySell() {
-		//Also tests numberOwnedStocks
-		stockMarket.buy("1234", "AAPL", 5);
-		assertEquals(5, stockMarket.numberOwnedStocks("1234", "AAPL"));
-		stockMarket.sell("1234", "AAPL", 2);
-		assertEquals(3, stockMarket.numberOwnedStocks("1234", "AAPL"));
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			stockMarket.sell("1234", "RandomStock", 2);
-        }, "Skal ikke kunne selge en aksje du ikke eier");
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			stockMarket.sell("1234", "RandomStock", 10);
-        }, "Skal ikke kunne selge flere aksjer enn du eier");
-
-
-
-	}
  }

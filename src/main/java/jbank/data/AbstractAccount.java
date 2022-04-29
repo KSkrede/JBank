@@ -7,6 +7,11 @@ public abstract class AbstractAccount {
     protected String name;
     protected Integer value;
 
+    public AbstractAccount(String name, Integer value) {
+        this.name = name;
+        this.value = value;
+    }
+
     public String getName() {
         return name;
     }

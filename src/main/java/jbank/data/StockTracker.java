@@ -12,6 +12,9 @@ public class StockTracker {
             stocklogs = new HashMap<>();
             indexlogs = new HashMap<>();
         }
+        if(days <= 0){
+            throw new IllegalArgumentException("Kan ikke logge negativ dag");
+        }
         stocklogs.put(days, stocks);
         indexlogs.put(days, indexAvg);
     }
@@ -19,7 +22,7 @@ public class StockTracker {
 
     public int getStockprice(int day, String ticker) {
         if (this.stocklogs == null) {
-            return -1;
+            return 0;
         } else {
             return stocklogs.get(day).get(ticker);
         }
