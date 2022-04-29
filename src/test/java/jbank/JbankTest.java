@@ -20,19 +20,19 @@ public class JbankTest {
     private Person person;
 
     @BeforeEach
-    public void setup(){
+    public void setup() throws IllegalAccessException{
     File stocks = new File("stocks.txt");
     stocks.delete();
     this.jbank = Jbank.getInstance();
     this.person = new Person("12345678", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234");
-    jbank.getAccountObject().setLoggedInPerson(null);
+    //this.jbank.getAccountObject().removePerson();
     }
 
     @Test
     public void userLoginTest() {
-        assertEquals(false, jbank.userLogin("12345678010100"));
-        jbank.getAccountObject().addPerson(person);
-        assertEquals(true, jbank.userLogin("12345678010100"));
+        Person newPerson = new Person("88888888", JBankHelp.stringToDate("010100"), "Ola", "Nordmann", "1234");
+        assertEquals(false, jbank.userLogin(newPerson.getUserId()));
+        assertEquals(true, jbank.userLogin(person.getUserId()));
     }
 
     @Test
@@ -51,6 +51,7 @@ public class JbankTest {
 
     @Test
     public void testSumBank() {
+        this.jbank.getAccountObject().setLoggedInPerson(null);
         assertThrows(IllegalArgumentException.class, () -> {
             jbank.sumBankAccounts();
         }, "Du skal ikke kunne summere kontoer når du ikke har noen");
@@ -67,8 +68,12 @@ public class JbankTest {
         }, "Du skal ikke kunne summere akjser når du ikke har noen");
         jbank.getAccountObject().setLoggedInPerson(person);
         assertEquals(0, jbank.sumStocks());
-        jbank.getStockMarket().buy(person.getUserId(), "AAPL", 1);
-        assertEquals(300, jbank.sumStocks());
+        System.out.println(jbank.getStockMarket().numberOwnedStocks(person.getUserId(), "TSLA"));
+        jbank.getStockMarket().buy(person.getUserId(), "TSLA", 1);
+        System.out.println(jbank.getStockMarket().numberOwnedStocks(person.getUserId(), "TSLA"));
+        System.out.println(jbank.getStockMarket().getValue("TSLA"));
+        //assertEquals(420, jbank.sumStocks());
+        assertEquals(jbank.getStockMarket().getValue("TSLA"), jbank.sumStocks());
     }
 
     @Test
