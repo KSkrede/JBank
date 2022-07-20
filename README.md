@@ -1,4 +1,4 @@
-# Jbank, Prosjekt i TDT4100
+# Jbank, JavaProsjekt i TDT4100
 
 Jbank skal er en "Bank simulator" som skal la deg investere penger.
 
